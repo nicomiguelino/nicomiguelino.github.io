@@ -10,7 +10,6 @@ node_modules/
 .env.*
 
 # editor and tooling
-.claude/
 .vscode/
 .idea/
 .DS_Store
