@@ -5,6 +5,8 @@ import TypedLede from '../components/TypedLede.astro';
 import SkillsMarquee from '../components/SkillsMarquee.astro';
 import { formatPostDate, postSlug } from '../lib/posts';
 
+const tagline = 'Full stack software engineer based in California';
+
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -17,7 +19,7 @@ const personSchema = JSON.stringify({
   jobTitle: 'Your Job Title',
   url: 'https://example.com',
   sameAs: [
-    'https://github.com/your-username',
+    'https://github.com/nicomiguelino',
     'https://linkedin.com/in/your-profile',
   ],
   // Escape < so no value can ever close the inline <script> tag.
@@ -25,15 +27,16 @@ const personSchema = JSON.stringify({
 ---
 
 <Layout
-  title="Palette — Your Name"
-  description="A short tagline describing you and what you write about."
+  title="Palette — Nico Miguelino"
+  description={tagline}
   canonicalPath="/"
 >
   <script type="application/ld+json" is:inline set:html={personSchema} />
   <main class="content-shell">
     <div class="page-hero">
       <h1 class="visually-hidden">Home</h1>
-      <TypedLede text="This is the place for my machinations and other thoughts." />
+      <TypedLede text={tagline} />
+      <p>A place for my thoughts, machinations, and anything tech-related</p>
     </div>
 
     <section class="section" aria-label="Recent posts">
