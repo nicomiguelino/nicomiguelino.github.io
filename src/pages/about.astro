@@ -2,17 +2,19 @@
 import Layout from '../components/Layout.astro';
 import TypedLede from '../components/TypedLede.astro';
 import SkillsMarquee from '../components/SkillsMarquee.astro';
+
+const description = 'I build things for the web and write about what I learn';
 ---
 
 <Layout
   title="About — Your Name"
-  description="A one-line summary of who you are and what you do."
+  description={description}
   canonicalPath="/about/"
 >
   <main class="content-shell" data-pagefind-body>
     <div class="page-hero">
       <h1 class="visually-hidden">About</h1>
-      <TypedLede text="A one-line summary of who you are and what you do." />
+      <TypedLede text={description} />
     </div>
 
     <div class="section" style="max-width: var(--max);">
@@ -21,9 +23,14 @@ import SkillsMarquee from '../components/SkillsMarquee.astro';
           <div class="about-card">
             <h3>About</h3>
             <div class="about-prose">
-              <p>Introduce yourself here. Say who you are, where you're based, and what kind of work you do. A couple of sentences is plenty for an opener.</p>
-              <p>Use this paragraph for what you're working on right now: projects, interests, the tools you reach for most often.</p>
-              <p>Close with what this site is for and how people can reach you. Replace the social links in the header with your own profiles.</p>
+              <p>
+                Hi, I'm Nico, a full-stack engineer who likes building things for the web, frontend or backend.
+                I've rebuilt this site in Jekyll, Angular, and now Astro, mostly because I can't resist a good excuse to tinker. When I'm not coding, I'm usually listening to or playing music in my room.
+              </p>
+
+              <p>
+                If any of this sounds interesting, feel free to reach out.
+              </p>
             </div>
           </div>
         </div>

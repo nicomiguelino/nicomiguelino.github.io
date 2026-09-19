@@ -5,7 +5,7 @@ import TypedLede from '../components/TypedLede.astro';
 import SkillsMarquee from '../components/SkillsMarquee.astro';
 import { formatPostDate, postSlug } from '../lib/posts';
 
-const tagline = 'Full stack software engineer based in California';
+const tagline = 'A place for my thoughts, machinations, and anything tech-related';
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -36,7 +36,6 @@ const personSchema = JSON.stringify({
     <div class="page-hero">
       <h1 class="visually-hidden">Home</h1>
       <TypedLede text={tagline} />
-      <p>A place for my thoughts, machinations, and anything tech-related</p>
     </div>
 
     <section class="section" aria-label="Recent posts">

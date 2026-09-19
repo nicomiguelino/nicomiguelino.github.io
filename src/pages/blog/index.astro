@@ -8,6 +8,8 @@ import PostCard from '../../components/PostCard.astro';
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const lede = "Notes on what I'm building, learning, and figuring out along the way";
 ---
 
 <Layout
@@ -18,7 +20,7 @@ const posts = (await getCollection('blog'))
   <main class="content-shell">
     <section class="page-hero">
       <h1 class="visually-hidden">Blog</h1>
-      <TypedLede text="A short description of what you write about." />
+      <TypedLede text={lede}/>
     </section>
 
     <section class="section" aria-label="Blog posts">
