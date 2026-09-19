@@ -1,14 +1,20 @@
 ---
 title: "git commit -m \"initial post\""
-description: "I've decided to give my personal site the care and makeover it deserves. In this post, I'll be telling my initial journey making this."
+description: "My personal site finally gets the makeover it deserves. Here's the story of how I built it."
 date: 2026-09-18
 tags:
   - General
 draft: false
 ---
 
-It's been a while since I touched this. It started out as a simple [Jekyll](https://jekyllrb.com/) site back in the spring of 2017. Almost a year later, I discovered frontend frameworks like React. Migrating my personal/blog site into React is in the cards but I barely have the time to sit on it. Almost three years later, I finally had the time to get to it but I decided to use Angular instead. The site can be seen [here](https://nicomiguelino.github.io/about-legacy/).
+## The story so far
 
-Just recently, I discovered [Astro](https://astro.build/), which feels similar to React. Writing posts still feels intuitive and straightforward&mdash;create a new Markdown file, add metadata, write something, and done.
+The site has been sitting untouched for a while. It began in 2017 as a simple [Jekyll](https://jekyllrb.com/) blog. About a year later, I discovered React and promised myself I'd migrate to it, but the migration kept slipping through the cracks. When I finally found the time, three years on, I rebuilt it in Angular instead. The [old version](https://nicomiguelino.github.io/about-legacy/) is still up.
 
-Thanks to this Astro theme called [Astro Palette](https://astro.build/themes/details/astro-palette/), I've finally spin up a blueprint for my personal site + blog.
+Then I stumbled onto [Astro](https://astro.build/). It felt familiar coming from React and Jekyll, and writing posts stayed refreshingly simple: create a Markdown file, add some metadata, write, and publish.
+
+Thanks to a theme called [Astro Palette](https://astro.build/themes/details/astro-palette/), I finally have a working prototype. On top of that, it's easily customizable.
+
+## What's next?
+
+Expect frequent tweaks to the design over the coming weeks, along with more posts.
