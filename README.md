@@ -4,10 +4,14 @@
 
 ```sh
 npm install
-npm run dev       # dev server on :4321
-npm run build     # astro build + pagefind index
-npm run preview   # preview the production build
-npm run check     # astro type checking
+npm run dev           # dev server on :4321
+npm run build         # astro build + pagefind index
+npm run preview       # preview the production build
+npm run check         # astro type checking
+npm run lint:check    # lint with ESLint
+npm run lint:fix      # lint and apply safe fixes
+npm run format:check  # check formatting with Prettier
+npm run format:fix    # format files with Prettier
 ```
 
 Search queries the Pagefind index in `dist/`, so run `npm run build` once before search will return results in dev.
