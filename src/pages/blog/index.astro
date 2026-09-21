@@ -1,10 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../../components/Layout.astro';
-import TypedLede from '../../components/TypedLede.astro';
-import SkillsMarquee from '../../components/SkillsMarquee.astro';
-import PostCard from '../../components/PostCard.astro';
-import { SITE_DESCRIPTION, SITE_NAME } from '../../lib/site';
+import Layout from '@/components/Layout.astro';
+import TypedLede from '@/components/TypedLede.astro';
+import SkillsMarquee from '@/components/SkillsMarquee.astro';
+import PostCard from '@/components/PostCard.astro';
+import { SITE_DESCRIPTION, SITE_NAME } from '@/lib/site';
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)

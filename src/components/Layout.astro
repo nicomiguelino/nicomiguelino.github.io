@@ -1,7 +1,7 @@
 ---
 import { ClientRouter } from 'astro:transitions';
-import { DEFAULT_PALETTE } from '../lib/palette';
-import { LINKEDIN_URL, SITE_NAME, SITE_URL } from '../lib/site';
+import { DEFAULT_PALETTE } from '@/lib/palette';
+import { LINKEDIN_URL, SITE_NAME, SITE_URL } from '@/lib/site';
 
 interface Props {
   title: string;
@@ -404,7 +404,7 @@ const currentPath = Astro.url.pathname;
     </script>
 
     <script>
-      import { DEFAULT_PALETTE } from '../lib/palette';
+      import { DEFAULT_PALETTE } from '@/lib/palette';
 
       let controller: AbortController | undefined;
 
