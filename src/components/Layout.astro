@@ -426,7 +426,7 @@ const currentPath = Astro.url.pathname;
         let committed = saved || defaultPalette();
 
         function defaultPalette() {
-          return media.matches ? DEFAULT_PALETTE.dark : DEFAULT_PALETTE.light;
+          return DEFAULT_PALETTE.dark;
         }
 
         function setPalette(value: string) {
