@@ -1384,7 +1384,7 @@ button.nav-icon-link {
 .about-card h3 {
     margin: 0 0 1rem;
     font-family: var(--mono);
-    font-size: 0.72rem;
+    font-size: 1rem;
     font-weight: 700;
     letter-spacing: 0.14em;
     color: var(--muted);
@@ -1414,7 +1414,7 @@ button.nav-icon-link {
 .sidebar-card h3 {
     margin: 0 0 1rem;
     font-family: var(--mono);
-    font-size: 0.72rem;
+    font-size: 1rem;
     font-weight: 700;
     letter-spacing: 0.14em;
     color: var(--muted);
