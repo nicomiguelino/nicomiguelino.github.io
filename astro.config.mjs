@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { SITE_URL } from './src/lib/site.ts';
 
 // Serve the Pagefind index from dist/ during `astro dev`, so search works
 // in dev after at least one `npm run build`.
@@ -37,7 +38,7 @@ function pagefindDev() {
 }
 
 export default defineConfig({
-  site: 'https://example.com',
+  site: SITE_URL,
   // v7 default ('jsx') strips spaces between inline elements, which corrupts
   // Pagefind's text extraction of adjacent spans (e.g. job titles + dates).
   compressHTML: true,

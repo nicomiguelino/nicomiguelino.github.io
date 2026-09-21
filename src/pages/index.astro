@@ -4,6 +4,7 @@ import Layout from '../components/Layout.astro';
 import TypedLede from '../components/TypedLede.astro';
 import SkillsMarquee from '../components/SkillsMarquee.astro';
 import { formatPostDate, postSlug } from '../lib/posts';
+import { JOB_TITLE, LINKEDIN_URL, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '../lib/site';
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -13,27 +14,27 @@ const posts = (await getCollection('blog'))
 const personSchema = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Your Name',
-  jobTitle: 'Your Job Title',
-  url: 'https://example.com',
+  name: SITE_NAME,
+  jobTitle: JOB_TITLE,
+  url: SITE_URL,
   sameAs: [
-    'https://github.com/your-username',
-    'https://linkedin.com/in/your-profile',
+    'https://github.com/nicomiguelino',
+    LINKEDIN_URL,
   ],
   // Escape < so no value can ever close the inline <script> tag.
 }).replace(/</g, '\\u003c');
 ---
 
 <Layout
-  title="Palette — Your Name"
-  description="A short tagline describing you and what you write about."
+  title={SITE_NAME}
+  description={SITE_DESCRIPTION}
   canonicalPath="/"
 >
   <script type="application/ld+json" is:inline set:html={personSchema} />
   <main class="content-shell">
     <div class="page-hero">
       <h1 class="visually-hidden">Home</h1>
-      <TypedLede text="This is the place for my machinations and other thoughts." />
+      <TypedLede text={SITE_DESCRIPTION} />
     </div>
 
     <section class="section" aria-label="Recent posts">
