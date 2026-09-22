@@ -17,20 +17,13 @@ const personSchema = JSON.stringify({
   name: SITE_NAME,
   jobTitle: JOB_TITLE,
   url: SITE_URL,
-  sameAs: [
-    'https://github.com/nicomiguelino',
-    LINKEDIN_URL,
-  ],
+  sameAs: ['https://github.com/nicomiguelino', LINKEDIN_URL],
   // Escape < so no value can ever close the inline <script> tag.
 }).replace(/</g, '\\u003c');
 ---
 
-<Layout
-  title={SITE_NAME}
-  description={SITE_DESCRIPTION}
-  canonicalPath="/"
->
-  <script type="application/ld+json" is:inline set:html={personSchema} />
+<Layout title={SITE_NAME} description={SITE_DESCRIPTION} canonicalPath="/">
+  <script type="application/ld+json" is:inline set:html={personSchema}></script>
   <main class="content-shell">
     <div class="page-hero">
       <h1 class="visually-hidden">Home</h1>
@@ -42,7 +35,9 @@ const personSchema = JSON.stringify({
         <p class="empty-note">No posts yet, check back soon.</p>
       ) : (
         <nav class="commit-tree" aria-label="Recent posts">
-          <a class="commit-tree-head" href="/blog/" title="All posts">Blog</a>
+          <a class="commit-tree-head" href="/blog/" title="All posts">
+            Blog
+          </a>
           {posts.map((post) => (
             <a href={`/blog/${postSlug(post)}/`}>
               {post.data.title}

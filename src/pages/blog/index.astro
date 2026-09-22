@@ -13,15 +13,11 @@ const posts = (await getCollection('blog'))
 const lede = "Notes on what I'm building, learning, and figuring out along the way";
 ---
 
-<Layout
-  title=`Blog — ${SITE_NAME}`
-  description={SITE_DESCRIPTION}
-  canonicalPath="/blog/"
->
+<Layout title=`Blog — ${SITE_NAME}` description={SITE_DESCRIPTION} canonicalPath="/blog/">
   <main class="content-shell">
     <section class="page-hero">
       <h1 class="visually-hidden">Blog</h1>
-      <TypedLede text={lede}/>
+      <TypedLede text={lede} />
     </section>
 
     <section class="section" aria-label="Blog posts">
@@ -29,7 +25,9 @@ const lede = "Notes on what I'm building, learning, and figuring out along the w
         <p style="color: var(--muted); font-family: var(--mono);">No posts yet, check back soon.</p>
       ) : (
         <div class="post-list">
-          {posts.map((post, index) => <PostCard post={post} latest={index === 0} />)}
+          {posts.map((post, index) => (
+            <PostCard post={post} latest={index === 0} />
+          ))}
         </div>
       )}
     </section>
