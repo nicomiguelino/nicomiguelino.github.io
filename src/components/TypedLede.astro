@@ -8,7 +8,9 @@ const { text } = Astro.props;
 
 <p class="hero-lede typed-lede">
   <span class="visually-hidden">{text}</span>
-  <span class="typed-lede-target" aria-hidden="true">{text}</span>
+  <span class="typed-lede-target" aria-hidden="true">
+    {text}
+  </span>
 </p>
 <script is:inline data-astro-rerun>
   document.querySelectorAll('.typed-lede').forEach((wrap) => {

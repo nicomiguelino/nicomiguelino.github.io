@@ -16,9 +16,7 @@ export async function getStaticPaths() {
     params: { tag: slug },
     props: {
       name,
-      posts: published.filter((post) =>
-        post.data.tags.some((tag) => slugifyTag(tag) === slug),
-      ),
+      posts: published.filter((post) => post.data.tags.some((tag) => slugifyTag(tag) === slug)),
     },
   }));
 }
@@ -32,27 +30,29 @@ const { name, posts } = Astro.props;
 const slug = Astro.params.tag!;
 ---
 
-<Layout
-  title={`#${name} — ${SITE_NAME}`}
-  description={`Posts tagged "${name}".`}
-  canonicalPath={`/tags/${slug}/`}
->
+<Layout title={`#${name} — ${SITE_NAME}`} description={`Posts tagged "${name}".`} canonicalPath={`/tags/${slug}/`}>
   <main class="content-shell">
     <section class="page-hero">
-      <p class="eyebrow"><span class="status-dot dot-blue"></span>tag</p>
+      <p class="eyebrow">
+        <span class="status-dot dot-blue"></span>tag
+      </p>
       <h1># {name}</h1>
       <p class="hero-lede">
         {posts.length === 0
           ? 'Nothing here yet — check back soon.'
           : `${posts.length} post${posts.length === 1 ? '' : 's'} tagged ${name}.`}{' '}
-        <a class="inline-link" href="/tags/">all tags</a>
+        <a class="inline-link" href="/tags/">
+          all tags
+        </a>
       </p>
     </section>
 
     {posts.length > 0 && (
       <section class="section" aria-label="Posts">
         <div class="post-list">
-          {posts.map((post) => <PostCard post={post} />)}
+          {posts.map((post) => (
+            <PostCard post={post} />
+          ))}
         </div>
       </section>
     )}

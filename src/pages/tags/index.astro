@@ -8,11 +8,7 @@ import { SITE_NAME } from '@/lib/site';
 const tags = getAllTags(await getCollection('blog'));
 ---
 
-<Layout
-  title=`Tags — ${SITE_NAME}`
-  description="Posts grouped by tag."
-  canonicalPath="/tags/"
->
+<Layout title=`Tags — ${SITE_NAME}` description="Posts grouped by tag." canonicalPath="/tags/">
   <main class="content-shell">
     <section class="page-hero">
       <h1 class="visually-hidden">Tags</h1>
@@ -22,7 +18,9 @@ const tags = getAllTags(await getCollection('blog'));
     <section class="section" aria-label="Tags">
       <div class="tag-cloud">
         {tags.map(({ slug, name, count }) => (
-          <a class="tag" href={`/tags/${slug}/`}>#{name} {count > 0 && <span class="tag-count">{count}</span>}</a>
+          <a class="tag" href={`/tags/${slug}/`}>
+            #{name} {count > 0 && <span class="tag-count">{count}</span>}
+          </a>
         ))}
       </div>
     </section>
