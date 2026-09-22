@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { formatPostDate, postSlug } from '../lib/posts';
-import { slugifyTag } from '../lib/tags';
+import { formatPostDate, postSlug } from '@/lib/posts';
+import { slugifyTag } from '@/lib/tags';
 
 interface Props {
   post: CollectionEntry<'blog'>;
