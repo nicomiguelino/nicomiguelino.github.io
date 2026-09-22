@@ -15,7 +15,11 @@
     "dev": "astro dev",
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write ."
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
@@ -24,7 +28,12 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "eslint": "^10.11.0",
+    "eslint-plugin-astro": "^1.7.0",
     "pagefind": "^1.5.2",
-    "typescript": "^6.0.3"
+    "prettier": "^3.9.8",
+    "prettier-plugin-astro": "^1.0.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.70.0"
   }
 }

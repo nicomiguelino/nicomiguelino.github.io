@@ -1,5 +1,5 @@
 ---
-title: "git commit -m \"initial post\""
+title: 'git commit -m "initial post"'
 description: "My personal site finally gets the makeover it deserves. Here's the story of how I built it."
 date: 2026-09-18
 tags:
