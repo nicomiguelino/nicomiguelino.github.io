@@ -4,3 +4,7 @@ updates:
     directory: '/'
     schedule:
       interval: 'monthly'
+    ignore:
+      - dependency-name: 'typescript'
+        versions:
+          - '>=7.0.0'
