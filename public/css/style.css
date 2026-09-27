@@ -390,20 +390,6 @@ code, pre, kbd, samp {
     font-family: var(--mono);
 }
 
-/* Blinking block cursor marks the current page in the nav. */
-.nav-links a[aria-current="page"]::after,
-.nav-menu-panel a[aria-current="page"]::after {
-    content: "";
-    display: inline-block;
-    width: 0.55ch;
-    height: 1em;
-    margin-left: 0.35ch;
-    vertical-align: middle;
-    transform: translateY(-0.08em);
-    background: var(--accent);
-    animation: type-cursor-blink 0.9s step-start infinite;
-}
-
 .nav-links a:hover,
 .nav-links a[aria-current="page"] {
     color: var(--accent);
