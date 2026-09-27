@@ -1,0 +1,29 @@
+---
+import { SITE_NAME } from '@/lib/site';
+import Layout from '@/components/Layout.astro';
+import Screenly from '@/components/experience/Screenly.astro';
+import DostAstiBackend from '@/components/experience/DostAstiBackend.astro';
+import Nokia from '@/components/experience/Nokia.astro';
+import DostAstiTestAutomation from '@/components/experience/DostAstiTestAutomation.astro';
+
+const description = 'Where I have worked and what I have built along the way';
+---
+
+<Layout title=`Experience — ${SITE_NAME}` description={description} canonicalPath="/experience/">
+  <main class="content-shell" data-pagefind-body>
+    <div class="section" style="max-width: var(--max)">
+      <h1>Experience</h1>
+
+      <Screenly />
+      <DostAstiBackend />
+      <Nokia />
+      <DostAstiTestAutomation />
+    </div>
+  </main>
+</Layout>
+
+<style>
+  h1 {
+    font-family: var(--mono);
+  }
+</style>

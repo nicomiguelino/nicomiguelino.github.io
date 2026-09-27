@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  dates: string;
+}
+
+const { title, dates } = Astro.props;
+---
+
+<h2>{title}</h2>
+<p class="experience-dates">{dates}</p>
+
+<ul>
+  <slot />
+</ul>
+
+<style>
+  h2,
+  .experience-dates {
+    font-family: var(--mono);
+  }
+
+  h2 {
+    margin-bottom: 0;
+  }
+
+  .experience-dates {
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+
+  ul :global(a) {
+    color: var(--accent);
+  }
+</style>
