@@ -25,7 +25,6 @@ const { title, dates } = Astro.props;
     padding: 0 0 2.5rem 3rem;
   }
 
-  /* The line: one segment per station, trimmed at both termini. */
   .station::before {
     content: '';
     position: absolute;
@@ -80,7 +79,6 @@ const { title, dates } = Astro.props;
     line-height: calc(var(--stop-y) * 2);
   }
 
-  /* Station sign. */
   .experience-dates {
     display: inline-block;
     margin: 0.4rem 0 0;
