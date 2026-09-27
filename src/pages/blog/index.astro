@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '@/components/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
 import TypedLede from '@/components/TypedLede.astro';
 import SkillsMarquee from '@/components/SkillsMarquee.astro';
 import PostCard from '@/components/PostCard.astro';
@@ -15,16 +16,15 @@ const lede = "Notes on what I'm building, learning, and figuring out along the w
 
 <Layout title=`Blog — ${SITE_NAME}` description={SITE_DESCRIPTION} canonicalPath="/blog/">
   <main class="content-shell">
-    <section class="page-hero">
-      <h1 class="visually-hidden">Blog</h1>
+    <PageHero title="Blog" hideTitle>
       <TypedLede text={lede} />
-    </section>
+    </PageHero>
 
     <section class="section" aria-label="Blog posts">
       {posts.length === 0 ? (
-        <p style="color: var(--muted); font-family: var(--mono);">No posts yet, check back soon.</p>
+        <p class="font-mono text-muted">No posts yet, check back soon.</p>
       ) : (
-        <div class="post-list">
+        <div class="grid">
           {posts.map((post, index) => (
             <PostCard post={post} latest={index === 0} />
           ))}

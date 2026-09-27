@@ -1,5 +1,6 @@
 ---
 import Layout from '@/components/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
 import TypedLede from '@/components/TypedLede.astro';
 import SkillsMarquee from '@/components/SkillsMarquee.astro';
 import { SITE_NAME } from '@/lib/site';
@@ -9,15 +10,14 @@ const description = 'I build things for the web and write about what I learn';
 
 <Layout title=`About — ${SITE_NAME}` description={description} canonicalPath="/about/">
   <main class="content-shell" data-pagefind-body>
-    <div class="page-hero">
-      <h1 class="visually-hidden">About</h1>
+    <PageHero title="About" hideTitle>
       <TypedLede text={description} />
-    </div>
+    </PageHero>
 
-    <div class="section" style="max-width: var(--max);">
-      <div class="about-grid">
+    <div class="section">
+      <div class="grid grid-cols-[minmax(0,1fr)_minmax(280px,0.4fr)] items-start gap-16 max-[860px]:block">
         <div class="about-me">
-          <div class="about-card">
+          <div class="card">
             <h3>About</h3>
             <div class="about-prose">
               <p>
@@ -32,12 +32,12 @@ const description = 'I build things for the web and write about what I learn';
         </div>
 
         <aside>
-          <div class="sidebar-card">
+          <div class="card sticky top-24 max-[860px]:static max-[860px]:mt-12">
             <h3>Education</h3>
-            <div class="edu-entry">
-              <p class="edu-degree">B.S. Computer Science</p>
-              <p class="edu-school">
-                <a href="https://www.ust.edu.ph/" target="_blank" rel="noopener" style="color: var(--accent);">
+            <div class="mb-4 last:mb-0">
+              <p class="text-[0.88rem] font-bold text-ink">B.S. Computer Science</p>
+              <p class="mt-[0.15rem] font-mono text-[0.75rem] text-muted">
+                <a href="https://www.ust.edu.ph/" target="_blank" rel="noopener" class="text-accent">
                   University of Santo Tomas
                 </a>{' '}
                 · 2016
@@ -51,3 +51,20 @@ const description = 'I build things for the web and write about what I learn';
     <SkillsMarquee />
   </main>
 </Layout>
+
+<style>
+  @reference "../styles/global.css";
+
+  .card {
+    @apply rounded-lg border border-line bg-bg-elevated p-6;
+  }
+
+  .card h3 {
+    @apply mb-4 font-mono text-[1rem] font-bold tracking-[0.14em] text-muted;
+  }
+
+  .about-prose p {
+    @apply mb-[1.2rem] max-w-[62ch] text-[1rem] leading-[1.75] last:mb-0;
+    color: color-mix(in srgb, var(--ink) 82%, var(--muted));
+  }
+</style>

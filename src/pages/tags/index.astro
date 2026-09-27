@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '@/components/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Tag from '@/components/Tag.astro';
 import TypedLede from '@/components/TypedLede.astro';
 import { getAllTags } from '@/lib/tags';
 import { SITE_NAME } from '@/lib/site';
@@ -10,17 +12,16 @@ const tags = getAllTags(await getCollection('blog'));
 
 <Layout title=`Tags — ${SITE_NAME}` description="Posts grouped by tag." canonicalPath="/tags/">
   <main class="content-shell">
-    <section class="page-hero">
-      <h1 class="visually-hidden">Tags</h1>
+    <PageHero title="Tags" hideTitle>
       <TypedLede text="Posts grouped by tag." />
-    </section>
+    </PageHero>
 
     <section class="section" aria-label="Tags">
-      <div class="tag-cloud">
+      <div class="flex flex-wrap gap-[0.6rem]">
         {tags.map(({ slug, name, count }) => (
-          <a class="tag" href={`/tags/${slug}/`}>
-            #{name} {count > 0 && <span class="tag-count">{count}</span>}
-          </a>
+          <Tag href={`/tags/${slug}/`} size="lg">
+            #{name} {count > 0 && <span class="font-normal text-muted-2">{count}</span>}
+          </Tag>
         ))}
       </div>
     </section>

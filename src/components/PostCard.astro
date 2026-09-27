@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { formatPostDate, postSlug } from '@/lib/posts';
 import { slugifyTag } from '@/lib/tags';
+import Tag from '@/components/Tag.astro';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -9,29 +10,41 @@ interface Props {
 }
 
 const { post, latest = false } = Astro.props;
-// Tags whose slug is empty have no archive page; skip their chips.
 const tags = post.data.tags.filter((tag) => slugifyTag(tag) !== '');
 ---
 
-<article class="post-card">
-  <a class="post-card-link" href={`/blog/${postSlug(post)}/`}>
+<article class="post-card group">
+  <a class="flex items-center justify-between gap-6 py-[1.45rem]" href={`/blog/${postSlug(post)}/`}>
     <div>
-      <h2>
+      <h2 class="m-0 font-mono text-[clamp(1.45rem,3vw,2.05rem)] leading-none font-normal tracking-[-0.055em] text-ink transition-colors duration-160 ease-[ease] group-hover:text-accent">
         {post.data.title}
-        {latest && <span class="tag-latest">latest</span>}
+        {latest && (
+          <span class="ml-[0.7rem] inline-block -translate-y-[0.15em] rounded-full border border-accent px-[0.6rem] py-[0.12rem] align-middle text-[0.68rem] font-semibold tracking-[0.04em] text-accent">
+            latest
+          </span>
+        )}
       </h2>
-      <p>{post.data.description}</p>
-      <p class="post-card-meta">{formatPostDate(post.data.date)}</p>
+      <p class="mt-[0.55rem] max-w-[680px] leading-[1.55] text-[color-mix(in_srgb,var(--ink)_62%,var(--muted))]">
+        {post.data.description}
+      </p>
+      <p class="mt-[0.4rem] max-w-[680px] font-mono text-[0.75rem] leading-[1.55] font-semibold text-muted">
+        {formatPostDate(post.data.date)}
+      </p>
     </div>
   </a>
-  {/* Chips are siblings of the card link, not children: anchors can't nest. */}
   {tags.length > 0 && (
-    <p class="post-tags">
+    <p class="-mt-[0.85rem] flex max-w-[680px] flex-wrap gap-2 pb-[1.45rem]">
       {tags.map((tag) => (
-        <a class="tag" href={`/tags/${slugifyTag(tag)}/`}>
-          #{tag}
-        </a>
+        <Tag href={`/tags/${slugifyTag(tag)}/`}>#{tag}</Tag>
       ))}
     </p>
   )}
 </article>
+
+<style>
+  @reference "../styles/global.css";
+
+  .post-card + .post-card {
+    @apply border-t border-line;
+  }
+</style>

@@ -21,7 +21,6 @@ export async function getStaticPaths() {
 const { post, slug } = Astro.props;
 const { Content, headings } = await render(post);
 const sectionHeadings = headings.filter((heading) => heading.depth === 2);
-// Tags whose slug is empty have no archive page; skip their chips.
 const tags = post.data.tags.filter((tag) => slugifyTag(tag) !== '');
 
 const postSchema = JSON.stringify({
@@ -36,7 +35,6 @@ const postSchema = JSON.stringify({
     name: SITE_NAME,
     url: new URL('/about/', SITE_URL).toString(),
   },
-  // Escape < so a post title/description can never close the <script> tag.
 }).replace(/</g, '\\u003c');
 ---
 
@@ -48,10 +46,10 @@ const postSchema = JSON.stringify({
 >
   <script type="application/ld+json" is:inline set:html={postSchema}></script>
   <main class="content-shell">
-    <div class="article-layout section" style="max-width: var(--max); padding-inline: 1.25rem;">
+    <div class="article-layout section">
       <aside class="article-toc" aria-label="Article sections">
         {sectionHeadings.length > 0 && (
-          <nav>
+          <nav class="ml-[5px] grid gap-[0.9rem] border-l-2 border-line">
             {sectionHeadings.map((heading) => (
               <a href={`#${heading.slug}`} data-heading-link={heading.slug}>
                 {heading.text}
@@ -61,24 +59,27 @@ const postSchema = JSON.stringify({
         )}
       </aside>
 
-      <article class="article-shell" data-pagefind-body>
-        <header class="article-header">
+      <article class="min-w-0" data-pagefind-body>
+        <header class="mb-[2.35rem] border-b border-line pb-8">
           <p class="post-meta">
             <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date)}</time>
-            {/* data-pagefind-ignore keeps tag labels out of the search index. */}
             {tags.map((tag) => (
               <a href={`/tags/${slugifyTag(tag)}/`} data-pagefind-ignore>
                 #{tag}
               </a>
             ))}
           </p>
-          <h1>{post.data.title}</h1>
-          <p>{post.data.description}</p>
+          <h1 class="m-0 max-w-[22ch] font-mono text-[clamp(2rem,4vw,3.4rem)] leading-none font-normal tracking-[-0.055em] text-ink">
+            {post.data.title}
+          </h1>
+          <p class="mt-[1.2rem] max-w-[680px] text-[1.18rem] leading-[1.7] text-[color-mix(in_srgb,var(--ink)_68%,var(--muted))]">
+            {post.data.description}
+          </p>
         </header>
         <div class="article-prose">
           <Content />
         </div>
-        <section class="article-comments" aria-label="Comments">
+        <section class="mt-[3.2rem] border-t border-line pt-[2.2rem]" aria-label="Comments">
           <div id="remark42"></div>
         </section>
       </article>
@@ -86,8 +87,6 @@ const postSchema = JSON.stringify({
   </main>
 
   <script>
-    // Optional Remark42 comments. Point these at your own instance, or
-    // remove the #remark42 section above to disable comments entirely.
     const REMARK_HOST = 'https://comments.nicomiguelino.github.io';
 
     type Remark42 = {
@@ -132,8 +131,6 @@ const postSchema = JSON.stringify({
       for (const heading of headings) tocObserver.observe(heading);
     }
 
-    // Map the active palette to Remark42's light/dark themes by the
-    // luminance of --bg, so all palettes work without a hard-coded list.
     function paletteTheme(): 'light' | 'dark' {
       const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
       const hex = bg.replace('#', '');
@@ -154,7 +151,6 @@ const postSchema = JSON.stringify({
         commentsInstance = undefined;
         return;
       }
-      // The comments service only exists on the public origin.
       if (window.location.hostname !== 'nicomiguelino.github.io') return;
 
       w.remark_config = {
@@ -171,7 +167,6 @@ const postSchema = JSON.stringify({
         } catch {}
         commentsInstance = w.REMARK42.createInstance(w.remark_config);
       } else if (!embedRequested) {
-        // embed.mjs self-initializes against #remark42 using remark_config.
         embedRequested = true;
         const script = document.createElement('script');
         script.src = `${REMARK_HOST}/web/embed.mjs`;
@@ -180,8 +175,6 @@ const postSchema = JSON.stringify({
       }
     }
 
-    // <html> survives view transitions, so one observer follows palette
-    // switches for the life of the session.
     new MutationObserver(() => {
       w.REMARK42?.changeTheme(paletteTheme());
     }).observe(document.documentElement, { attributeFilter: ['data-palette'] });
@@ -192,8 +185,56 @@ const postSchema = JSON.stringify({
     }
 
     init();
-    // Module scripts run once per session; re-init after view-transition
-    // navigations (e.g. post → post through the archive tree).
     document.addEventListener('astro:page-load', init);
   </script>
 </Layout>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .post-meta {
+    @apply mb-[0.85rem] flex flex-wrap items-center gap-[0.55rem];
+    @apply font-mono text-[0.78rem] font-bold tracking-[-0.03em] uppercase;
+    color: color-mix(in srgb, var(--ink) 58%, var(--muted));
+  }
+
+  .post-meta > * + *::before {
+    content: '/';
+    @apply mr-[0.55rem] text-line-strong;
+  }
+
+  .article-layout {
+    @apply relative grid grid-cols-[minmax(8rem,12rem)_minmax(0,860px)] items-start gap-[clamp(2rem,6vw,4rem)] pt-16;
+    @apply border-t-0;
+    @apply max-[1040px]:block max-[1040px]:max-w-[860px] max-sm:pt-[2.25rem];
+  }
+
+  .article-toc {
+    @apply sticky top-24 pt-[0.35rem] font-mono text-[0.78rem] max-[1040px]:hidden;
+    color: color-mix(in srgb, var(--ink) 58%, var(--muted));
+  }
+
+  .article-toc a {
+    @apply relative pl-[1.1rem] leading-[1.35];
+    color: color-mix(in srgb, var(--ink) 58%, var(--muted));
+  }
+
+  .article-toc a::before {
+    content: '';
+    @apply absolute top-[0.22em] -left-[6px] size-[10px] rounded-full border-2 border-line-strong bg-bg;
+    @apply transition-[border-color,background] duration-150 ease-[ease];
+  }
+
+  .article-toc a:hover,
+  .article-toc a[aria-current='true'] {
+    @apply text-accent;
+  }
+
+  .article-toc a:hover::before {
+    @apply border-accent;
+  }
+
+  .article-toc a[aria-current='true']::before {
+    @apply border-accent bg-accent;
+  }
+</style>

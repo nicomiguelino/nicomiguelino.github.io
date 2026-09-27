@@ -3,21 +3,54 @@ import { skills, slugifyTag } from '@/lib/tags';
 ---
 
 <section class="skills-marquee" aria-label="Skills">
-  <ul class="visually-hidden">
+  <ul class="sr-only">
     {skills.map((skill) => (
       <li>
         <a href={`/tags/${slugifyTag(skill)}/`}>{skill}</a>
       </li>
     ))}
   </ul>
-  {/* Two copies make the loop seamless; hidden from readers and search.
-      tabindex="-1" keeps the aria-hidden copies out of the tab order —
-      the visually-hidden list above is the keyboard-reachable one. */}
   <div class="skills-track" aria-hidden="true" data-pagefind-ignore>
     {[...skills, ...skills].map((skill) => (
-      <a class="skills-item" href={`/tags/${slugifyTag(skill)}/`} tabindex="-1">
+      <a
+        class="pr-[2.4rem] font-mono text-[0.78rem] font-semibold whitespace-nowrap text-muted transition-colors duration-150 ease-[ease] hover:text-accent"
+        href={`/tags/${slugifyTag(skill)}/`}
+        tabindex="-1"
+      >
         {skill}
       </a>
     ))}
   </div>
 </section>
+
+<style>
+  @reference "../styles/global.css";
+
+  .skills-marquee {
+    @apply mx-auto mt-[4.5rem] max-w-(--max) overflow-hidden border-t border-line px-5 py-[1.2rem] max-sm:mt-12;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .skills-track {
+    @apply flex w-max;
+    animation: skills-scroll 70s linear infinite;
+  }
+
+  .skills-marquee:hover .skills-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes skills-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skills-track {
+      @apply w-auto flex-wrap gap-x-0 gap-y-2;
+      animation: none;
+    }
+  }
+</style>

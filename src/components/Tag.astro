@@ -1,0 +1,30 @@
+---
+interface Props {
+  href: string;
+  size?: 'sm' | 'lg';
+}
+
+const { href, size = 'sm' } = Astro.props;
+---
+
+<a
+  class:list={['tag', size === 'lg' ? 'px-3 py-[0.22rem] text-[0.78rem]' : 'px-[0.6rem] py-[0.14rem] text-[0.7rem]']}
+  href={href}
+>
+  <slot />
+</a>
+
+<style>
+  @reference "../styles/global.css";
+
+  .tag {
+    @apply inline-flex items-center gap-[0.35rem] rounded-full border border-line-strong;
+    @apply font-mono leading-[1.4] font-semibold text-muted;
+    @apply transition-colors duration-120 ease-[ease];
+  }
+
+  .tag:hover {
+    @apply bg-accent-soft text-accent;
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line-strong));
+  }
+</style>
