@@ -41,8 +41,8 @@ src/
   content/blog/   posts as markdown
   lib/            post and tag helpers, skills list, default palette, site constants
   pages/          index (home), blog/, tags/, about, 404, rss
+  styles/         global styles, design tokens, palette definitions (Tailwind CSS)
 public/
-  css/style.css   all styling, including palette definitions
   assets/         font, og image
 ```
 
