@@ -1,4 +1,6 @@
 ---
+import Lede from '@/components/Lede.astro';
+
 interface Props {
   text: string;
 }
@@ -6,12 +8,12 @@ interface Props {
 const { text } = Astro.props;
 ---
 
-<p class="hero-lede typed-lede">
-  <span class="visually-hidden">{text}</span>
+<Lede class="typed-lede">
+  <span class="sr-only">{text}</span>
   <span class="typed-lede-target" aria-hidden="true">
     {text}
   </span>
-</p>
+</Lede>
 <script is:inline data-astro-rerun>
   document.querySelectorAll('.typed-lede').forEach((wrap) => {
     if (wrap.dataset.typed) return;
@@ -20,7 +22,6 @@ const { text } = Astro.props;
     if (!target) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const full = target.textContent || '';
-    // Reserve the final height so the page doesn't shift while typing.
     wrap.style.minHeight = wrap.getBoundingClientRect().height + 'px';
     target.textContent = '';
     let i = 0;

@@ -1,17 +1,15 @@
 ---
 import Layout from '@/components/Layout.astro';
+import Lede from '@/components/Lede.astro';
+import PageHero from '@/components/PageHero.astro';
 import { SITE_NAME } from '@/lib/site';
 ---
 
 <Layout title=`404 — ${SITE_NAME}` description="Page not found." canonicalPath="/404/">
   <main class="content-shell">
-    <div class="page-hero">
-      <p class="eyebrow">
-        <span class="status-dot dot-blue"></span>page not found
-      </p>
-      <h1>404</h1>
-      <p class="hero-lede">This page doesn't exist. It may have been moved, deleted, or never published.</p>
-      <div class="hero-actions">
+    <PageHero title="404" eyebrow="page not found">
+      <Lede>This page doesn't exist. It may have been moved, deleted, or never published.</Lede>
+      <div class="mt-7 flex flex-wrap gap-[0.6rem]">
         <a class="button button-primary" href="/">
           Go home
         </a>
@@ -19,6 +17,24 @@ import { SITE_NAME } from '@/lib/site';
           Browse the blog
         </a>
       </div>
-    </div>
+    </PageHero>
   </main>
 </Layout>
+
+<style>
+  @reference "../styles/global.css";
+
+  .button {
+    @apply inline-flex min-h-[2.6rem] items-center justify-center rounded-md border border-transparent px-[1.1rem] py-[0.6rem];
+    @apply font-mono text-[0.9rem] font-semibold transition-all duration-120 ease-[ease];
+  }
+
+  .button-primary {
+    @apply bg-ink text-bg hover:bg-accent hover:text-white;
+  }
+
+  .button-secondary {
+    @apply border-line-strong bg-transparent text-ink-soft;
+    @apply hover:border-accent hover:bg-accent-soft hover:text-accent;
+  }
+</style>

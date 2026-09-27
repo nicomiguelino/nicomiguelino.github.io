@@ -7,33 +7,33 @@ interface Props {
 const { title, dates } = Astro.props;
 ---
 
-<article class="station">
-  <span class="stop" aria-hidden="true"></span>
-  <h2>{title}</h2>
-  <p class="experience-dates">{dates}</p>
+<article class="station group">
+  <span
+    class="absolute top-(--stop-y) left-(--rail-x) size-5 -translate-1/2 rounded-full border-5 border-accent bg-bg group-first-of-type:size-[1.6rem] group-last-of-type:size-[1.6rem]"
+    aria-hidden="true"
+  ></span>
+  <h2 class="m-0 font-mono text-[1.5em] leading-[calc(var(--stop-y)*2)] font-normal">{title}</h2>
+  <p class="mt-[0.7rem] inline-block rounded-md bg-ink px-[0.6rem] py-[0.15rem] font-mono text-[0.8rem] text-bg">
+    {dates}
+  </p>
 
-  <ul>
+  <ul class="my-4 list-disc pl-10 text-ink-soft [&_a]:text-accent">
     <slot />
   </ul>
 </article>
 
 <style>
+  @reference "../../styles/global.css";
+
   .station {
     --rail-x: 0.75rem;
     --stop-y: 0.9rem;
-    position: relative;
-    padding: 0 0 2.5rem 3rem;
+    @apply relative pb-10 pl-12;
   }
 
   .station::before {
     content: '';
-    position: absolute;
-    left: var(--rail-x);
-    top: 0;
-    bottom: 0;
-    width: 5px;
-    background: var(--accent);
-    transform: translateX(-50%);
+    @apply absolute inset-y-0 left-(--rail-x) w-[5px] -translate-x-1/2 bg-accent;
   }
 
   .station:first-of-type::before {
@@ -47,53 +47,5 @@ const { title, dates } = Astro.props;
 
   .station:only-of-type::before {
     display: none;
-  }
-
-  .stop {
-    position: absolute;
-    left: var(--rail-x);
-    top: var(--stop-y);
-    width: 1.25rem;
-    height: 1.25rem;
-    border: 5px solid var(--accent);
-    border-radius: 50%;
-    background: var(--bg);
-    transform: translate(-50%, -50%);
-    box-sizing: border-box;
-  }
-
-  .station:first-of-type .stop,
-  .station:last-of-type .stop {
-    width: 1.6rem;
-    height: 1.6rem;
-  }
-
-  h2,
-  .experience-dates {
-    font-family: var(--mono);
-  }
-
-  h2 {
-    margin: 0;
-    line-height: calc(var(--stop-y) * 2);
-    font-weight: 400;
-  }
-
-  .experience-dates {
-    display: inline-block;
-    margin: 0.7rem 0 0;
-    padding: 0.15rem 0.6rem;
-    border-radius: var(--radius-md);
-    background: var(--ink);
-    color: var(--bg);
-    font-size: 0.8rem;
-  }
-
-  ul {
-    color: var(--ink-soft);
-  }
-
-  ul :global(a) {
-    color: var(--accent);
   }
 </style>

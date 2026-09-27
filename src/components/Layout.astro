@@ -1,8 +1,10 @@
 ---
 import { ClientRouter } from 'astro:transitions';
+import Footer from '@/components/Footer.astro';
 import Header from '@/components/Header.astro';
 import { DEFAULT_PALETTE } from '@/lib/palette';
 import { SITE_NAME, SITE_URL } from '@/lib/site';
+import '@/styles/global.css';
 
 interface Props {
   title: string;
@@ -14,7 +16,6 @@ interface Props {
 const { title, description, canonicalPath = '/', ogType = 'website' } = Astro.props;
 
 const canonicalUrl = new URL(canonicalPath, SITE_URL).toString();
-// Replace public/assets/og.png with your own 1200x630 social preview image.
 const ogImageUrl = new URL('/assets/og.png', SITE_URL).toString();
 ---
 
@@ -59,7 +60,6 @@ const ogImageUrl = new URL('/assets/og.png', SITE_URL).toString();
         document.addEventListener('astro:after-swap', apply);
       })();
     </script>
-    <link rel="stylesheet" href="/css/style.css" />
     <ClientRouter />
   </head>
   <body>
@@ -67,9 +67,7 @@ const ogImageUrl = new URL('/assets/og.png', SITE_URL).toString();
 
     <slot />
 
-    <footer class="footer">
-      <span>&copy; {new Date().getFullYear()} nicomiguelino.github.io</span>
-    </footer>
+    <Footer />
 
     <div class="theme-hint" id="theme-hint">
       <span class="theme-hint-label" id="theme-hint-label">
@@ -232,8 +230,6 @@ const ogImageUrl = new URL('/assets/og.png', SITE_URL).toString();
       async function loadPagefind() {
         if (pagefind || pagefindFailed) return pagefind;
         try {
-          // The index only exists in the build output; new Function keeps the
-          // bundler from rewriting this runtime-only import.
           pagefind = await new Function("return import('/pagefind/pagefind.js')")();
           pagefind?.init();
         } catch {
@@ -258,7 +254,6 @@ const ogImageUrl = new URL('/assets/og.png', SITE_URL).toString();
         let activeIndex = -1;
         let debounceTimer: ReturnType<typeof setTimeout> | undefined;
         let queryId = 0;
-        // Shell-style history: -1 = not browsing, 0 = most recent search.
         let historyIndex = -1;
         const HISTORY_KEY = 'site-search-history';
 
@@ -389,7 +384,6 @@ const ogImageUrl = new URL('/assets/og.png', SITE_URL).toString();
           'keydown',
           (e) => {
             if (e.key === 'k' && (e.ctrlKey || e.metaKey)) {
-              // Don't stack on top of the theme switcher.
               if (document.getElementById('theme-overlay')?.hidden === false) return;
               e.preventDefault();
               if (overlay.hidden) openOverlay();
@@ -403,8 +397,6 @@ const ogImageUrl = new URL('/assets/og.png', SITE_URL).toString();
             } else if (e.key === 'ArrowDown') {
               e.preventDefault();
               if (historyIndex >= 0) {
-                // Symmetric with ArrowUp: down walks toward newer history
-                // entries and finally back to the empty prompt.
                 recallHistory(historyIndex - 1);
               } else if (items.length > 0) {
                 setActive(Math.min(items.length - 1, activeIndex + 1));
@@ -423,7 +415,6 @@ const ogImageUrl = new URL('/assets/og.png', SITE_URL).toString();
                 active.click();
               }
             } else if (e.key === 'Tab') {
-              // Trap focus inside the dialog while it is open.
               const focusables = [input, ...items, closeBtn].filter(Boolean) as HTMLElement[];
               const first = focusables[0];
               const last = focusables[focusables.length - 1];
@@ -558,7 +549,6 @@ const ogImageUrl = new URL('/assets/og.png', SITE_URL).toString();
               e.preventDefault();
               revert();
             } else if (e.key === 'Tab') {
-              // Trap focus inside the dialog while it is open.
               const focusables = [...options, closeBtn].filter(
                 (el): el is HTMLButtonElement | HTMLElement => el !== null,
               );
