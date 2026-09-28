@@ -1,10 +1,14 @@
 ---
 interface Props {
-  title: string;
+  role: string;
   dates: string;
+  organization: {
+    name: string;
+    url?: string;
+  };
 }
 
-const { title, dates } = Astro.props;
+const { role, dates, organization } = Astro.props;
 ---
 
 <article class="station group">
@@ -12,7 +16,16 @@ const { title, dates } = Astro.props;
     class="absolute top-(--stop-y) left-(--rail-x) size-5 -translate-1/2 rounded-full border-5 border-accent bg-bg group-first-of-type:bg-accent"
     aria-hidden="true"
   ></span>
-  <h2 class="m-0 font-mono text-[1.5em] leading-[calc(var(--stop-y)*2)] font-normal">{title}</h2>
+  <h2 class="m-0 font-mono text-[1.5em] leading-[calc(var(--stop-y)*2)] font-normal [&_a]:text-accent">
+    {role},{' '}
+    {organization.url ? (
+      <a href={organization.url} target="_blank" rel="noopener">
+        {organization.name}
+      </a>
+    ) : (
+      organization.name
+    )}
+  </h2>
   <p class="mt-[0.7rem] inline-block rounded-md bg-ink px-[0.6rem] py-[0.15rem] font-mono text-[0.8rem] text-bg">
     {dates}
   </p>
