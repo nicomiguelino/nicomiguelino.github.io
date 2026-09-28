@@ -30,6 +30,20 @@ const personSchema = JSON.stringify({
     </PageHero>
 
     <section class="section" aria-label="Recent posts">
+      <div class="flex justify-center w-full">
+        <div class="card max-w-[1080px]">
+          <div class="about-prose">
+            <p>
+              Hi, I'm Nico, a full-stack engineer who likes building things for the web, frontend or backend. I've
+              rebuilt this site in Jekyll, Angular, and now Astro, mostly because I can't resist a good excuse to
+              tinker. When I'm not coding, I'm usually listening to or playing music in my room.
+            </p>
+
+            <p>If any of this sounds interesting, feel free to reach out.</p>
+          </div>
+        </div>
+      </div>
+
       {posts.length === 0 ? (
         <p class="font-mono text-muted">No posts yet, check back soon.</p>
       ) : (
@@ -43,7 +57,6 @@ const personSchema = JSON.stringify({
               <span class="text-[0.75rem] font-semibold text-muted">{formatPostDate(post.data.date)}</span>
             </a>
           ))}
-          <a href="/about/">About</a>
         </nav>
       )}
     </section>
@@ -84,5 +97,14 @@ const personSchema = JSON.stringify({
 
   .commit-tree .commit-tree-head::before {
     @apply top-[0.24em] -left-[7px] size-[12px] border-accent bg-accent;
+  }
+
+  .card {
+    @apply rounded-lg border border-line bg-bg-elevated p-6 mb-20;
+  }
+
+  .about-prose p {
+    @apply mb-[1.2rem] text-[1rem] leading-[1.75] last:mb-0;
+    color: color-mix(in srgb, var(--ink) 82%, var(--muted));
   }
 </style>
