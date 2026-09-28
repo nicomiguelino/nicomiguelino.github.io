@@ -33,7 +33,7 @@ const postSchema = JSON.stringify({
   author: {
     '@type': 'Person',
     name: SITE_NAME,
-    url: new URL('/about/', SITE_URL).toString(),
+    url: new URL('/', SITE_URL).toString(),
   },
 }).replace(/</g, '\\u003c');
 ---
