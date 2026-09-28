@@ -6,6 +6,6 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<p class:list={['mt-5 max-w-[680px] text-[clamp(1rem,1.8vw,1.18rem)] leading-[1.6] text-muted', className]}>
+<p class:list={['mt-5 text-[clamp(1rem,1.8vw,1.18rem)] leading-[1.6] text-muted', className]}>
   <slot />
 </p>
