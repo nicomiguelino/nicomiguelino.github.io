@@ -11,7 +11,7 @@ const description = 'Where I have worked and what I have built along the way';
 
 <Layout title=`Experience — ${SITE_NAME}` description={description} canonicalPath="/experience/">
   <main class="content-shell" data-pagefind-body>
-    <div class="section">
+    <div class="section no-top-border">
       <h1 class="my-[0.67em] font-mono text-[2em] font-normal">Experience</h1>
 
       <Screenly />
@@ -21,3 +21,9 @@ const description = 'Where I have worked and what I have built along the way';
     </div>
   </main>
 </Layout>
+
+<style>
+  .section.no-top-border {
+    border-top: none;
+  }
+</style>
