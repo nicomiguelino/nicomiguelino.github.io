@@ -2,7 +2,11 @@
 import ExperienceEntry from './ExperienceEntry.astro';
 ---
 
-<ExperienceEntry title="Software Engineer, Screenly" dates="October 2022 - September 2026">
+<ExperienceEntry
+  role="Software Engineer"
+  organization={{ name: 'Screenly', url: 'https://www.screenly.io/' }}
+  dates="October 2022 - September 2026"
+>
   <li>
     Migrated Anthias' frontend framework from Backbone.js and CoffeeScript to React and TypeScript, enabling faster
     delivery of UI features and bug fixes

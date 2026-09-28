@@ -2,7 +2,11 @@
 import ExperienceEntry from './ExperienceEntry.astro';
 ---
 
-<ExperienceEntry title="Software Engineer, Nokia" dates="February 2017 - April 2020">
+<ExperienceEntry
+  role="Software Engineer"
+  organization={{ name: 'Nokia', url: 'https://www.nokia.com/' }}
+  dates="February 2017 - April 2020"
+>
   <li>
     Developed 5G features for Nokia's in-house 5G User Equipment simulator, later recognized as a cost-effective
     alternative to purchasing hardware and software from competitors
