@@ -2,6 +2,23 @@
 import { LINKEDIN_URL, SITE_NAME } from '@/lib/site';
 
 const currentPath = Astro.url.pathname;
+const navMenuItems = [
+  {
+    href: '/',
+    title: 'Home',
+    current: currentPath === '/',
+  },
+  {
+    href: '/blog/',
+    title: 'Blog',
+    current: currentPath.startsWith('/blog'),
+  },
+  {
+    href: '/experience/',
+    title: 'Experience',
+    current: currentPath === '/experience/',
+  },
+];
 ---
 
 <header class="sticky top-0 z-20 border-b border-line bg-bg/75 backdrop-blur-[0.15rem]">
@@ -17,28 +34,24 @@ const currentPath = Astro.url.pathname;
         <span></span>
       </summary>
       <div class="nav-menu-panel">
-        <a href="/" aria-current={currentPath === '/' ? 'page' : undefined}>
-          Home
-        </a>
-        <a href="/blog/" aria-current={currentPath.startsWith('/blog') ? 'page' : undefined}>
-          Blog
-        </a>
-        <a href="/experience/" aria-current={currentPath === '/experience/' ? 'page' : undefined}>
-          Experience
-        </a>
+        {navMenuItems.map((item) => {
+          return (
+            <a href={item.href} aria-current={item.current ? 'page' : undefined}>
+              {item.title}
+            </a>
+          );
+        })}
       </div>
     </details>
 
     <div class="nav-links">
-      <a href="/" aria-current={currentPath === '/' ? 'page' : undefined}>
-        Home
-      </a>
-      <a href="/blog/" aria-current={currentPath.startsWith('/blog') ? 'page' : undefined}>
-        Blog
-      </a>
-      <a href="/experience/" aria-current={currentPath === '/experience/' ? 'page' : undefined}>
-        Experience
-      </a>
+      {navMenuItems.map((item) => {
+        return (
+          <a href={item.href} aria-current={item.current ? 'page' : undefined}>
+            {item.title}
+          </a>
+        );
+      })}
     </div>
 
     <div class="flex items-center gap-[0.45rem] max-sm:basis-full max-sm:justify-end max-sm:gap-[0.35rem]">
