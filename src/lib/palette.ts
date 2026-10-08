@@ -1,4 +1,4 @@
 export const DEFAULT_PALETTE = {
-  dark: 'dracula',
+  dark: 'everforest',
   light: 'rose-pine-dawn',
 } as const;
