@@ -135,7 +135,7 @@
 
   let controller: AbortController | undefined;
 
-  function initThemeSwitcher() {
+  function initThemeSwitcher(): void {
     controller?.abort();
     controller = new AbortController();
     const { signal } = controller;
@@ -153,19 +153,19 @@
     const separators = Array.from(list.querySelectorAll<HTMLElement>('.theme-separator'));
     const media = window.matchMedia('(prefers-color-scheme: dark)');
     const saved = localStorage.getItem('site-palette') || '';
-    let committed = saved || defaultPalette();
+    let committed = saved || getDefaultPalette();
     let cursor: HTMLButtonElement | undefined;
 
-    function defaultPalette() {
+    function getDefaultPalette(): string {
       return DEFAULT_PALETTE.dark;
     }
 
-    function setPalette(value: string) {
-      document.documentElement.setAttribute('data-palette', value || defaultPalette());
+    function setPalette(value: string): void {
+      document.documentElement.setAttribute('data-palette', value || getDefaultPalette());
     }
 
-    function updateUI(value: string) {
-      const activeValue = value || defaultPalette();
+    function updateUI(value: string): void {
+      const activeValue = value || getDefaultPalette();
       for (const option of options) {
         option.setAttribute('aria-selected', String(option.dataset.value === activeValue));
       }
@@ -177,7 +177,7 @@
       return options.filter((option) => !option.hidden);
     }
 
-    function filterOptions(query: string) {
+    function filterOptions(query: string): void {
       const needle = query.trim().toLowerCase();
       for (const option of options) {
         option.hidden = !(option.textContent ?? '').toLowerCase().includes(needle);
@@ -194,11 +194,11 @@
       emptyMessage!.hidden = getVisibleOptions().length > 0;
     }
 
-    function openOverlay() {
+    function openOverlay(): void {
       if (!overlay) return;
       overlay.hidden = false;
       document.body.style.overflow = 'hidden';
-      committed = localStorage.getItem('site-palette') || defaultPalette();
+      committed = localStorage.getItem('site-palette') || getDefaultPalette();
       input!.value = '';
       cursor = undefined;
       filterOptions('');
@@ -207,18 +207,18 @@
       input!.focus();
     }
 
-    function closeOverlay() {
+    function closeOverlay(): void {
       if (!overlay) return;
       overlay.hidden = true;
       document.body.style.overflow = '';
     }
 
-    function toggleOverlay() {
+    function toggleOverlay(): void {
       if (overlay?.hidden) openOverlay();
       else closeOverlay();
     }
 
-    function preview(option: HTMLButtonElement | undefined) {
+    function preview(option: HTMLButtonElement | undefined): void {
       if (!option) return;
       cursor = option;
       setPalette(option.dataset.value ?? '');
@@ -226,14 +226,14 @@
       option.scrollIntoView({ block: 'nearest' });
     }
 
-    function commit(value: string) {
+    function commit(value: string): void {
       setPalette(value);
       localStorage.setItem('site-palette', value);
       updateUI(value);
       closeOverlay();
     }
 
-    function revert() {
+    function revert(): void {
       setPalette(committed);
       updateUI(committed);
       closeOverlay();
