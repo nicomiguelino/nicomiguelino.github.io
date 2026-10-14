@@ -2,6 +2,21 @@
 
 ## Getting started
 
+Clone with submodules (`.claude/skills` is a submodule):
+
+```sh
+git clone --recurse-submodules git@github.com:nicomiguelino/nicomiguelino.github.io.git
+cd nicomiguelino.github.io
+```
+
+If already cloned without them:
+
+```sh
+git submodule update --init
+```
+
+Then install and run:
+
 ```sh
 npm install
 npm run dev           # dev server on :4321
