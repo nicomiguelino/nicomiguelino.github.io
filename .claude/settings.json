@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "nicomiguelino": {
+      "source": {
+        "source": "github",
+        "repo": "nicomiguelino/claude-plugin"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "nicomiguelino@nicomiguelino": true
+  }
+}
