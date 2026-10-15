@@ -1,4 +1,0 @@
-[submodule ".claude/skills"]
-	path = .claude/skills
-	url = git@github.com:nicomiguelino/claude-skills.git
-	ignore = all
