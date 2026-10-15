@@ -9,6 +9,12 @@ git clone git@github.com:nicomiguelino/nicomiguelino.github.io.git
 cd nicomiguelino.github.io
 ```
 
+If you use Claude Code, install the project plugin once:
+
+```sh
+claude plugin install nicomiguelino@nicomiguelino --scope project
+```
+
 Then install and run:
 
 ```sh
