@@ -29,6 +29,9 @@ npm run format:check  # check formatting with Prettier
 npm run format:fix    # format files with Prettier
 ```
 
+> [!NOTE]
+> `npm install` also sets up a Husky pre-commit hook that runs `lint:check`, `format:check`, and `check`. Fix failures before committing.
+
 Search queries the Pagefind index in `dist/`, so run `npm run build` once before search will return results in dev.
 
 ## Customizing
