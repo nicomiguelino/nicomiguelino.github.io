@@ -19,7 +19,8 @@
     "lint:check": "eslint .",
     "lint:fix": "eslint . --fix",
     "format:check": "prettier --check .",
-    "format:fix": "prettier --write ."
+    "format:fix": "prettier --write .",
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
@@ -32,6 +33,7 @@
     "@astrojs/check": "^0.9.9",
     "eslint": "^10.11.0",
     "eslint-plugin-astro": "^3.2.1",
+    "husky": "^9.1.7",
     "pagefind": "^1.5.2",
     "prettier": "^3.9.9",
     "prettier-plugin-astro": "^1.1.0",
