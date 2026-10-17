@@ -2,13 +2,14 @@
 interface Props {
   role: string;
   dates: string;
+  flag: string;
   organization: {
     name: string;
     url?: string;
   };
 }
 
-const { role, dates, organization } = Astro.props;
+const { role, dates, flag, organization } = Astro.props;
 ---
 
 <article class="station group">
@@ -24,7 +25,10 @@ const { role, dates, organization } = Astro.props;
       </a>
     ) : (
       organization.name
-    )}
+    )}{' '}
+    <span class="text-[1.25em] align-middle" aria-hidden="true">
+      {flag}
+    </span>
   </h2>
   <p class="mt-[0.7rem] inline-block rounded-md bg-ink px-[0.6rem] py-[0.15rem] font-semibold text-[0.8rem] text-bg">
     {dates}
