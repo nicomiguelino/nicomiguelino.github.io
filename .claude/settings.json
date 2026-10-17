@@ -1,4 +1,7 @@
 {
+  "enabledPlugins": {
+    "nicomiguelino@nicomiguelino": true
+  },
   "extraKnownMarketplaces": {
     "nicomiguelino": {
       "source": {
@@ -6,8 +9,5 @@
         "repo": "nicomiguelino/claude-plugin"
       }
     }
-  },
-  "enabledPlugins": {
-    "nicomiguelino@nicomiguelino": true
   }
 }
