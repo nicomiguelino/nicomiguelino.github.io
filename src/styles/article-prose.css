@@ -13,7 +13,7 @@
 .article-prose h3 {
   color: var(--ink);
   line-height: 1.05;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.005em;
   font-family: var(--serif);
   font-weight: 600;
 }
