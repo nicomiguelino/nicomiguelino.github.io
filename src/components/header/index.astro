@@ -33,6 +33,9 @@ const navMenuItems = [
 <header class="sticky top-0 z-20 border-b border-line bg-bg/75 backdrop-blur-[0.15rem]">
   <nav class="nav" aria-label="Primary navigation">
     <a class="brand" href="/" aria-label={SITE_NAME}>
+      <span class="brand-logo" aria-hidden="true">
+        &lambda;
+      </span>
       <span>{SITE_NAME}</span>
     </a>
 
@@ -96,6 +99,11 @@ const navMenuItems = [
 
   .brand {
     @apply inline-flex items-center gap-[0.55rem] font-serif text-[1.3rem] font-bold tracking-[-0.02em] text-ink;
+  }
+
+  .brand-logo {
+    @apply inline-flex size-[1.9rem] items-center justify-center rounded-full border border-ink bg-ink;
+    @apply font-mono text-[1.05rem] leading-none font-bold tracking-normal text-bg [-webkit-text-stroke:0.025em_var(--bg)];
   }
 
   .nav-links {
