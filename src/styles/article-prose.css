@@ -13,9 +13,9 @@
 .article-prose h3 {
   color: var(--ink);
   line-height: 1.05;
-  letter-spacing: -0.04em;
-  font-family: var(--mono);
-  font-weight: 400;
+  letter-spacing: -0.02em;
+  font-family: var(--serif);
+  font-weight: 600;
 }
 
 .article-prose h1 {
