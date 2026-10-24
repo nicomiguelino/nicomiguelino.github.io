@@ -1,27 +1,5 @@
 import type { CollectionEntry } from 'astro:content';
 
-export const skills = [
-  'HTML',
-  'CSS',
-  'JavaScript',
-  'TypeScript',
-  'Python',
-  'Bash',
-  'Git',
-  'GitHub Actions',
-  'Docker',
-  'PostgreSQL',
-  'Redis',
-  'GraphQL',
-  'REST APIs',
-  'Linux',
-  'React',
-  'Tailwind',
-  'Django',
-  'Vite',
-  'SQLite',
-];
-
 export function slugifyTag(tag: string): string {
   return tag
     .toLowerCase()
@@ -37,11 +15,6 @@ export interface TagInfo {
 
 export function getAllTags(posts: CollectionEntry<'blog'>[]): TagInfo[] {
   const bySlug = new Map<string, TagInfo>();
-
-  for (const skill of skills) {
-    const slug = slugifyTag(skill);
-    if (slug) bySlug.set(slug, { slug, name: skill, count: 0 });
-  }
 
   for (const post of posts) {
     if (post.data.draft) continue;

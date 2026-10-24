@@ -39,8 +39,6 @@ Search queries the Pagefind index in `dist/`, so run `npm run build` once before
 Site-wide values (name, URL, description, job title, and LinkedIn profile) live in `src/lib/site.ts`. Everything else to customize:
 
 - `src/components/Layout.astro`: social links, footer
-- `src/pages/about.astro`: bio
-- `src/lib/tags.ts`: skills list for the marquee, which also seeds the `/tags/` archive
 - `src/lib/palette.ts`: the palette applied before a visitor picks one, per `prefers-color-scheme`
 - `public/robots.txt` and `public/.well-known/security.txt`: domain and contact (static files, so they can't import from `site.ts`)
 - `public/assets/og.png`: social preview image, 1200x630 (a plain placeholder is included)
@@ -55,13 +53,13 @@ Posts are markdown files in `src/content/blog/` with `title`, `description`, `da
 
 ```
 src/
-  components/     Layout (nav, search, theme switcher), TypedLede, SkillsMarquee
-  content/blog/   posts as markdown
-  lib/            post and tag helpers, skills list, default palette, site constants
-  pages/          index (home), blog/, tags/, about, 404, rss
-  styles/         global styles, design tokens, palette definitions (Tailwind CSS)
+  components/     # reusable UI: layout, header, page hero, post card, search, theme switcher
+  content/blog/   # posts as markdown
+  lib/            # post and tag helpers, default palette, site constants
+  pages/          # index (home), blog/, experience/, tags/, 404, rss
+  styles/         # global styles, design tokens, palette definitions (Tailwind CSS)
 public/
-  assets/         font, og image
+  assets/         # font, og image
 ```
 
 ## License
