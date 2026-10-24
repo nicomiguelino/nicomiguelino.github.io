@@ -34,9 +34,9 @@ const { role, dates, flag, organization } = Astro.props;
     {dates}
   </p>
 
-  <ul class="my-4 list-disc pl-10 text-ink-soft [&_a]:text-accent space-y-2">
+  <div class="my-4 space-y-4 text-ink-soft [&_a]:text-accent">
     <slot />
-  </ul>
+  </div>
 </article>
 
 <style>
