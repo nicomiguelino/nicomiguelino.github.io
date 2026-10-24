@@ -64,9 +64,8 @@ samp {
   max-width: var(--max);
   margin: 0 auto;
   padding-inline: 1.25rem;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-  border-top: 1px solid var(--line);
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .content-shell {

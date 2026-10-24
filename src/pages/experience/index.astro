@@ -1,29 +1,27 @@
 ---
 import { SITE_NAME } from '@/lib/site';
 import Layout from '@/components/Layout.astro';
+import Lede from '@/components/Lede.astro';
+import PageHero from '@/components/PageHero.astro';
 import Screenly from '@/components/experience/Screenly.astro';
 import DostAstiBackend from '@/components/experience/DostAstiBackend.astro';
 import Nokia from '@/components/experience/Nokia.astro';
 import DostAstiTestAutomation from '@/components/experience/DostAstiTestAutomation.astro';
 
-const description = 'Where I have worked and what I have built along the way';
+const description = 'My tech journey so far...';
 ---
 
 <Layout title=`Experience — ${SITE_NAME}` description={description} canonicalPath="/experience/">
   <main class="content-shell" data-pagefind-body>
-    <div class="section no-top-border">
-      <h1 class="my-[0.67em] font-serif text-[2em] font-semibold tracking-[0.005em]">Experience</h1>
+    <PageHero title="Experience" hideTitle>
+      <Lede>{description}</Lede>
+    </PageHero>
 
+    <section class="section" aria-label="Work experience">
       <Screenly />
       <DostAstiBackend />
       <Nokia />
       <DostAstiTestAutomation />
-    </div>
+    </section>
   </main>
 </Layout>
-
-<style>
-  .section.no-top-border {
-    border-top: none;
-  }
-</style>
