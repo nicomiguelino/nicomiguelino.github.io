@@ -52,7 +52,10 @@ const ogImageUrl = new URL('/assets/og.png', SITE_URL).toString();
     <script is:inline define:vars={{ DEFAULT_PALETTE }}>
       (() => {
         const apply = () => {
-          const saved = localStorage.getItem('site-palette');
+          const storedPalette = localStorage.getItem('site-palette');
+          const isValidPalette = Object.values(DEFAULT_PALETTE).includes(storedPalette);
+          if (storedPalette && !isValidPalette) localStorage.removeItem('site-palette');
+          const saved = isValidPalette ? storedPalette : '';
           const system = window.matchMedia('(prefers-color-scheme: dark)').matches
             ? DEFAULT_PALETTE.dark
             : DEFAULT_PALETTE.light;
