@@ -1,4 +1,4 @@
 export const DEFAULT_PALETTE = {
-  dark: 'everforest',
-  light: 'everforest-light',
+  dark: 'gruvbox',
+  light: 'gruvbox-light',
 } as const;
