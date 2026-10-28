@@ -21,28 +21,76 @@
 </div>
 
 <script>
-  type PageFindSearchResultData = {
-    url: string;
-    excerpt: string;
-    meta?: {
-      title: string;
-    };
-  };
-  type PageFindSearchResult = { data: () => Promise<PageFindSearchResultData> };
-  type PageFindSearchResults = { results: PageFindSearchResult[] };
-  let searchController: AbortController | undefined;
-  let pagefind: { search: (q: string) => Promise<PageFindSearchResults>; init: () => void } | null = null;
-  let pagefindFailed = false;
+  import type { SearchEntry } from '@/lib/search';
+  import Fuse, { type FuseResult, type RangeTuple } from 'fuse.js';
 
-  async function loadPagefind() {
-    if (pagefind || pagefindFailed) return pagefind;
+  let searchController: AbortController | undefined;
+  let fuse: Fuse<SearchEntry> | null = null;
+  let fuseFailed = false;
+
+  async function loadFuse(): Promise<Fuse<SearchEntry> | null> {
+    if (fuse || fuseFailed) return fuse;
     try {
-      pagefind = await new Function("return import('/pagefind/pagefind.js')")();
-      pagefind?.init();
+      const response = await fetch('/search.json');
+      const entries: SearchEntry[] = await response.json();
+      fuse = new Fuse(entries, {
+        keys: [
+          { name: 'title', weight: 3 },
+          { name: 'tags', weight: 2 },
+          { name: 'description', weight: 2 },
+          { name: 'body', weight: 1 },
+        ],
+        threshold: 0.35,
+        ignoreLocation: true,
+        minMatchCharLength: 2,
+        includeMatches: true,
+      });
     } catch {
-      pagefindFailed = true;
+      fuseFailed = true;
     }
-    return pagefind;
+    return fuse;
+  }
+
+  const EXCERPT_RADIUS = 60;
+
+  function getMatchIndices(result: FuseResult<SearchEntry>, key: string): readonly RangeTuple[] {
+    const match = result.matches?.find((candidate) => candidate.key === key);
+    return match?.indices ?? [];
+  }
+
+  function getHighlightedNodes(text: string, indices: readonly RangeTuple[]): Node[] {
+    const nodes: Node[] = [];
+    let cursorIndex = 0;
+    indices.forEach(([startIndex, endIndex]) => {
+      if (startIndex < cursorIndex) return;
+      nodes.push(document.createTextNode(text.slice(cursorIndex, startIndex)));
+      const mark = document.createElement('mark');
+      mark.textContent = text.slice(startIndex, endIndex + 1);
+      nodes.push(mark);
+      cursorIndex = endIndex + 1;
+    });
+    nodes.push(document.createTextNode(text.slice(cursorIndex)));
+    return nodes;
+  }
+
+  function getExcerptNodes(result: FuseResult<SearchEntry>): Node[] {
+    const descriptionIndices = getMatchIndices(result, 'description');
+    const bodyIndices = getMatchIndices(result, 'body');
+    const { description, body } = result.item;
+    if (descriptionIndices.length > 0 || bodyIndices.length === 0) {
+      return getHighlightedNodes(description, descriptionIndices);
+    }
+
+    const [longestMatchStartIndex] = bodyIndices.reduce((longest, range) =>
+      range[1] - range[0] > longest[1] - longest[0] ? range : longest,
+    );
+    const snippetStart = Math.max(0, longestMatchStartIndex - EXCERPT_RADIUS);
+    const snippetEnd = Math.min(body.length, longestMatchStartIndex + EXCERPT_RADIUS);
+    const snippet = body.slice(snippetStart, snippetEnd).replace(/\s+/g, ' ');
+    const shiftedIndices: RangeTuple[] = bodyIndices
+      .filter(([startIndex, endIndex]) => startIndex >= snippetStart && endIndex < snippetEnd)
+      .map(([startIndex, endIndex]) => [startIndex - snippetStart, endIndex - snippetStart]);
+    return getHighlightedNodes(snippet, shiftedIndices);
   }
 
   function initSearch() {
@@ -119,31 +167,29 @@
         setEmpty('Type to search');
         return;
       }
-      const pf = await loadPagefind();
-      if (!pf) {
-        setEmpty('Search index not found: run npm run build to generate it.');
+      const searchIndex = await loadFuse();
+      if (!searchIndex) {
+        setEmpty('Search index could not be loaded.');
         return;
       }
-      const res = await pf.search(query);
       if (id !== queryId || !results) return;
-      const top = await Promise.all(res.results.slice(0, 8).map((r: PageFindSearchResult) => r.data()));
-      if (id !== queryId) return;
+      const top: FuseResult<SearchEntry>[] = searchIndex.search(query, { limit: 8 });
       if (top.length === 0) {
         setEmpty(`No matches for "${query}"`);
         return;
       }
       results.innerHTML = '';
-      items = top.map((data) => {
+      items = top.map((result) => {
         const link = document.createElement('a');
         link.className = 'search-result';
-        link.href = data.url;
+        link.href = result.item.url;
         link.setAttribute('role', 'option');
         const title = document.createElement('span');
         title.className = 'search-result-title';
-        title.textContent = data.meta?.title ?? data.url;
+        title.append(...getHighlightedNodes(result.item.title, getMatchIndices(result, 'title')));
         const excerpt = document.createElement('span');
         excerpt.className = 'search-result-excerpt';
-        excerpt.innerHTML = data.excerpt ?? '';
+        excerpt.append(...getExcerptNodes(result));
         link.append(title, excerpt);
         link.addEventListener('click', () => saveHistory(input!.value), { signal });
         results.append(link);
@@ -159,7 +205,7 @@
       historyIndex = -1;
       setEmpty('Type to search');
       input!.focus();
-      void loadPagefind();
+      void loadFuse();
     }
 
     function closeOverlay() {

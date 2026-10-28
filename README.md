@@ -20,7 +20,7 @@ Then install and run:
 ```sh
 npm install
 npm run dev           # dev server on :4321
-npm run build         # astro build + pagefind index
+npm run build         # production build
 npm run preview       # preview the production build
 npm run check         # astro type checking
 npm run lint:check    # lint with ESLint
@@ -31,8 +31,6 @@ npm run format:fix    # format files with Prettier
 
 > [!NOTE]
 > `npm install` also sets up a Husky pre-commit hook that runs `lint:check`, `format:check`, and `check`. Fix failures before committing.
-
-Search queries the Pagefind index in `dist/`, so run `npm run build` once before search will return results in dev.
 
 ## Customizing
 
@@ -91,4 +89,4 @@ With thanks to:
   All are MIT except Gruvbox, which declares MIT/X11 in its README. Terminal is not
   derived from a published scheme.
 - Font: [JetBrains Mono](https://www.jetbrains.com/lp/mono/), under the [SIL Open Font License 1.1](https://github.com/JetBrains/JetBrainsMono/blob/master/OFL.txt)
-- Search: [Pagefind](https://pagefind.app) (MIT)
+- Search: [Fuse.js](https://www.fusejs.io) (Apache-2.0)

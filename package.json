@@ -13,7 +13,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist",
+    "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
     "lint:check": "eslint .",
@@ -27,6 +27,7 @@
     "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.5",
+    "fuse.js": "^7.5.0",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
@@ -34,7 +35,6 @@
     "eslint": "^10.11.0",
     "eslint-plugin-astro": "^3.2.1",
     "husky": "^9.1.7",
-    "pagefind": "^1.5.2",
     "prettier": "^3.9.9",
     "prettier-plugin-astro": "^1.1.0",
     "typescript": "^6.0.3",

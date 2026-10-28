@@ -59,14 +59,12 @@ const postSchema = JSON.stringify({
         )}
       </aside>
 
-      <article class="min-w-0" data-pagefind-body>
+      <article class="min-w-0">
         <header class="mb-[2.35rem] border-b border-line pb-8">
           <p class="post-meta">
             <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date)}</time>
             {tags.map((tag) => (
-              <a href={`/tags/${slugifyTag(tag)}/`} data-pagefind-ignore>
-                #{tag}
-              </a>
+              <a href={`/tags/${slugifyTag(tag)}/`}>#{tag}</a>
             ))}
           </p>
           <h1 class="m-0 max-w-[22ch] font-serif text-[clamp(2rem,4vw,3.4rem)] leading-none font-semibold tracking-[0.005em] text-ink">
