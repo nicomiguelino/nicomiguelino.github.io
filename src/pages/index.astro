@@ -44,7 +44,7 @@ const personSchema = JSON.stringify({
       </div>
 
       {posts.length === 0 ? (
-        <p class="font-mono text-muted">No posts yet, check back soon.</p>
+        <p class="text-muted">No posts yet, check back soon.</p>
       ) : (
         <nav class="commit-tree" aria-label="Recent posts">
           <a class="commit-tree-head" href="/blog/" title="All posts">
@@ -66,7 +66,7 @@ const personSchema = JSON.stringify({
   @reference "@/styles/global.css";
 
   .commit-tree {
-    @apply ml-[5px] grid gap-[1.15rem] border-l-2 border-line font-mono;
+    @apply ml-[5px] grid gap-[1.15rem] border-l-2 border-line;
   }
 
   .commit-tree a {

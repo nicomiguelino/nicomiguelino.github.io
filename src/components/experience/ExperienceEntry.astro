@@ -17,7 +17,7 @@ const { role, dates, flag, organization } = Astro.props;
     class="absolute top-(--stop-y) left-(--rail-x) size-5 -translate-1/2 rounded-full border-5 border-accent bg-bg group-first-of-type:bg-accent"
     aria-hidden="true"
   ></span>
-  <h2 class="m-0 font-serif text-[1.5em] leading-[calc(var(--stop-y)*2)] font-semibold tracking-[0.005em] [&_a]:text-accent">
+  <h2 class="m-0 text-[1.5em] leading-[calc(var(--stop-y)*2)] font-semibold tracking-[0.005em] [&_a]:text-accent">
     {role},{' '}
     {organization.url ? (
       <a href={organization.url} target="_blank" rel="noopener">

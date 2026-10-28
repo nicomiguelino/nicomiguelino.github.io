@@ -39,7 +39,7 @@ const slug = Astro.params.tag!;
         {posts.length === 0
           ? 'Nothing here yet — check back soon.'
           : `${posts.length} post${posts.length === 1 ? '' : 's'} tagged ${name}.`}{' '}
-        <a class="font-mono font-semibold text-accent hover:underline" href="/tags/">
+        <a class="font-semibold text-accent hover:underline" href="/tags/">
           all tags
         </a>
       </Lede>
