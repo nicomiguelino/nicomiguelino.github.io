@@ -21,15 +21,9 @@
 </div>
 
 <script>
+  import type { SearchEntry } from '@/lib/search';
   import Fuse, { type FuseResult, type RangeTuple } from 'fuse.js';
 
-  type SearchEntry = {
-    title: string;
-    description: string;
-    tags: string[];
-    body: string;
-    url: string;
-  };
   let searchController: AbortController | undefined;
   let fuse: Fuse<SearchEntry> | null = null;
   let fuseFailed = false;
