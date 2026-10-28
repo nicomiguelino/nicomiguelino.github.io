@@ -1,0 +1,81 @@
+<button class="theme-toggle cursor-pointer" type="button" id="theme-toggle" aria-label="Toggle color theme">
+  <svg
+    class="theme-toggle-sun size-4"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2" />
+    <path d="M12 20v2" />
+    <path d="m4.93 4.93 1.41 1.41" />
+    <path d="m17.66 17.66 1.41 1.41" />
+    <path d="M2 12h2" />
+    <path d="M20 12h2" />
+    <path d="m6.34 17.66-1.41 1.41" />
+    <path d="m19.07 4.93-1.41 1.41" />
+  </svg>
+  <svg
+    class="theme-toggle-moon size-4"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+  </svg>
+</button>
+
+<script>
+  import { DEFAULT_PALETTE } from '@/lib/palette';
+
+  function getNextPalette(): string {
+    const currentPalette = document.documentElement.getAttribute('data-palette');
+    return currentPalette === DEFAULT_PALETTE.dark ? DEFAULT_PALETTE.light : DEFAULT_PALETTE.dark;
+  }
+
+  function togglePalette(): void {
+    const nextPalette = getNextPalette();
+    document.documentElement.setAttribute('data-palette', nextPalette);
+    localStorage.setItem('site-palette', nextPalette);
+  }
+
+  function initThemeToggle(): void {
+    const toggleButton = document.getElementById('theme-toggle');
+    toggleButton?.addEventListener('click', togglePalette);
+  }
+
+  document.addEventListener('astro:page-load', initThemeToggle);
+</script>
+
+<style>
+  @reference "@/styles/global.css";
+
+  .theme-toggle {
+    @apply inline-flex size-[2.1rem] items-center justify-center rounded-md border border-line text-muted;
+    @apply transition-colors duration-120 ease-[ease];
+  }
+
+  .theme-toggle:hover {
+    @apply border-accent-border bg-accent-soft text-accent;
+  }
+
+  .theme-toggle-moon {
+    display: none;
+  }
+
+  :global([data-palette='gruvbox']) .theme-toggle-sun {
+    display: none;
+  }
+
+  :global([data-palette='gruvbox']) .theme-toggle-moon {
+    display: block;
+  }
+</style>
