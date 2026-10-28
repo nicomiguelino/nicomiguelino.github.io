@@ -1,7 +1,6 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import SearchOverlay from '@/components/SearchOverlay.astro';
-import ThemeSwitcher from '@/components/ThemeSwitcher.astro';
 import Footer from '@/components/Footer.astro';
 import Header from '@/components/header/index.astro';
 import { DEFAULT_PALETTE } from '@/lib/palette';
@@ -73,8 +72,6 @@ const ogImageUrl = new URL('/assets/og.png', SITE_URL).toString();
     <slot />
 
     <Footer />
-
-    <ThemeSwitcher />
 
     <SearchOverlay />
   </body>

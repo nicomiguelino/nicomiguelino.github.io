@@ -237,7 +237,6 @@
       'keydown',
       (e) => {
         if (e.key === 'k' && (e.ctrlKey || e.metaKey)) {
-          if (document.getElementById('theme-overlay')?.hidden === false) return;
           e.preventDefault();
           if (overlay.hidden) openOverlay();
           else closeOverlay();

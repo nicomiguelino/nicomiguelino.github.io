@@ -36,8 +36,8 @@ npm run format:fix    # format files with Prettier
 
 Site-wide values (name, URL, description, job title, and LinkedIn profile) live in `src/lib/site.ts`. Everything else to customize:
 
-- `src/components/Layout.astro`: social links, footer
-- `src/lib/palette.ts`: the palette applied before a visitor picks one, per `prefers-color-scheme`
+- `src/components/header/index.astro` and `src/components/Footer.astro`: social links, footer
+- `src/lib/palette.ts`: the Gruvbox palettes applied per `prefers-color-scheme` until a visitor uses the theme toggle
 - `public/robots.txt` and `public/.well-known/security.txt`: domain and contact (static files, so they can't import from `site.ts`)
 - `public/assets/og.png`: social preview image, 1200x630 (a plain placeholder is included)
 
@@ -51,11 +51,11 @@ Posts are markdown files in `src/content/blog/` with `title`, `description`, `da
 
 ```
 src/
-  components/     # reusable UI: layout, header, page hero, post card, search, theme switcher
+  components/     # reusable UI: layout, header, page hero, post card, search, theme toggle
   content/blog/   # posts as markdown
-  lib/            # post and tag helpers, default palette, site constants
+  lib/            # post and tag helpers, palette names, site constants
   pages/          # index (home), blog/, experience/, tags/, 404, rss
-  styles/         # global styles, design tokens, palette definitions (Tailwind CSS)
+  styles/         # global styles, design tokens, Gruvbox palette definitions (Tailwind CSS)
 public/
   assets/         # font, og image
 ```
@@ -67,26 +67,6 @@ public/
 With thanks to:
 
 - [herdr](https://github.com/ogulcancelik/herdr) by Oğulcan Çelik, the website theme this one grew out of, and the reason it is AGPL-3.0-or-later
-- Palettes, each from its upstream project and used under that project's licence:
-  [Catppuccin](https://github.com/catppuccin/palette),
-  [Tokyo Night](https://github.com/enkia/tokyo-night-vscode-theme),
-  [Dracula and Alucard](https://github.com/dracula/dracula-theme),
-  [Nord](https://github.com/nordtheme/nord),
-  [Gruvbox](https://github.com/morhetz/gruvbox),
-  [One Dark and One Light](https://github.com/atom/one-dark-syntax),
-  [Solarized](https://github.com/altercation/solarized),
-  [Kanagawa](https://github.com/rebelot/kanagawa.nvim),
-  [Rose Pine](https://github.com/rose-pine/neovim),
-  [Vesper](https://github.com/raunofreiberg/vesper),
-  [Everforest](https://github.com/sainnhe/everforest),
-  [Ayu](https://github.com/ayu-theme/ayu-colors),
-  [GitHub](https://github.com/primer/github-vscode-theme),
-  [Monokai](https://github.com/tanvirtin/monokai.nvim),
-  [Night Owl and Light Owl](https://github.com/sdras/night-owl-vscode-theme),
-  [Oxocarbon](https://github.com/nyoom-engineering/oxocarbon),
-  [Poimandres](https://github.com/drcmda/poimandres-theme) and
-  [Palenight](https://github.com/whizkydee/vscode-palenight-theme).
-  All are MIT except Gruvbox, which declares MIT/X11 in its README. Terminal is not
-  derived from a published scheme.
+- Palette: [Gruvbox](https://github.com/morhetz/gruvbox), which declares MIT/X11 in its README
 - Font: [JetBrains Mono](https://www.jetbrains.com/lp/mono/), under the [SIL Open Font License 1.1](https://github.com/JetBrains/JetBrainsMono/blob/master/OFL.txt)
 - Search: [Fuse.js](https://www.fusejs.io) (Apache-2.0)

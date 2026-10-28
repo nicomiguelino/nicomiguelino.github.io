@@ -5,6 +5,7 @@ import GitHubIcon from './GitHubIcon.astro';
 import LinkedInIcon from './LinkedInIcon.astro';
 import RssIcon from './RssIcon.astro';
 import SearchIcon from './SearchIcon.astro';
+import ThemeToggle from './ThemeToggle.astro';
 
 const currentPath = Astro.url.pathname;
 const navMenuItems = [
@@ -84,6 +85,7 @@ const navMenuItems = [
       <a class="nav-icon-link" href="/rss.xml" aria-label="RSS feed">
         <RssIcon />
       </a>
+      <ThemeToggle />
     </div>
   </nav>
 </header>
