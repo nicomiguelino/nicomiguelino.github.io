@@ -34,7 +34,7 @@ Every time I tweak a skill in one project, I have to remember to copy the change
 
 ## Git submodules
 
-My first instinct was to use Git submodules because I was familiar with them. I created a common repository that contains only the skills:
+My first instinct was to use Git submodules because I was familiar with them. I used to keep the shared files in a common repository, [`claude-skills`](https://github.com/nicomiguelino/claude-skills), that contains only the skills:
 
 ```text
 claude-skills/
@@ -58,7 +58,7 @@ It worked, but it came with a few catches:
 - Updating the skills means running `git submodule update --remote`, then committing the new submodule pointer in each project.
 - If a project used to track `.claude/skills` as plain files, pulling the commit that swaps in the submodule can delete the submodule's files from the working tree.
 
-Eventually, I realized I should've just created a Claude plugin.
+Once I learned that I could've just used a Claude plugin, I created a new repository, [`claude-plugin`](https://github.com/nicomiguelino/claude-plugin), to replace it.
 
 ## Claude plugins
 
