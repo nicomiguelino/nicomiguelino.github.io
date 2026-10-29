@@ -50,7 +50,7 @@ const postSchema = JSON.stringify({
     <div class="article-layout section">
       <aside class="article-toc" aria-label="Article sections">
         {sectionHeadings.length > 0 && (
-          <nav class="ml-[5px] grid gap-[0.9rem] border-l-2 border-transparent">
+          <nav class="grid border-l-[3px] border-ink">
             {sectionHeadings.map((heading) => (
               <a href={`#${heading.slug}`} data-heading-link={heading.slug}>
                 {heading.text}
@@ -213,31 +213,17 @@ const postSchema = JSON.stringify({
   }
 
   .article-toc a {
-    @apply relative pl-[1.1rem] leading-[1.35];
-    color: color-mix(in srgb, var(--ink) 58%, var(--muted));
-  }
-
-  .article-toc a::before {
-    content: '';
-    @apply absolute top-[0.22em] -left-[6px] z-10 size-[10px] rounded-full border-2 border-line-strong bg-bg;
-    @apply transition-[border-color,background] duration-150 ease-[ease];
-  }
-
-  .article-toc a:not(:last-child)::after {
-    content: '';
-    @apply absolute top-[calc(0.22em_+_5px)] -left-[2px] h-[calc(100%_+_0.9rem)] w-[2px] bg-line;
+    @apply -ml-[3px] block border-l-[3px] border-transparent py-1.5 pl-3 leading-[1.35];
+    @apply transition-[border-color,color] duration-150 ease-[ease];
+    color: color-mix(in srgb, var(--ink) 75%, var(--muted));
   }
 
   .article-toc a:hover,
   .article-toc a[aria-current='true'] {
-    @apply text-accent;
+    @apply border-accent text-accent;
   }
 
-  .article-toc a:hover::before {
-    @apply border-accent;
-  }
-
-  .article-toc a[aria-current='true']::before {
-    @apply border-accent bg-accent;
+  .article-toc a[aria-current='true'] {
+    @apply font-bold;
   }
 </style>
