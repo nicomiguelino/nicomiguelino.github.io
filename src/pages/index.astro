@@ -1,6 +1,5 @@
 ---
 import Layout from '@/components/Layout.astro';
-import Lede from '@/components/Lede.astro';
 import PageHero from '@/components/PageHero.astro';
 import { JOB_TITLE, LINKEDIN_URL, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
 
@@ -18,7 +17,7 @@ const personSchema = JSON.stringify({
   <script type="application/ld+json" is:inline set:html={personSchema}></script>
   <main class="content-shell">
     <PageHero title="Home" hideTitle>
-      <Lede>{SITE_DESCRIPTION}</Lede>
+      <h2 class:list={['text-[clamp(2.5rem,3.2vw,3.1rem)]', 'leading-[1.25]']}>{SITE_DESCRIPTION}</h2>
     </PageHero>
 
     <section class="section" aria-label="About">
