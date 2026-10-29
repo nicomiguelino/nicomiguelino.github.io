@@ -28,7 +28,6 @@ const ogImageUrl = new URL('/assets/og.png', SITE_URL).toString();
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f0eee9" />
-    <link rel="preload" href="/assets/ss4.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/assets/jbm.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -49,7 +48,6 @@ const ogImageUrl = new URL('/assets/og.png', SITE_URL).toString();
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    <link rel="preload" href="/assets/jbm.woff2" as="font" type="font/woff2" crossorigin />
     <script is:inline define:vars={{ DEFAULT_PALETTE }}>
       (() => {
         const apply = () => {
