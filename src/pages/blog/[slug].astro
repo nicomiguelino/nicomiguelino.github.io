@@ -5,6 +5,7 @@ import Tag from '@/components/Tag.astro';
 import { formatPostDate, postSlug } from '@/lib/posts';
 import { slugifyTag } from '@/lib/tags';
 import { SITE_NAME, SITE_URL } from '@/lib/site';
+import { ANIMATED_UNDERLINE_CLASSES } from '@/lib/animatedUnderline';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -23,6 +24,7 @@ const { post, slug } = Astro.props;
 const { Content, headings } = await render(post);
 const sectionHeadings = headings.filter((heading) => heading.depth === 2);
 const tags = post.data.tags.filter((tag) => slugifyTag(tag) !== '');
+const articleProseClasses: string[] = ['article-prose', ...ANIMATED_UNDERLINE_CLASSES];
 
 const postSchema = JSON.stringify({
   '@context': 'https://schema.org',
@@ -79,7 +81,7 @@ const postSchema = JSON.stringify({
             </p>
           )}
         </header>
-        <div class="article-prose">
+        <div class:list={articleProseClasses}>
           <Content />
         </div>
         <section class="mt-[3.2rem] border-t-4 border-ink pt-[2.2rem]" aria-label="Comments">
