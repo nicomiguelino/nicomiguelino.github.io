@@ -18,12 +18,12 @@ const { href, size = 'sm' } = Astro.props;
   @reference "@/styles/global.css";
 
   .tag {
-    @apply inline-flex items-center gap-[0.35rem] rounded-none border-2 border-ink bg-bg text-ink;
-    @apply font-mono leading-[1.4] font-bold shadow-[2px_2px_0_0_var(--ink)];
-    @apply transition-[translate,box-shadow,background-color,color] duration-120 ease-[ease];
+    @apply inline-flex items-center gap-[0.35rem] rounded-none bg-[color-mix(in_srgb,var(--accent)_15%,transparent)] text-accent;
+    @apply font-mono leading-[1.4] font-bold;
+    @apply transition-[background-color] duration-120 ease-[ease];
   }
 
   .tag:hover {
-    @apply translate-x-[2px] translate-y-[2px] bg-accent text-bg shadow-none;
+    @apply bg-[color-mix(in_srgb,var(--accent)_30%,transparent)];
   }
 </style>
