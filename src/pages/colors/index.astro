@@ -11,7 +11,10 @@ const description = 'The color palette behind this site, in light and dark.';
 <Layout title=`Colors — ${SITE_NAME}` description={description} canonicalPath="/colors/">
   <main class="content-shell">
     <PageHero title="Colors" hideTitle>
-      <Lede>{description}</Lede>
+      <Lede>
+        The color palette behind this site, in <span class="palette-mode-dark">dark</span>
+        <span class="palette-mode-light">light</span> mode.
+      </Lede>
     </PageHero>
 
     <section class="section grid gap-10" aria-label="Color palette">
@@ -45,6 +48,20 @@ const description = 'The color palette behind this site, in light and dark.';
     </section>
   </main>
 </Layout>
+
+<style>
+  .palette-mode-light {
+    display: none;
+  }
+
+  :global([data-palette='neon-light']) .palette-mode-light {
+    display: inline;
+  }
+
+  :global([data-palette='neon-light']) .palette-mode-dark {
+    display: none;
+  }
+</style>
 
 <script>
   function updateColorValues(): void {
