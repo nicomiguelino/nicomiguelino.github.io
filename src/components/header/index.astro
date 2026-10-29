@@ -32,29 +32,12 @@ const navMenuItems = [
 ];
 ---
 
-<header class="sticky top-0 z-20 border-b border-line bg-bg/75 backdrop-blur-[0.15rem]">
+<header class="sticky top-0 z-20 border-b-5 border-ink bg-bg">
   <nav class="nav" aria-label="Primary navigation">
     <a class="brand" href="/" aria-label={SITE_NAME}>
       <BrandLogo />
       <span>{SITE_NAME}</span>
     </a>
-
-    <details class="ml-auto hidden max-[860px]:flex">
-      <summary class="nav-menu-button" aria-label="Open navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </summary>
-      <div class="nav-menu-panel">
-        {navMenuItems.map((item) => {
-          return (
-            <a href={item.href} aria-current={item.current ? 'page' : undefined}>
-              {item.title}
-            </a>
-          );
-        })}
-      </div>
-    </details>
 
     <div class="nav-links">
       {navMenuItems.map((item) => {
@@ -66,7 +49,7 @@ const navMenuItems = [
       })}
     </div>
 
-    <div class="flex items-center gap-[0.45rem] max-sm:hidden">
+    <div class="flex items-center gap-[0.45rem] max-[860px]:ml-auto max-sm:hidden">
       <button class="nav-icon-link cursor-pointer" type="button" id="search-open" aria-label="Search (Ctrl+K)">
         <SearchIcon />
       </button>
@@ -87,6 +70,23 @@ const navMenuItems = [
       </a>
       <ThemeToggle />
     </div>
+
+    <details class="hidden max-[860px]:flex">
+      <summary class="nav-menu-button" aria-label="Open navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </summary>
+      <div class="nav-menu-panel">
+        {navMenuItems.map((item) => {
+          return (
+            <a href={item.href} aria-current={item.current ? 'page' : undefined}>
+              {item.title}
+            </a>
+          );
+        })}
+      </div>
+    </details>
   </nav>
 </header>
 
@@ -99,11 +99,11 @@ const navMenuItems = [
   }
 
   .brand {
-    @apply inline-flex items-center gap-[0.55rem] text-[1.3rem] font-bold tracking-[-0.02em] text-ink;
+    @apply inline-flex items-center gap-[0.55rem] font-heading text-[1.3rem] font-bold tracking-[-0.02em] text-ink;
   }
 
   .nav-links {
-    @apply flex items-center gap-5 text-[0.9rem] text-muted max-[860px]:hidden;
+    @apply flex items-center gap-5 font-heading font-semibold text-[1rem] text-ink max-[860px]:hidden;
   }
 
   .nav-links a:hover,
@@ -113,7 +113,8 @@ const navMenuItems = [
 
   .nav-menu-button {
     @apply inline-flex size-[2.1rem] cursor-pointer list-none flex-col items-center justify-center gap-[0.22rem];
-    @apply rounded-md border border-line text-ink-soft transition-colors duration-120 ease-[ease];
+    @apply rounded-none border-2 border-ink bg-bg-elevated text-ink shadow-[3px_3px_0_0_var(--ink)];
+    @apply transition-[translate,box-shadow,background-color,color] duration-120 ease-[ease];
   }
 
   .nav-menu-button::-webkit-details-marker {
@@ -124,31 +125,31 @@ const navMenuItems = [
   }
 
   .nav-menu-button span {
-    @apply block h-px w-[0.92rem] bg-current;
+    @apply block h-0.5 w-[0.92rem] bg-current;
   }
 
   .nav-menu-panel {
     @apply absolute top-[calc(100%_+_0.5rem)] right-5 z-30 grid min-w-[min(18rem,calc(100vw-2rem))] p-[0.35rem];
-    @apply rounded-md border border-line-strong bg-bg-elevated shadow-[0_16px_44px_rgba(0,0,0,0.16)];
+    @apply rounded-none border-2 border-ink bg-bg-elevated shadow-[4px_4px_0_0_var(--ink)];
   }
 
   .nav-menu-panel a {
-    @apply rounded-sm px-[0.7rem] py-[0.62rem] text-[0.86rem] font-semibold text-ink-soft;
+    @apply rounded-none px-[0.7rem] py-[0.62rem] font-heading text-[0.9rem] font-semibold text-ink;
   }
 
   .nav-menu-panel a:hover,
   .nav-menu-panel a[aria-current='page'] {
-    @apply bg-accent-soft text-accent;
+    @apply bg-accent text-bg;
   }
 
   .nav-icon-link {
-    @apply inline-flex size-[2.1rem] items-center justify-center rounded-md border border-line text-muted;
-    @apply transition-colors duration-120 ease-[ease];
+    @apply inline-flex size-[2.1rem] items-center justify-center rounded-none border-2 border-ink bg-bg-elevated text-ink;
+    @apply shadow-[3px_3px_0_0_var(--ink)] transition-[translate,box-shadow,background-color,color] duration-120 ease-[ease];
   }
 
   .nav-menu-button:hover,
   [open] > .nav-menu-button,
   .nav-icon-link:hover {
-    @apply border-accent-border bg-accent-soft text-accent;
+    @apply translate-x-[3px] translate-y-[3px] bg-accent text-bg shadow-none;
   }
 </style>

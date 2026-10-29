@@ -5,7 +5,14 @@ interface Props {
 
 const { class: className } = Astro.props;
 
-const baseClasses: string[] = ['my-[0.67em]', 'text-[1.5rem]', 'font-semibold', 'tracking-[0.005em]', 'text-muted'];
+const baseClasses: string[] = [
+  'my-[0.67em]',
+  'text-[clamp(1.6rem,3.2vw,2.1rem)]',
+  'leading-[1.25]',
+  'font-bold',
+  'tracking-[0.005em]',
+  'text-ink',
+];
 ---
 
 <h2 class:list={[baseClasses, className]}>

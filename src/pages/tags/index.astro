@@ -20,7 +20,7 @@ const tags = getAllTags(await getCollection('blog'));
       <div class="flex flex-wrap gap-[0.6rem]">
         {tags.map(({ slug, name, count }) => (
           <Tag href={`/tags/${slug}/`} size="lg">
-            #{name} {count > 0 && <span class="font-normal text-muted-2">{count}</span>}
+            #{name} {count > 0 && <span class="font-normal opacity-70">{count}</span>}
           </Tag>
         ))}
       </div>

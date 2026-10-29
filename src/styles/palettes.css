@@ -44,6 +44,4 @@
 }
 
 [data-palette='gruvbox'] {
-  --logo-filter: invert(1) hue-rotate(180deg) brightness(1.08) contrast(0.9) saturate(1.05);
-  --logo-opacity: 0.72;
 }

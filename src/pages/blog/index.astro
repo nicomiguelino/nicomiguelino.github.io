@@ -23,7 +23,7 @@ const lede = "Notes on what I'm building, learning, and figuring out along the w
       {posts.length === 0 ? (
         <p class="text-muted">No posts yet, check back soon.</p>
       ) : (
-        <div class="grid">
+        <div class="grid gap-8">
           {posts.map((post, index) => (
             <PostCard post={post} latest={index === 0} />
           ))}
