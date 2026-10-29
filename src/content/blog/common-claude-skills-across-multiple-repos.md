@@ -1,5 +1,5 @@
 ---
-title: 'Using the Same Set of Claude Skills Across Multiple Repos: A Case Study'
+title: 'Using the Same Set of Claude Skills Across Multiple Repos'
 description: "Claude skills are easy to set up in one repo. Keeping the same set working across many is the hard part. In this post, I'll share how I tackled it."
 date: 2026-10-29
 tags:
