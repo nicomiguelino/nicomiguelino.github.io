@@ -60,7 +60,7 @@ const postSchema = JSON.stringify({
       </aside>
 
       <article class="min-w-0">
-        <header class="mb-[2.35rem] border-b border-line pb-8">
+        <header class="mb-[2.35rem] border-b-4 border-ink pb-8">
           <p class="post-meta">
             <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date)}</time>
             {tags.map((tag) => (
@@ -77,7 +77,7 @@ const postSchema = JSON.stringify({
         <div class="article-prose">
           <Content />
         </div>
-        <section class="mt-[3.2rem] border-t border-line pt-[2.2rem]" aria-label="Comments">
+        <section class="mt-[3.2rem] border-t-4 border-ink pt-[2.2rem]" aria-label="Comments">
           <div id="remark42"></div>
         </section>
       </article>
