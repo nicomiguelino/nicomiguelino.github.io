@@ -47,7 +47,7 @@ const slug = Astro.params.tag!;
 
     {posts.length > 0 && (
       <section class="section" aria-label="Posts">
-        <div class="grid">
+        <div class="grid gap-8">
           {posts.map((post) => (
             <PostCard post={post} />
           ))}
