@@ -13,6 +13,7 @@
   --red: #f5a3ad;
   --blue: #4a8fe0;
   --pink: #e0559f;
+  --dot: color-mix(in srgb, var(--pink) 20%, transparent);
   --term-bg: #1d1b24;
   --term-active-bg: #2e2a38;
   --term-border: #453f54;
@@ -37,6 +38,7 @@
   --red: #c04a5c;
   --blue: #9cc7f0;
   --pink: #f4a9c9;
+  --dot: color-mix(in srgb, var(--pink) 32%, transparent);
   --term-bg: #f7f3fc;
   --term-active-bg: #ece5f6;
   --term-border: #e0d8ec;
