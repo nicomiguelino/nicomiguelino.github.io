@@ -34,14 +34,11 @@ const slug = Astro.params.tag!;
 
 <Layout title={`#${name} — ${SITE_NAME}`} description={`Posts tagged "${name}".`} canonicalPath={`/tags/${slug}/`}>
   <main class="content-shell">
-    <PageHero title={`# ${name}`} eyebrow="tag">
+    <PageHero title={`# ${name}`}>
       <Lede>
         {posts.length === 0
           ? 'Nothing here yet — check back soon.'
           : `${posts.length} post${posts.length === 1 ? '' : 's'} tagged ${name}.`}{' '}
-        <a class="font-semibold text-accent hover:underline" href="/tags/">
-          all tags
-        </a>
       </Lede>
     </PageHero>
 
