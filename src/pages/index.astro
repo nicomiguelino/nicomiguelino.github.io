@@ -17,11 +17,13 @@ const personSchema = JSON.stringify({
   <script type="application/ld+json" is:inline set:html={personSchema}></script>
   <main class="content-shell">
     <PageHero title="Home" hideTitle>
-      <h2 class:list={['text-[clamp(2.5rem,3.2vw,3.1rem)]', 'leading-[1.25]']}>{SITE_DESCRIPTION}</h2>
+      <h2 class:list={['glitch-heading', 'text-[clamp(3rem,4.5vw,4.25rem)]', 'leading-[1.1]', 'tracking-[-0.03em]']}>
+        {SITE_DESCRIPTION}
+      </h2>
     </PageHero>
 
     <section class="section" aria-label="About">
-      <div class="flex justify-center w-full">
+      <div class="flex justify-center w-full mt-10">
         <div class="card">
           <div class="about-prose">
             <p>
@@ -41,12 +43,47 @@ const personSchema = JSON.stringify({
 <style>
   @reference "@/styles/global.css";
 
+  .glitch-heading {
+    animation: glitch 2.5s steps(1, end) infinite;
+  }
+
+  @keyframes glitch {
+    0%,
+    94%,
+    100% {
+      text-shadow:
+        0 0 0 var(--blue),
+        0 0 0 var(--pink);
+    }
+    85% {
+      text-shadow:
+        -0.5rem 0 0 var(--blue),
+        0.5rem 0 0 var(--pink);
+    }
+    88% {
+      text-shadow:
+        0.375rem 0 0 var(--blue),
+        -0.375rem 0 0 var(--pink);
+    }
+    91% {
+      text-shadow:
+        -0.125rem 0 0 var(--blue),
+        0.125rem 0 0 var(--pink);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glitch-heading {
+      animation: none;
+    }
+  }
+
   .card {
     @apply rounded-none border-2 border-ink bg-bg-elevated p-6 shadow-[6px_6px_0_0_var(--ink)];
   }
 
   .about-prose p {
-    @apply mb-[1.2rem] font-heading text-[1.1rem] leading-[1.75] last:mb-0;
+    @apply mb-[1.2rem] font-heading text-[1.3rem] leading-[1.75] last:mb-0;
     color: color-mix(in srgb, var(--ink) 82%, var(--muted));
   }
 </style>

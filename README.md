@@ -37,7 +37,7 @@ npm run format:fix    # format files with Prettier
 Site-wide values (name, URL, description, job title, and LinkedIn profile) live in `src/lib/site.ts`. Everything else to customize:
 
 - `src/components/header/index.astro` and `src/components/Footer.astro`: social links, footer
-- `src/lib/palette.ts`: the Gruvbox palettes applied per `prefers-color-scheme` until a visitor uses the theme toggle
+- `src/lib/palette.ts`: the neon palettes (light and dark) applied per `prefers-color-scheme` until a visitor uses the theme toggle
 - `public/robots.txt` and `public/.well-known/security.txt`: domain and contact (static files, so they can't import from `site.ts`)
 - `public/assets/og.png`: social preview image, 1200x630 (a plain placeholder is included)
 
@@ -55,7 +55,7 @@ src/
   content/blog/   # posts as markdown
   lib/            # post and tag helpers, palette names, site constants
   pages/          # index (home), blog/, experience/, tags/, 404, rss
-  styles/         # global styles, design tokens, Gruvbox palette definitions (Tailwind CSS)
+  styles/         # global styles, design tokens, neon palette definitions (Tailwind CSS)
 public/
   assets/         # font, og image
 ```
@@ -67,6 +67,5 @@ public/
 With thanks to:
 
 - [herdr](https://github.com/ogulcancelik/herdr) by Oğulcan Çelik, the website theme this one grew out of, and the reason it is AGPL-3.0-or-later
-- Palette: [Gruvbox](https://github.com/morhetz/gruvbox), which declares MIT/X11 in its README
 - Font: [JetBrains Mono](https://www.jetbrains.com/lp/mono/), under the [SIL Open Font License 1.1](https://github.com/JetBrains/JetBrainsMono/blob/master/OFL.txt)
 - Search: [Fuse.js](https://www.fusejs.io) (Apache-2.0)

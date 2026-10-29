@@ -91,7 +91,7 @@ samp {
 }
 
 ::selection {
-  background: var(--accent-soft);
+  background: color-mix(in srgb, var(--accent) 40%, transparent);
 }
 
 .section {
