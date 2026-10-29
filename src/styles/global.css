@@ -53,6 +53,15 @@ html {
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
+  cursor:
+    url('/assets/cursor.svg') 10 10,
+    auto;
+}
+
+html[data-palette='neon'] {
+  cursor:
+    url('/assets/cursor-light.svg') 10 10,
+    auto;
 }
 
 body {
