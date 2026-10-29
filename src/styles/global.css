@@ -54,13 +54,13 @@ html {
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
   cursor:
-    url('/assets/cursor.svg') 8 8,
+    url('/assets/cursor.svg') 10 10,
     auto;
 }
 
 html[data-palette='neon'] {
   cursor:
-    url('/assets/cursor-light.svg') 8 8,
+    url('/assets/cursor-light.svg') 10 10,
     auto;
 }
 
