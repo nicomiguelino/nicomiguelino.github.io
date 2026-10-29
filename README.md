@@ -40,7 +40,7 @@ Site-wide values (name, URL, description, job title, and LinkedIn profile) live 
 - `src/lib/palette.ts`: the neon palettes (light and dark) applied per `prefers-color-scheme` until a visitor uses the theme toggle
 - `src/lib/colors.ts`: the color tokens listed on the `/colors/` page; add a token here when you add one to `src/styles/palettes.css`
 - `public/robots.txt` and `public/.well-known/security.txt`: domain and contact (static files, so they can't import from `site.ts`)
-- `public/assets/og.png`: social preview image, 1200x630 (a plain placeholder is included)
+- `public/assets/og-v2.png`: social preview image, 1200x630 (a plain placeholder is included)
 
 Comments stay disabled unless you run a Remark42 instance. The configuration is at the bottom of `src/pages/blog/[slug].astro`; remove the comments section there if you don't want it.
 
