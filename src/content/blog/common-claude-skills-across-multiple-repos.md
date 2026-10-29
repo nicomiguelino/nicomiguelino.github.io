@@ -112,13 +112,10 @@ Each skill is a `SKILL.md` file with a description in its frontmatter, followed 
 
 ```markdown
 ---
-description: Open a pull request for the current branch.
+description: Describe what the skill does and when to use it
 ---
 
-# Open PR
-
-- Follow Conventional Commits for the PR title.
-- Base branch is `main`.
+Write the instructions for Claude here.
 ```
 
 ## Using it in each project
