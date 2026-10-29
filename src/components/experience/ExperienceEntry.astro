@@ -1,4 +1,6 @@
 ---
+import { ANIMATED_UNDERLINE_CLASSES } from '@/lib/animatedUnderline';
+
 interface Props {
   role: string;
   dates: string;
@@ -9,10 +11,12 @@ interface Props {
 }
 
 const { role, dates, organization } = Astro.props;
+
+const linkClasses: string[] = ['[&_a]:text-accent', ...ANIMATED_UNDERLINE_CLASSES];
 ---
 
 <article class="border-2 border-ink bg-bg-elevated p-6 shadow-[6px_6px_0_0_var(--ink)]">
-  <h2 class="m-0 text-[1.5em] leading-[1.2] font-bold tracking-[0.005em] [&_a]:text-accent">
+  <h2 class:list={['m-0 text-[1.5em] leading-[1.2] font-bold tracking-[0.005em]', ...linkClasses]}>
     {role},{' '}
     {organization.url ? (
       <a href={organization.url} target="_blank" rel="noopener">
@@ -26,7 +30,7 @@ const { role, dates, organization } = Astro.props;
     {dates}
   </p>
 
-  <div class="mt-4 space-y-4 text-ink-soft [&_a]:text-accent">
+  <div class:list={['mt-4 space-y-4 text-ink-soft', ...linkClasses]}>
     <slot />
   </div>
 </article>

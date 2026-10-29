@@ -1,47 +1,47 @@
-[data-palette='gruvbox'] {
-  --bg: #282828;
-  --bg-elevated: #32302f;
-  --ink: #fbf1c7;
-  --ink-soft: #ebdbb2;
-  --muted: #a89984;
-  --muted-2: #928374;
-  --line: #504945;
-  --line-strong: #665c54;
-  --accent: #d79921;
-  --green: #b8bb26;
-  --yellow: #fabd2f;
-  --red: #fb4934;
-  --term-bg: #282828;
-  --term-active-bg: #3c3836;
-  --term-border: #504945;
-  --term-text: #ebdbb2;
-  --term-muted: #928374;
-  --term-prompt: #d79921;
-  --term-cmd: #b8bb26;
-  --term-str: #fabd2f;
+[data-palette='neon'] {
+  --bg: #24212d;
+  --bg-elevated: #2e2a38;
+  --ink: #f4eefb;
+  --ink-soft: #ddd3ea;
+  --muted: #a79db8;
+  --muted-2: #8b8199;
+  --line: #453f54;
+  --line-strong: #5b546d;
+  --accent: #f0a6d6;
+  --green: #a8e6c1;
+  --yellow: #f7e1a0;
+  --red: #f5a3ad;
+  --term-bg: #1d1b24;
+  --term-active-bg: #2e2a38;
+  --term-border: #453f54;
+  --term-text: #e8e0f2;
+  --term-muted: #8b8199;
+  --term-prompt: #f0a6d6;
+  --term-cmd: #9fdcf0;
+  --term-str: #f7e1a0;
 }
-[data-palette='gruvbox-light'] {
-  --bg: #fbf1c7;
-  --bg-elevated: #f2e5bc;
-  --ink: #282828;
-  --ink-soft: #3c3836;
-  --muted: #665c54;
-  --muted-2: #928374;
-  --line: #d5c4a1;
-  --line-strong: #bdae93;
-  --accent: #076678;
-  --green: #79740e;
-  --yellow: #b57614;
-  --red: #9d0006;
-  --term-bg: #fbf1c7;
-  --term-active-bg: #ebdbb2;
-  --term-border: #d5c4a1;
-  --term-text: #3c3836;
-  --term-muted: #928374;
-  --term-prompt: #076678;
-  --term-cmd: #79740e;
-  --term-str: #b57614;
+[data-palette='neon-light'] {
+  --bg: #f7f3fc;
+  --bg-elevated: #ffffff;
+  --ink: #2b2535;
+  --ink-soft: #433b52;
+  --muted: #6b627a;
+  --muted-2: #8e86a0;
+  --line: #e0d8ec;
+  --line-strong: #c7bdd8;
+  --accent: #b84a96;
+  --green: #3f8f68;
+  --yellow: #a8801f;
+  --red: #c04a5c;
+  --term-bg: #f7f3fc;
+  --term-active-bg: #ece5f6;
+  --term-border: #e0d8ec;
+  --term-text: #433b52;
+  --term-muted: #8e86a0;
+  --term-prompt: #b84a96;
+  --term-cmd: #2f8aa6;
+  --term-str: #a8801f;
 }
 
-[data-palette='gruvbox'] {
+[data-palette='neon'] {
 }
