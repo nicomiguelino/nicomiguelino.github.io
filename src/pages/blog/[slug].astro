@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '@/components/Layout.astro';
+import Tag from '@/components/Tag.astro';
 import { formatPostDate, postSlug } from '@/lib/posts';
 import { slugifyTag } from '@/lib/tags';
 import { SITE_NAME, SITE_URL } from '@/lib/site';
@@ -63,9 +64,6 @@ const postSchema = JSON.stringify({
         <header class="mb-[2.35rem] border-b-4 border-ink pb-8">
           <p class="post-meta">
             <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date)}</time>
-            {tags.map((tag) => (
-              <a href={`/tags/${slugifyTag(tag)}/`}>#{tag}</a>
-            ))}
           </p>
           <h1 class="m-0 max-w-[22ch] text-[clamp(2rem,4vw,3.4rem)] leading-none font-semibold tracking-[0.005em] text-ink">
             {post.data.title}
@@ -73,6 +71,13 @@ const postSchema = JSON.stringify({
           <p class="mt-[1.2rem] max-w-[680px] text-[1.18rem] leading-[1.7] text-[color-mix(in_srgb,var(--ink)_68%,var(--muted))]">
             {post.data.description}
           </p>
+          {tags.length > 0 && (
+            <p class="mt-4 flex max-w-[680px] flex-wrap gap-2">
+              {tags.map((tag) => (
+                <Tag href={`/tags/${slugifyTag(tag)}/`}>#{tag}</Tag>
+              ))}
+            </p>
+          )}
         </header>
         <div class="article-prose">
           <Content />
@@ -194,11 +199,6 @@ const postSchema = JSON.stringify({
     @apply mb-[0.85rem] flex flex-wrap items-center gap-[0.55rem];
     @apply text-[0.78rem] font-bold tracking-[-0.03em] uppercase;
     color: color-mix(in srgb, var(--ink) 58%, var(--muted));
-  }
-
-  .post-meta > * + *::before {
-    content: '/';
-    @apply mr-[0.55rem] text-line-strong;
   }
 
   .article-layout {
