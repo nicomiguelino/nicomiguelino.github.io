@@ -31,6 +31,11 @@
   border-radius: 0;
 }
 
+::-webkit-scrollbar-thumb:vertical {
+  border-top: 0;
+  border-bottom: 0;
+}
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--ink);
 }
@@ -46,10 +51,11 @@
 .article-prose pre::-webkit-scrollbar-track:horizontal {
   border-top: 2px solid var(--ink);
   border-bottom: 0;
+  background: linear-gradient(to left, var(--ink) 1px, var(--bg-elevated) 1px);
 }
 
 .article-prose pre::-webkit-scrollbar-thumb:horizontal {
-  border-width: 2px 2px 0;
+  border-width: 2px 0 0;
 }
 
 .article-prose pre::-webkit-scrollbar-button:single-button {
