@@ -3,6 +3,7 @@
 @import './tokens.css';
 @import './palettes.css';
 @import './overlays.css';
+@import './scrollbar.css';
 @import './article-prose.css';
 
 @font-face {

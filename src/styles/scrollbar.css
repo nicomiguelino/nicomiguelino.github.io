@@ -1,0 +1,30 @@
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-elevated);
+  border-left: 2px solid var(--ink);
+  border-right: 2px solid var(--ink);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border: 2px solid var(--ink);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--bg-elevated);
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-color: var(--ink) var(--bg-elevated);
+  }
+}
