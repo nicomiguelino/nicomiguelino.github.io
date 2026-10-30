@@ -53,15 +53,20 @@ html {
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
-  cursor:
-    url('/assets/cursor.svg') 10 10,
-    auto;
+  --cursor: url('/assets/cursor.svg') 10 10, auto;
+  cursor: var(--cursor);
 }
 
 html[data-palette='neon'] {
-  cursor:
-    url('/assets/cursor-light.svg') 10 10,
-    auto;
+  --cursor: url('/assets/cursor-light.svg') 10 10, auto;
+}
+
+a,
+button,
+summary,
+label,
+[role='button'] {
+  cursor: var(--cursor);
 }
 
 body {
