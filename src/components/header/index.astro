@@ -56,7 +56,7 @@ const navMenuItems = [
     </div>
 
     <div class="flex items-center gap-[0.45rem] max-[860px]:ml-auto max-sm:hidden">
-      <button class="nav-icon-link cursor-pointer" type="button" id="search-open" aria-label="Search (Ctrl+K)">
+      <button class="nav-icon-link" type="button" id="search-open" aria-label="Search (Ctrl+K)">
         <SearchIcon />
       </button>
       <a
@@ -118,7 +118,7 @@ const navMenuItems = [
   }
 
   .nav-menu-button {
-    @apply inline-flex size-[2.1rem] cursor-pointer list-none flex-col items-center justify-center gap-[0.22rem];
+    @apply inline-flex size-[2.1rem] list-none flex-col items-center justify-center gap-[0.22rem];
     @apply rounded-none border-2 border-ink bg-bg-elevated text-ink shadow-[3px_3px_0_0_var(--ink)];
     @apply transition-[translate,box-shadow,background-color,color] duration-120 ease-[ease];
   }
