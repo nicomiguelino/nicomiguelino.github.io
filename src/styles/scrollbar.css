@@ -5,8 +5,24 @@
 
 ::-webkit-scrollbar-track {
   background: var(--bg-elevated);
+}
+
+::-webkit-scrollbar-track:vertical {
   border-left: 2px solid var(--ink);
   border-right: 2px solid var(--ink);
+}
+
+::-webkit-scrollbar-track:horizontal {
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+
+::-webkit-scrollbar-button:single-button {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: var(--bg-elevated);
+  border: 2px solid var(--ink);
 }
 
 ::-webkit-scrollbar-thumb {
