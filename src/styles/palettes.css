@@ -1,4 +1,4 @@
-[data-palette='neon'] {
+[data-palette='neon-dark'] {
   --bg: #24212d;
   --bg-elevated: #2e2a38;
   --ink: #f4eefb;
@@ -49,5 +49,5 @@
   --term-str: #a8801f;
 }
 
-[data-palette='neon'] {
+[data-palette='neon-dark'] {
 }
