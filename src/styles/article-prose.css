@@ -88,9 +88,10 @@
 .article-prose pre {
   margin: 1.75rem 0;
   overflow-x: auto;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
+  border: 2px solid var(--ink);
+  border-radius: 0;
   background: var(--bg-elevated);
+  box-shadow: 4px 4px 0 0 var(--ink);
   color: var(--ink);
   padding: 1rem;
   line-height: 1.3;

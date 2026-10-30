@@ -1,6 +1,6 @@
 ::-webkit-scrollbar {
-  width: 16px;
-  height: 16px;
+  width: 25px;
+  height: 25px;
 }
 
 ::-webkit-scrollbar-track {
@@ -8,26 +8,26 @@
 }
 
 ::-webkit-scrollbar-track:vertical {
-  border-left: 2px solid var(--ink);
-  border-right: 2px solid var(--ink);
+  border-left: 5px solid var(--ink);
+  border-right: 5px solid var(--ink);
 }
 
 ::-webkit-scrollbar-track:horizontal {
-  border-top: 2px solid var(--ink);
-  border-bottom: 2px solid var(--ink);
+  border-top: 5px solid var(--ink);
+  border-bottom: 5px solid var(--ink);
 }
 
 ::-webkit-scrollbar-button:single-button {
   display: block;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   background: var(--bg-elevated);
   border: 2px solid var(--ink);
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--accent);
-  border: 2px solid var(--ink);
+  border: 5px solid var(--ink);
   border-radius: 0;
 }
 
@@ -37,6 +37,25 @@
 
 ::-webkit-scrollbar-corner {
   background: var(--bg-elevated);
+}
+
+.article-prose pre::-webkit-scrollbar {
+  height: 14px;
+}
+
+.article-prose pre::-webkit-scrollbar-track:horizontal {
+  border-top: 2px solid var(--ink);
+  border-bottom: 0;
+}
+
+.article-prose pre::-webkit-scrollbar-thumb:horizontal {
+  border-width: 2px 2px 0;
+}
+
+.article-prose pre::-webkit-scrollbar-button:single-button {
+  width: 14px;
+  height: 14px;
+  border-width: 2px 2px 0;
 }
 
 @supports not selector(::-webkit-scrollbar) {
