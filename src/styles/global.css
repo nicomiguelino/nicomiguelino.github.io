@@ -54,12 +54,12 @@ html {
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
-  --cursor: url('/assets/cursor.svg') 10 10, auto;
+  --cursor: url('/assets/cursor.svg') 12 12, auto;
   cursor: var(--cursor);
 }
 
 html[data-palette='neon'] {
-  --cursor: url('/assets/cursor-light.svg') 10 10, auto;
+  --cursor: url('/assets/cursor-light.svg') 12 12, auto;
 }
 
 a,
