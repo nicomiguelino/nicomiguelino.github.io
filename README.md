@@ -32,12 +32,31 @@ bun run format:fix    # format files with Prettier
 > [!NOTE]
 > `bun install` also sets up a Husky pre-commit hook that runs `lint:check`, `format:check`, and `check`. Fix failures before committing.
 
+## Seasonal theme
+
+The site switches palettes by date. Both families have a light and a dark variant, defined in `src/styles/palettes.css`:
+
+- `neon-*`: the default, used all year
+- `autumn-*`: used from Sept 22 to Dec 21
+
+How it works:
+
+- The family is picked from the visitor's local date on every page load, so no rebuild is needed when a season starts or ends.
+- The mode (light or dark) comes from the theme toggle, falling back to `prefers-color-scheme`. Only the mode is stored (`site-mode` in `localStorage`), so a saved preference carries across seasons.
+- The legacy `site-palette` value is migrated to `site-mode` and removed.
+- `initializePalette()` in `src/lib/palette.ts` sets `data-palette` on `<html>`. `Layout.astro` calls it from `<head>`, and `body` stays hidden until the attribute is set (visible when scripting is off) to avoid a flash of the wrong colors.
+- The theme toggle switches between light and dark within the active family.
+
+To change the dates, edit `autumnSeason` in `PALETTE_CONFIG` (`MMDD` numbers, inclusive). To add a season, add a `[data-palette='<name>-light']` and `<name>-dark` block to `palettes.css` and extend `getPaletteFamily()`.
+
+To preview a season, set it in the browser console, e.g. `document.documentElement.dataset.palette = 'autumn-dark'`.
+
 ## Customizing
 
 Site-wide values (name, URL, description, job title, and LinkedIn profile) live in `src/lib/site.ts`. Everything else to customize:
 
 - `src/components/header/index.astro` and `src/components/Footer.astro`: social links, footer
-- `src/lib/palette.ts`: the neon palettes (light and dark) applied per `prefers-color-scheme` until a visitor uses the theme toggle
+- `src/lib/palette.ts`: the seasonal palette logic and its config (storage keys, autumn dates); see [Seasonal theme](#seasonal-theme)
 - `src/lib/colors.ts`: the color tokens listed on the `/colors/` page; add a token here when you add one to `src/styles/palettes.css`
 - `public/robots.txt` and `public/.well-known/security.txt`: domain and contact (static files, so they can't import from `site.ts`)
 - `public/assets/og-v2.png`: social preview image, 1200x630 (a plain placeholder is included)
@@ -54,9 +73,9 @@ Posts are markdown files in `src/content/blog/` with `title`, `description`, `da
 src/
   components/     # reusable UI: layout, header, page hero, post card, search, theme toggle
   content/blog/   # posts as markdown
-  lib/            # post and tag helpers, palette names, color token list, site constants
+  lib/            # post and tag helpers, palette config, color token list, site constants
   pages/          # index (home), blog/, experience/, colors/, tags/, 404, rss
-  styles/         # global styles, design tokens, neon palette definitions (Tailwind CSS)
+  styles/         # global styles, design tokens, neon and autumn palette definitions (Tailwind CSS)
 public/
   assets/         # font, og image
 ```
