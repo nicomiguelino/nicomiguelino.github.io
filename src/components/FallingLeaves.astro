@@ -1,15 +1,6 @@
 ---
-interface Leaf {
-  left: number;
-  size: number;
-  duration: number;
-  delay: number;
-  drift: number;
-  color: string;
-  shape: string;
-}
+import FallingParticles from '@/components/FallingParticles.astro';
 
-const LEAF_COUNT = 18;
 const LEAF_SHAPES: Record<string, string> = {
   teardrop: 'M12 2C6 6 4 12 8 17c1.5 2 3 3 4 5 1-2 2.5-3 4-5 4-5 2-11-4-15z',
   maple:
@@ -18,91 +9,17 @@ const LEAF_SHAPES: Record<string, string> = {
   willow: 'M12 1C16.5 6 16.5 15 12.8 21.5V23h-1.6v-1.5C7.5 15 7.5 6 12 1z',
   oak: 'M12 2C14 2 14.5 4.5 14.5 5.5C16 4 18.5 5 18.5 7C18.5 8.5 17.5 9.5 16.5 10C18.5 10.5 20 12 19.5 14C19 16 17 16.5 15.5 16.3C15.5 18 14.5 19.5 13 20V23H11V20C9.5 19.5 8.5 18 8.5 16.3C7 16.5 5 16 4.5 14C4 12 5.5 10.5 7.5 10C6.5 9.5 5.5 8.5 5.5 7C5.5 5 8 4 9.5 5.5C9.5 4.5 10 2 12 2Z',
 };
-const SHAPE_NAMES: string[] = Object.keys(LEAF_SHAPES);
 const LEAF_COLORS: string[] = ['var(--accent)', 'var(--pink)', 'var(--yellow)', 'var(--red)'];
-
-const leaves: Leaf[] = Array.from({ length: LEAF_COUNT }, (_, leafIndex: number): Leaf => {
-  const seed: number = leafIndex + 1;
-  return {
-    left: (seed * 37) % 100,
-    size: 24 + ((seed * 7) % 18),
-    duration: 12 + ((seed * 5) % 10),
-    delay: -((seed * 3) % 20),
-    drift: (seed % 2 === 0 ? 1 : -1) * (20 + ((seed * 11) % 40)),
-    color: LEAF_COLORS[seed % LEAF_COLORS.length],
-    shape: SHAPE_NAMES[seed % SHAPE_NAMES.length],
-  };
-});
 ---
 
-<div class="falling-leaves" aria-hidden="true">
-  <svg width="0" height="0" class="absolute">
-    {SHAPE_NAMES.map((shapeName: string) => (
-      <symbol id={`leaf-${shapeName}`} viewBox="0 0 24 24">
-        <path d={LEAF_SHAPES[shapeName]} />
-      </symbol>
-    ))}
-  </svg>
-  {leaves.map((leaf: Leaf) => (
-    <svg
-      class="leaf"
-      style={`--left:${leaf.left}%;--size:${leaf.size}px;--duration:${leaf.duration}s;--delay:${leaf.delay}s;--drift:${leaf.drift}px;--color:${leaf.color}`}
-    >
-      <use href={`#leaf-${leaf.shape}`} />
-    </svg>
-  ))}
-</div>
-
-<style>
-  .falling-leaves {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .leaf {
-    position: absolute;
-    top: 0;
-    left: var(--left);
-    width: var(--size);
-    height: var(--size);
-    fill: var(--color);
-    opacity: 0;
-    animation: fall var(--duration) linear var(--delay) infinite;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    :global([data-palette^='autumn']) .falling-leaves {
-      display: block;
-    }
-  }
-
-  @keyframes fall {
-    0% {
-      opacity: 0;
-      transform: translate3d(0, -10vh, 0) rotate(0deg);
-    }
-    10% {
-      opacity: 0.85;
-    }
-    25% {
-      transform: translate3d(var(--drift), 28vh, 0) rotate(90deg);
-    }
-    50% {
-      transform: translate3d(0, 55vh, 0) rotate(180deg);
-    }
-    75% {
-      transform: translate3d(calc(var(--drift) * -1), 82vh, 0) rotate(270deg);
-    }
-    90% {
-      opacity: 0.85;
-    }
-    100% {
-      opacity: 0;
-      transform: translate3d(0, 110vh, 0) rotate(360deg);
-    }
-  }
-</style>
+<FallingParticles
+  family="autumn"
+  shapes={LEAF_SHAPES}
+  colors={LEAF_COLORS}
+  count={18}
+  size={{ min: 24, spread: 18 }}
+  duration={{ min: 12, spread: 10 }}
+  drift={{ min: 20, spread: 40 }}
+  delaySpread={20}
+  peakOpacity={0.85}
+/>

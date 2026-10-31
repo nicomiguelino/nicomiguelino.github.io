@@ -45,6 +45,7 @@ The site switches palettes by date. Both families have a light and a dark varian
 | ------ | -------------------------------------------------- | ------------------------------------------------ |
 | Neon   | ![Neon light](screenshots/home-default-light.png)  | ![Neon dark](screenshots/home-default-dark.png)  |
 | Autumn | ![Autumn light](screenshots/home-autumn-light.png) | ![Autumn dark](screenshots/home-autumn-dark.png) |
+| Winter | ![Winter light](screenshots/home-winter-light.png) | ![Winter dark](screenshots/home-winter-dark.png) |
 
 How it works:
 
@@ -87,12 +88,12 @@ bunx playwright show-report                              # open the last HTML re
 
 ### Screenshots
 
-- Every page is captured at 1920x1200 in light and dark. The home page is also captured in autumn.
-- The clock is pinned (June 15 for the default palette, Oct 15 for autumn), so results don't depend on today's date.
+- Every page is captured at 1920x1200 in light and dark. The home page is also captured in autumn and winter.
+- The clock is pinned (June 15 for the default palette, Oct 15 for autumn, Jan 15 for winter), so results don't depend on today's date.
 - The color scheme is emulated with `prefers-color-scheme`.
 - Screenshots are written to `screenshots/` (overwriting the previous ones) and are not part of the deployed site. Names look like `home-autumn-dark.png`.
 - They are captured, not compared, so the tests don't fail on visual changes. Review the images in `git diff` before committing.
-- To add a page, create `src/tests/screenshots/<page>.spec.ts` that calls `defineScreenshotTests('<page>', '/<path>/')` from `./support`. Pass `[DEFAULT_SEASON, AUTUMN_SEASON]` as a third argument to cover both palettes.
+- To add a page, create `src/tests/screenshots/<page>.spec.ts` that calls `defineScreenshotTests('<page>', '/<path>/')` from `./support`. Pass `[DEFAULT_SEASON, AUTUMN_SEASON, WINTER_SEASON]` as a third argument to cover every palette.
 
 The `Checks` workflow runs lint, format, and E2E as parallel jobs after a shared dependency setup, on pushes and pull requests to `main`. It can also be started manually.
 
