@@ -1,8 +1,13 @@
 ---
+interface Props {
+  bold?: boolean;
+}
+
+const { bold = false } = Astro.props;
 const content: string = (await Astro.slots.render('default')).trim();
 ---
 
-<span class="highlight" set:html={content} />
+<span class:list={['highlight', { 'font-semibold': bold }]} set:html={content} />
 
 <style>
   .highlight {
