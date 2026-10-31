@@ -1,0 +1,26 @@
+---
+const content: string = (await Astro.slots.render('default')).trim();
+---
+
+<span class="highlight" set:html={content} />
+
+<style>
+  .highlight {
+    --highlight-color: color-mix(in srgb, var(--pink) 55%, transparent);
+    --highlight-edge: 0.2em;
+    padding-inline: 0.2em;
+    margin-inline: -0.2em;
+    background-image: linear-gradient(
+      76deg,
+      transparent var(--highlight-edge),
+      var(--highlight-color) var(--highlight-edge),
+      var(--highlight-color) calc(100% - var(--highlight-edge)),
+      transparent calc(100% - var(--highlight-edge))
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 0.75em;
+    background-position: 0 100%;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+</style>
