@@ -27,6 +27,7 @@ bun run lint:check    # lint with ESLint
 bun run lint:fix      # lint and apply safe fixes
 bun run format:check  # check formatting with Prettier
 bun run format:fix    # format files with Prettier
+bun run test:e2e      # Playwright E2E and screenshot tests
 ```
 
 > [!NOTE]
@@ -39,6 +40,11 @@ The site switches palettes by date. Both families have a light and a dark varian
 - `neon-*`: the default, used all year
 - `autumn-*`: used from Sept 22 to Dec 21
 
+|        | Light                                                     | Dark                                                    |
+| ------ | --------------------------------------------------------- | ------------------------------------------------------- |
+| Neon   | ![Neon light](screenshots/home-default-light-darwin.png)  | ![Neon dark](screenshots/home-default-dark-darwin.png)  |
+| Autumn | ![Autumn light](screenshots/home-autumn-light-darwin.png) | ![Autumn dark](screenshots/home-autumn-dark-darwin.png) |
+
 How it works:
 
 - The family is picked from the visitor's local date on every page load, so no rebuild is needed when a season starts or ends.
@@ -50,6 +56,49 @@ How it works:
 To change the dates, edit `autumnSeason` in `PALETTE_CONFIG` (`MMDD` numbers, inclusive). To add a season, add a `[data-palette='<name>-light']` and `<name>-dark` block to `palettes.css` and extend `getPaletteFamily()`.
 
 To preview a season, set it in the browser console, e.g. `document.documentElement.dataset.palette = 'autumn-dark'`.
+
+## Testing
+
+Tests use [Playwright](https://playwright.dev) and live in `src/tests/`:
+
+- `src/tests/e2e/`: behavior checks, e.g. the home page title
+- `src/tests/screenshots/`: visual regression tests, one spec per page
+
+Set up once per machine:
+
+```sh
+bunx playwright install chromium
+```
+
+Then build and run. Playwright serves the production build with `astro preview` on port 4322, so it never collides with the dev server on :4321:
+
+```sh
+bun run build
+bun run test:e2e                                      # everything
+bunx playwright test src/tests/e2e                    # E2E only
+bunx playwright test src/tests/screenshots            # screenshots only
+bunx playwright test src/tests/screenshots/blog.spec.ts  # one page
+bunx playwright test --ui                             # interactive runner
+bunx playwright show-report                           # open the last HTML report
+```
+
+### Screenshots
+
+- Every page is captured at 1920x1200 in light and dark. The home page is also captured in autumn.
+- The clock is pinned (June 15 for the default palette, Oct 15 for autumn), so results don't depend on today's date.
+- The color scheme is emulated with `prefers-color-scheme`.
+- Baselines are committed to `screenshots/` and are not part of the deployed site. Names look like `home-autumn-dark-darwin.png`; the suffix is the OS, because rendering differs between platforms.
+- After an intentional visual change, rebuild and refresh them, then review the images before committing:
+
+```sh
+bun run build
+bunx playwright test src/tests/screenshots --update-snapshots
+```
+
+- A missing baseline fails the first run and is written for the next one.
+- To add a page, create `src/tests/screenshots/<page>.spec.ts` that calls `defineScreenshotTests('<page>', '/<path>/')` from `./support`. Pass `[DEFAULT_SEASON, AUTUMN_SEASON]` as a third argument to cover both palettes.
+
+The `Checks` workflow runs lint, format, and E2E as parallel jobs after a shared dependency setup, on pushes and pull requests to `main`. It can also be started manually.
 
 ## Customizing
 
@@ -76,6 +125,8 @@ src/
   lib/            # post and tag helpers, palette config, color token list, site constants
   pages/          # index (home), blog/, experience/, colors/, tags/, 404, rss
   styles/         # global styles, design tokens, neon and autumn palette definitions (Tailwind CSS)
+  tests/          # Playwright specs: e2e/ and screenshots/
+screenshots/      # committed screenshot baselines (not deployed)
 public/
   assets/         # font, og image
 ```
