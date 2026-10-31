@@ -1,5 +1,6 @@
 ---
 import Layout from '@/components/Layout.astro';
+import Highlight from '@/components/Highlight.astro';
 import PageHero from '@/components/PageHero.astro';
 import { JOB_TITLE, LINKEDIN_URL, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
 
@@ -17,17 +18,9 @@ const personSchema = JSON.stringify({
   <script type="application/ld+json" is:inline set:html={personSchema}></script>
   <main class="content-shell">
     <PageHero title="Home" hideTitle>
-      <h2
-        class:list={[
-          'text-[clamp(3rem,4.5vw,4.25rem)]',
-          'leading-[1.1]',
-          'tracking-[-0.03em]',
-          'text-shadow-[0_0_0_var(--pink),0_0_0_var(--blue)]',
-          'hover:text-shadow-[0.1875rem_0.125rem_0_var(--pink),0.375rem_0.25rem_0_var(--blue)]',
-          'transition-[text-shadow] duration-160 ease-[ease] motion-reduce:transition-none',
-        ]}
-      >
-        {SITE_DESCRIPTION}
+      <h2 class:list={['text-[clamp(3rem,4.5vw,4.25rem)]', 'leading-[1.1]', 'tracking-[-0.03em]']}>
+        A place for my <Highlight>thoughts</Highlight>, <Highlight>machinations</Highlight>, and
+        <Highlight>anything tech-related</Highlight>
       </h2>
     </PageHero>
 
@@ -36,12 +29,15 @@ const personSchema = JSON.stringify({
         <div class="card">
           <div class="about-prose">
             <p>
-              Hi, I'm Nico, a full-stack engineer who likes building things for the web, frontend or backend. I turn
-              annoying problems into convenient tools, using engineering and creativity. Years in, I still can't resist
-              tinkering. When I'm not coding, I'm usually listening to or playing music in my room.
+              Hi, I'm Nico, a <Highlight bold>full-stack engineer</Highlight> who likes building things for the web,
+              frontend or backend. I turn annoying problems into convenient tools, using{' '}
+              <Highlight bold>engineering</Highlight> and <Highlight bold>creativity</Highlight>. Years in, I still
+              can't resist tinkering. When I'm not coding, I'm usually listening to or playing music in my room.
             </p>
 
-            <p>If any of this sounds interesting, feel free to reach out.</p>
+            <p>
+              If any of this sounds interesting, <Highlight bold>feel free to reach out</Highlight>.
+            </p>
           </div>
         </div>
       </div>
