@@ -99,3 +99,13 @@
   --term-cmd: #7b3fa8;
   --term-str: #a8710f;
 }
+
+html:not([data-palette]) body {
+  visibility: hidden;
+}
+
+@media (scripting: none) {
+  html:not([data-palette]) body {
+    visibility: visible;
+  }
+}

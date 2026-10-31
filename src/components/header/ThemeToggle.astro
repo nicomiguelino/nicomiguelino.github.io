@@ -34,17 +34,25 @@
 </button>
 
 <script>
-  import { DEFAULT_PALETTE } from '@/lib/palette';
+  import { PALETTE_CONFIG } from '@/lib/palette';
 
-  function getNextPalette(): string {
-    const currentPalette = document.documentElement.getAttribute('data-palette');
-    return currentPalette === DEFAULT_PALETTE.dark ? DEFAULT_PALETTE.light : DEFAULT_PALETTE.dark;
+  function getCurrentPalette(): string {
+    return document.documentElement.getAttribute('data-palette') ?? '';
+  }
+
+  function getNextMode(): 'light' | 'dark' {
+    return getCurrentPalette().endsWith('-dark') ? 'light' : 'dark';
+  }
+
+  function getNextPalette(nextMode: string): string {
+    const paletteFamily: string = getCurrentPalette().replace(/-(light|dark)$/, '');
+    return `${paletteFamily}-${nextMode}`;
   }
 
   function togglePalette(): void {
-    const nextPalette = getNextPalette();
-    document.documentElement.setAttribute('data-palette', nextPalette);
-    localStorage.setItem('site-palette', nextPalette);
+    const nextMode: 'light' | 'dark' = getNextMode();
+    document.documentElement.setAttribute('data-palette', getNextPalette(nextMode));
+    localStorage.setItem(PALETTE_CONFIG.modeStorageKey, nextMode);
   }
 
   function initThemeToggle(): void {
