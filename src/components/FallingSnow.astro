@@ -1,14 +1,6 @@
 ---
-interface Flake {
-  left: number;
-  size: number;
-  duration: number;
-  delay: number;
-  drift: number;
-  shape: string;
-}
+import FallingParticles from '@/components/FallingParticles.astro';
 
-const FLAKE_COUNT = 24;
 const FLAKE_SHAPES: Record<string, string> = {
   star: 'M12 12L12 2M9.5 4.5L12 7L14.5 4.5M12 12L20.66 7M17.25 6.08L16.33 9.5L19.75 10.42M12 12L20.66 17M19.75 13.58L16.33 14.5L17.25 17.92M12 12L12 22M14.5 19.5L12 17L9.5 19.5M12 12L3.34 17M6.75 17.92L7.67 14.5L4.25 13.58M12 12L3.34 7M4.25 10.42L7.67 9.5L6.75 6.08',
   frost:
@@ -16,90 +8,16 @@ const FLAKE_SHAPES: Record<string, string> = {
   crystal:
     'M12 12L12 2M9 3L15 3M10 6L14 6M12 12L20.66 7M18.29 4.9L21.29 10.1M16.2 7.27L18.2 10.73M12 12L20.66 17M21.29 13.9L18.29 19.1M18.2 13.27L16.2 16.73M12 12L12 22M15 21L9 21M14 18L10 18M12 12L3.34 17M5.71 19.1L2.71 13.9M7.8 16.73L5.8 13.27M12 12L3.34 7M2.71 10.1L5.71 4.9M5.8 10.73L7.8 7.27',
 };
-const SHAPE_NAMES: string[] = Object.keys(FLAKE_SHAPES);
-
-const flakes: Flake[] = Array.from({ length: FLAKE_COUNT }, (_, flakeIndex: number): Flake => {
-  const seed: number = flakeIndex + 1;
-  return {
-    left: (seed * 29) % 100,
-    size: 12 + ((seed * 5) % 12),
-    duration: 14 + ((seed * 7) % 12),
-    delay: -((seed * 4) % 24),
-    shape: SHAPE_NAMES[seed % SHAPE_NAMES.length],
-    drift: (seed % 2 === 0 ? 1 : -1) * (10 + ((seed * 13) % 30)),
-  };
-});
 ---
 
-<div class="falling-snow" aria-hidden="true">
-  <svg width="0" height="0" class="absolute">
-    {SHAPE_NAMES.map((shapeName: string) => (
-      <symbol id={`flake-${shapeName}`} viewBox="0 0 24 24">
-        <path d={FLAKE_SHAPES[shapeName]} />
-      </symbol>
-    ))}
-  </svg>
-  {flakes.map((flake: Flake) => (
-    <svg
-      class="flake"
-      style={`--left:${flake.left}%;--size:${flake.size}px;--duration:${flake.duration}s;--delay:${flake.delay}s;--drift:${flake.drift}px`}
-    >
-      <use href={`#flake-${flake.shape}`} />
-    </svg>
-  ))}
-</div>
-
-<style>
-  .falling-snow {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .flake {
-    position: absolute;
-    top: 0;
-    left: var(--left);
-    width: var(--size);
-    height: var(--size);
-    fill: none;
-    stroke: var(--accent);
-    stroke-width: 1.6;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    opacity: 0;
-    animation: snowfall var(--duration) linear var(--delay) infinite;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    :global([data-palette^='winter']) .falling-snow {
-      display: block;
-    }
-  }
-
-  @keyframes snowfall {
-    0% {
-      opacity: 0;
-      transform: translate3d(0, -5vh, 0) rotate(0deg);
-    }
-    10% {
-      opacity: 0.7;
-    }
-    33% {
-      transform: translate3d(var(--drift), 35vh, 0) rotate(120deg);
-    }
-    66% {
-      transform: translate3d(calc(var(--drift) * -1), 70vh, 0) rotate(240deg);
-    }
-    90% {
-      opacity: 0.7;
-    }
-    100% {
-      opacity: 0;
-      transform: translate3d(0, 105vh, 0) rotate(360deg);
-    }
-  }
-</style>
+<FallingParticles
+  family="winter"
+  shapes={FLAKE_SHAPES}
+  count={24}
+  size={{ min: 12, spread: 12 }}
+  duration={{ min: 14, spread: 12 }}
+  drift={{ min: 10, spread: 30 }}
+  delaySpread={24}
+  peakOpacity={0.7}
+  stroke
+/>

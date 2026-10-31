@@ -27,6 +27,7 @@ bun run lint:check    # lint with ESLint
 bun run lint:fix      # lint and apply safe fixes
 bun run format:check  # check formatting with Prettier
 bun run format:fix    # format files with Prettier
+bun run test:e2e      # Playwright E2E and screenshot tests
 ```
 
 > [!NOTE]
@@ -41,6 +42,12 @@ The site switches palettes by date. Both families have a light and a dark varian
 - `winter-*`: used from Dec 22 to Mar 19
 - `spring-*`: used from Mar 20 to Jun 20
 
+|        | Light                                              | Dark                                             |
+| ------ | -------------------------------------------------- | ------------------------------------------------ |
+| Neon   | ![Neon light](screenshots/home-default-light.png)  | ![Neon dark](screenshots/home-default-dark.png)  |
+| Autumn | ![Autumn light](screenshots/home-autumn-light.png) | ![Autumn dark](screenshots/home-autumn-dark.png) |
+| Winter | ![Winter light](screenshots/home-winter-light.png) | ![Winter dark](screenshots/home-winter-dark.png) |
+
 How it works:
 
 - The family is picked from the visitor's local date on every page load, so no rebuild is needed when a season starts or ends.
@@ -54,6 +61,43 @@ Each season also has a falling effect on the home page (`FallingLeaves`, `Fallin
 To change the dates, edit `seasons` in `PALETTE_CONFIG` (`MMDD` numbers, inclusive; a range with `start` after `end` wraps the new year). To add a season, add `[data-palette='<name>-light']` and `<name>-dark` blocks to `palettes.css`, add its name to `PaletteFamily`, and add its range to `seasons`.
 
 To preview a season, set it in the browser console, e.g. `document.documentElement.dataset.palette = 'autumn-dark'`.
+
+## Testing
+
+Tests use [Playwright](https://playwright.dev) and live in `src/tests/`:
+
+- `src/tests/e2e/`: behavior checks, e.g. the home page title
+- `src/tests/screenshots/`: captures a screenshot of each page, one spec per page
+
+Set up once per machine:
+
+```sh
+bunx playwright install chromium
+```
+
+Then build and run. Playwright serves the production build with `astro preview` on port 4322, so it never collides with the dev server on :4321:
+
+```sh
+bun run build
+bun run test:e2e                                         # everything
+bunx playwright test src/tests/e2e                       # E2E only
+bunx playwright test src/tests/screenshots               # screenshots only
+bunx playwright test src/tests/screenshots/blog.spec.ts  # one page
+bunx playwright test --ui                                # interactive runner
+bunx playwright show-report                              # open the last HTML report
+```
+
+### Screenshots
+
+- Every page is captured at 1920x1200 in light and dark. The home page is also captured in autumn and winter.
+- The clock is pinned (June 15 for the default palette, Oct 15 for autumn, Jan 15 for winter), so results don't depend on today's date.
+- `falling-particles` captures the home page with the falling effects frozen mid-fall (all seasons), since the other screenshots disable animations and so hide the particles.
+- The color scheme is emulated with `prefers-color-scheme`.
+- Screenshots are written to `screenshots/` (overwriting the previous ones) and are not part of the deployed site. Names look like `home-autumn-dark.png`.
+- They are captured, not compared, so the tests don't fail on visual changes. Review the images in `git diff` before committing.
+- To add a page, create `src/tests/screenshots/<page>.spec.ts` that calls `defineScreenshotTests('<page>', '/<path>/')` from `./support`. Pass `[DEFAULT_SEASON, AUTUMN_SEASON, WINTER_SEASON]` as a third argument to cover every palette.
+
+The `Checks` workflow runs lint, format, and E2E as parallel jobs after a shared dependency setup, on pushes and pull requests to `main`. It can also be started manually.
 
 ## Customizing
 
@@ -80,6 +124,8 @@ src/
   lib/            # post and tag helpers, palette config, color token list, site constants
   pages/          # index (home), blog/, experience/, colors/, tags/, 404, rss
   styles/         # global styles, design tokens, neon and autumn palette definitions (Tailwind CSS)
+  tests/          # Playwright specs: e2e/ and screenshots/
+screenshots/      # committed screenshot baselines (not deployed)
 public/
   assets/         # font, og image
 ```
