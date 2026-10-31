@@ -4,7 +4,6 @@ import SearchOverlay from '@/components/SearchOverlay.astro';
 import SmartCursor from '@/components/SmartCursor.astro';
 import Footer from '@/components/Footer.astro';
 import Header from '@/components/header/index.astro';
-import { DEFAULT_PALETTE } from '@/lib/palette';
 import { SITE_NAME, SITE_URL } from '@/lib/site';
 import '@/styles/global.css';
 
@@ -51,21 +50,10 @@ const ogImageUrl = new URL('/assets/og-v2.png', SITE_URL).toString();
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    <script is:inline define:vars={{ DEFAULT_PALETTE }}>
-      (() => {
-        const apply = () => {
-          const storedPalette = localStorage.getItem('site-palette');
-          const isValidPalette = Object.values(DEFAULT_PALETTE).includes(storedPalette);
-          if (storedPalette && !isValidPalette) localStorage.removeItem('site-palette');
-          const saved = isValidPalette ? storedPalette : '';
-          const system = window.matchMedia('(prefers-color-scheme: dark)').matches
-            ? DEFAULT_PALETTE.dark
-            : DEFAULT_PALETTE.light;
-          document.documentElement.setAttribute('data-palette', saved || system);
-        };
-        apply();
-        document.addEventListener('astro:after-swap', apply);
-      })();
+    <script>
+      import { initializePalette } from '@/lib/palette';
+
+      initializePalette();
     </script>
     <ClientRouter />
   </head>

@@ -54,11 +54,11 @@ const description = 'The color palette behind this site, in light and dark.';
     display: none;
   }
 
-  :global([data-palette='neon-light']) .palette-mode-light {
+  :global([data-palette$='-light']) .palette-mode-light {
     display: inline;
   }
 
-  :global([data-palette='neon-light']) .palette-mode-dark {
+  :global([data-palette$='-light']) .palette-mode-dark {
     display: none;
   }
 </style>
