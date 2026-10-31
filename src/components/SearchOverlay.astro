@@ -1,16 +1,30 @@
+---
+import SearchIcon from '@/components/header/SearchIcon.astro';
+---
+
 <div class="theme-overlay" id="search-overlay" hidden>
   <div class="theme-overlay-panel" role="dialog" aria-label="Search" aria-modal="true">
     <div class="search-input-row">
-      <span class="search-prompt" aria-hidden="true">
-        $
+      <span class="search-icon" aria-hidden="true">
+        <SearchIcon />
       </span>
-      <input id="search-input" type="search" autocomplete="off" spellcheck="false" aria-label="Search query" />
-      <span class="search-caret" aria-hidden="true"></span>
+      <input
+        id="search-input"
+        type="search"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Search posts and tags"
+        aria-label="Search query"
+      />
     </div>
     <div class="search-results" id="search-results" role="listbox" aria-label="Search results">
       <p class="search-empty">Type to search</p>
     </div>
     <div class="theme-overlay-footer">
+      <span class="theme-overlay-hints" aria-hidden="true">
+        <kbd>↑</kbd>
+        <kbd>↓</kbd> navigate <kbd>↵</kbd> open
+      </span>
       <span class="theme-overlay-actions">
         <button class="theme-close-btn" type="button" id="search-close-btn">
           esc
@@ -291,46 +305,47 @@
   .search-input-row {
     display: flex;
     align-items: center;
-    gap: 0.55rem;
-    padding: 0.75rem 1rem;
-    border-bottom: 2px solid var(--ink);
+    gap: 0.6rem;
+    margin: 0.9rem 0.9rem 0;
+    padding: 0.55rem 0.8rem;
+    border: 2px solid var(--ink);
+    background: var(--bg);
+    box-shadow: 3px 3px 0 0 var(--ink);
+    color: var(--ink);
   }
 
-  .search-prompt {
-    color: var(--term-prompt);
-    font-weight: 700;
+  .search-icon {
+    display: inline-flex;
     flex: none;
   }
 
   .search-input-row input {
-    flex: 0 1 auto;
-    field-sizing: content;
-    min-width: 1px;
-    max-width: 100%;
+    flex: 1;
+    min-width: 0;
     border: 0;
     outline: none;
     background: transparent;
-    color: var(--term-text);
-    caret-color: transparent;
-    font-family: inherit;
-    font-size: 0.9rem;
+    color: var(--ink);
+    caret-color: var(--accent);
+    font-family: var(--heading);
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .search-input-row input::placeholder {
+    color: var(--muted);
+    font-weight: 500;
   }
 
   .search-input-row input::-webkit-search-cancel-button {
     display: none;
   }
 
-  .search-caret {
-    flex: none;
-    width: 0.55ch;
-    height: 1.05em;
-    margin-left: -0.55rem;
-    background: var(--term-prompt);
-    animation: type-cursor-blink 0.9s step-start infinite;
-  }
-
   .search-results {
+    display: flex;
     flex: 1;
+    flex-direction: column;
+    gap: 0.6rem;
     min-height: 9rem;
     max-height: 50vh;
     overflow-y: auto;
@@ -338,71 +353,88 @@
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y;
     scrollbar-gutter: stable;
-    padding: 0.6rem;
+    padding: 0.9rem;
     scrollbar-width: thin;
-    scrollbar-color: var(--term-muted) var(--term-active-bg);
+    scrollbar-color: var(--ink) var(--bg);
   }
 
   .search-results::-webkit-scrollbar {
     width: 8px;
   }
   .search-results::-webkit-scrollbar-track {
-    background: var(--term-active-bg);
-    border-radius: 4px;
+    background: var(--bg);
   }
   .search-results::-webkit-scrollbar-thumb {
-    background: var(--term-muted);
-    border-radius: 4px;
-  }
-  .search-results::-webkit-scrollbar-thumb:hover {
-    background: var(--term-text);
+    background: var(--ink);
   }
 
   .search-result {
     display: block;
-    padding: 0.5rem 0.8rem;
-    border-radius: 1px;
+    padding: 0.65rem 0.85rem;
+    border: 2px solid var(--ink);
+    background: var(--bg-elevated);
+    box-shadow: 3px 3px 0 0 var(--ink);
+    color: var(--ink);
     text-decoration: none;
+    transition:
+      translate 120ms ease,
+      box-shadow 120ms ease,
+      background-color 120ms ease;
   }
 
   .search-result:hover,
   .search-result:focus-visible,
   .search-result[aria-selected='true'] {
     outline: none;
-    background: var(--term-active-bg);
+    translate: 1px 1px;
+    background: var(--accent);
+    box-shadow: 2px 2px 0 0 var(--ink);
+    color: var(--bg);
   }
 
   .search-result-title {
     display: block;
-    color: var(--term-text);
-    font-size: 0.85rem;
+    font-family: var(--heading);
+    font-size: 1rem;
     font-weight: 700;
+    line-height: 1.35;
   }
 
   .search-result-excerpt {
     display: block;
-    margin-top: 0.15rem;
-    color: var(--term-muted);
-    font-size: 0.75rem;
+    margin-top: 0.2rem;
+    color: var(--muted);
+    font-size: 0.8rem;
     line-height: 1.55;
   }
 
-  .search-result-excerpt mark {
-    background: transparent;
-    color: var(--term-str, var(--accent));
+  .search-result:hover .search-result-excerpt,
+  .search-result:focus-visible .search-result-excerpt,
+  .search-result[aria-selected='true'] .search-result-excerpt {
+    color: var(--bg);
+  }
+
+  .search-result mark {
+    padding-inline: 0.15em;
+    margin-inline: -0.15em;
+    background: color-mix(in srgb, var(--pink) 55%, transparent);
+    color: inherit;
     font-weight: 700;
+  }
+
+  .search-result:hover mark,
+  .search-result:focus-visible mark,
+  .search-result[aria-selected='true'] mark {
+    background: var(--bg);
+    color: var(--ink);
   }
 
   .search-empty {
     margin: 0;
-    padding: 1rem 0.8rem;
-    color: var(--term-muted);
-    font-size: 0.8rem;
-  }
-
-  @keyframes type-cursor-blink {
-    50% {
-      opacity: 0;
-    }
+    padding: 1rem 0.2rem;
+    color: var(--muted);
+    font-family: var(--heading);
+    font-size: 0.95rem;
+    font-weight: 500;
   }
 </style>
