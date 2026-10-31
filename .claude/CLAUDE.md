@@ -19,4 +19,4 @@
 
 ## Checks
 
-- Run `npx astro check` and `npx prettier --check` on changed files.
+- Run `bunx astro check` and `bunx prettier --check` on changed files.

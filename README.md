@@ -18,19 +18,19 @@ claude plugin install nicomiguelino@nicomiguelino --scope project
 Then install and run:
 
 ```sh
-npm install
-npm run dev           # dev server on :4321
-npm run build         # production build
-npm run preview       # preview the production build
-npm run check         # astro type checking
-npm run lint:check    # lint with ESLint
-npm run lint:fix      # lint and apply safe fixes
-npm run format:check  # check formatting with Prettier
-npm run format:fix    # format files with Prettier
+bun install
+bun run dev           # dev server on :4321
+bun run build         # production build
+bun run preview       # preview the production build
+bun run check         # astro type checking
+bun run lint:check    # lint with ESLint
+bun run lint:fix      # lint and apply safe fixes
+bun run format:check  # check formatting with Prettier
+bun run format:fix    # format files with Prettier
 ```
 
 > [!NOTE]
-> `npm install` also sets up a Husky pre-commit hook that runs `lint:check`, `format:check`, and `check`. Fix failures before committing.
+> `bun install` also sets up a Husky pre-commit hook that runs `lint:check`, `format:check`, and `check`. Fix failures before committing.
 
 ## Customizing
 
