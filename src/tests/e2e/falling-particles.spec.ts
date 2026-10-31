@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { AUTUMN_SEASON, DEFAULT_SEASON, WINTER_SEASON } from '../seasons';
+import { AUTUMN_SEASON, DEFAULT_SEASON, SPRING_SEASON, WINTER_SEASON } from '../seasons';
 
 interface SeasonCase {
   description: string;
@@ -7,7 +7,7 @@ interface SeasonCase {
   visibleFamily: string | null;
 }
 
-const PARTICLE_FAMILIES: string[] = ['autumn', 'winter'];
+const PARTICLE_FAMILIES: string[] = ['autumn', 'winter', 'spring'];
 
 const SEASON_CASES: SeasonCase[] = [
   { description: 'default season', date: DEFAULT_SEASON.date, visibleFamily: null },
@@ -17,6 +17,11 @@ const SEASON_CASES: SeasonCase[] = [
   { description: 'first day of winter', date: '2026-12-22T12:00:00', visibleFamily: 'winter' },
   { description: 'mid winter', date: WINTER_SEASON.date, visibleFamily: 'winter' },
   { description: 'last day of winter', date: '2026-03-19T12:00:00', visibleFamily: 'winter' },
+  { description: 'first day of spring', date: '2026-03-20T12:00:00', visibleFamily: 'spring' },
+  { description: 'mid spring', date: SPRING_SEASON.date, visibleFamily: 'spring' },
+  { description: 'last day of spring', date: '2026-06-20T12:00:00', visibleFamily: 'spring' },
+  { description: 'first day of summer', date: '2026-06-21T12:00:00', visibleFamily: null },
+  { description: 'day before autumn', date: '2026-09-21T12:00:00', visibleFamily: null },
 ];
 
 for (const seasonCase of SEASON_CASES) {
@@ -36,7 +41,7 @@ for (const seasonCase of SEASON_CASES) {
   });
 }
 
-for (const season of [AUTUMN_SEASON, WINTER_SEASON]) {
+for (const season of [AUTUMN_SEASON, WINTER_SEASON, SPRING_SEASON]) {
   test(`home page hides the ${season.name} particles when reduced motion is preferred`, async ({ page }) => {
     await page.clock.setFixedTime(new Date(season.date));
     await page.emulateMedia({ reducedMotion: 'reduce' });

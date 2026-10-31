@@ -1,5 +1,6 @@
 ---
 import FallingLeaves from '@/components/FallingLeaves.astro';
+import FallingPetals from '@/components/FallingPetals.astro';
 import FallingSnow from '@/components/FallingSnow.astro';
 import Layout from '@/components/Layout.astro';
 import Highlight from '@/components/Highlight.astro';
@@ -20,6 +21,7 @@ const personSchema = JSON.stringify({
   <script type="application/ld+json" is:inline set:html={personSchema}></script>
   <FallingLeaves />
   <FallingSnow />
+  <FallingPetals />
   <main class="content-shell">
     <PageHero title="Home" hideTitle>
       <h2 class:list={['text-[clamp(3rem,4.5vw,4.25rem)]', 'leading-[1.1]', 'tracking-[-0.03em]']}>
