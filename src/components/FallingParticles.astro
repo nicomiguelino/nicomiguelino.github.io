@@ -24,6 +24,7 @@ interface Props {
   delaySpread: number;
   peakOpacity: number;
   colors?: string[];
+  shapeColors?: Record<string, string[]>;
   stroke?: boolean;
 }
 
@@ -37,6 +38,7 @@ const {
   delaySpread,
   peakOpacity,
   colors = ['var(--accent)'],
+  shapeColors = {},
   stroke = false,
 } = Astro.props;
 
@@ -45,14 +47,16 @@ const shapeNames: string[] = Object.keys(shapes);
 const particles: Particle[] = Array.from({ length: count }, (_, particleIndex: number): Particle => {
   const seed: number = particleIndex + 1;
   const direction: number = seed % 2 === 0 ? 1 : -1;
+  const shapeName: string = shapeNames[seed % shapeNames.length];
+  const palette: string[] = shapeColors[shapeName] ?? colors;
   return {
     left: (seed * 37) % 100,
     size: size.min + ((seed * 7) % size.spread),
     duration: duration.min + ((seed * 5) % duration.spread),
     delay: -((seed * 3) % delaySpread),
     drift: direction * (drift.min + ((seed * 11) % drift.spread)),
-    color: colors[seed % colors.length],
-    shape: shapeNames[seed % shapeNames.length],
+    color: palette[seed % palette.length],
+    shape: shapeName,
   };
 });
 ---
@@ -111,7 +115,8 @@ const particles: Particle[] = Array.from({ length: count }, (_, particleIndex: n
 
   @media (prefers-reduced-motion: no-preference) {
     :global([data-palette^='autumn']) .falling-particles[data-family='autumn'],
-    :global([data-palette^='winter']) .falling-particles[data-family='winter'] {
+    :global([data-palette^='winter']) .falling-particles[data-family='winter'],
+    :global([data-palette^='spring']) .falling-particles[data-family='spring'] {
       display: block;
     }
   }

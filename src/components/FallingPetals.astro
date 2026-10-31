@@ -1,116 +1,29 @@
 ---
-interface Petal {
-  left: number;
-  size: number;
-  duration: number;
-  delay: number;
-  drift: number;
-  color: string;
-  shape: string;
-}
+import FallingParticles from '@/components/FallingParticles.astro';
 
-const PETAL_COUNT = 26;
-const PETAL_SHAPES: Record<string, { path: string; colors: string[] }> = {
-  blossom: {
-    path: 'M12 4C10.5 2.5 8 2 6.5 3.5 4 6 4.5 11 12 22 19.5 11 20 6 17.5 3.5 16 2 13.5 2.5 12 4z',
-    colors: ['var(--accent)', 'var(--pink)'],
-  },
-  oval: {
-    path: 'M12 2C7 6 6 13 12 22 18 13 17 6 12 2z',
-    colors: ['var(--pink)', 'var(--accent)'],
-  },
-  flower: {
-    path: 'M7.6 6.6a4.4 4.4 0 1 0 8.8 0a4.4 4.4 0 1 0 -8.8 0zM12.74 10.33a4.4 4.4 0 1 0 8.8 0a4.4 4.4 0 1 0 -8.8 0zM10.77 16.37a4.4 4.4 0 1 0 8.8 0a4.4 4.4 0 1 0 -8.8 0zM4.43 16.37a4.4 4.4 0 1 0 8.8 0a4.4 4.4 0 1 0 -8.8 0zM2.46 10.33a4.4 4.4 0 1 0 8.8 0a4.4 4.4 0 1 0 -8.8 0zM9 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0z',
-    colors: ['var(--accent)', 'var(--yellow)', 'var(--pink)'],
-  },
-  leaf: {
-    path: 'M4 20C4 10 10 4 20 4c0 10-6 16-16 16z',
-    colors: ['var(--green)'],
-  },
+const PETAL_SHAPES: Record<string, string> = {
+  blossom: 'M12 4C10.5 2.5 8 2 6.5 3.5 4 6 4.5 11 12 22 19.5 11 20 6 17.5 3.5 16 2 13.5 2.5 12 4z',
+  oval: 'M12 2C7 6 6 13 12 22 18 13 17 6 12 2z',
+  flower:
+    'M7.6 6.6a4.4 4.4 0 1 0 8.8 0a4.4 4.4 0 1 0 -8.8 0zM12.74 10.33a4.4 4.4 0 1 0 8.8 0a4.4 4.4 0 1 0 -8.8 0zM10.77 16.37a4.4 4.4 0 1 0 8.8 0a4.4 4.4 0 1 0 -8.8 0zM4.43 16.37a4.4 4.4 0 1 0 8.8 0a4.4 4.4 0 1 0 -8.8 0zM2.46 10.33a4.4 4.4 0 1 0 8.8 0a4.4 4.4 0 1 0 -8.8 0zM9 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0z',
+  leaf: 'M4 20C4 10 10 4 20 4c0 10-6 16-16 16z',
 };
-const SHAPE_NAMES: string[] = Object.keys(PETAL_SHAPES);
-
-const petals: Petal[] = Array.from({ length: PETAL_COUNT }, (_, petalIndex: number): Petal => {
-  const seed: number = petalIndex + 1;
-  const shapeName: string = SHAPE_NAMES[seed % SHAPE_NAMES.length];
-  const shapeColors: string[] = PETAL_SHAPES[shapeName].colors;
-  return {
-    left: (seed * 41) % 100,
-    size: 14 + ((seed * 7) % 12),
-    duration: 13 + ((seed * 5) % 10),
-    delay: -((seed * 3) % 22),
-    drift: (seed % 2 === 0 ? 1 : -1) * (25 + ((seed * 11) % 45)),
-    color: shapeColors[seed % shapeColors.length],
-    shape: shapeName,
-  };
-});
+const PETAL_COLORS: Record<string, string[]> = {
+  blossom: ['var(--accent)', 'var(--pink)'],
+  oval: ['var(--pink)', 'var(--accent)'],
+  flower: ['var(--accent)', 'var(--yellow)', 'var(--pink)'],
+  leaf: ['var(--green)'],
+};
 ---
 
-<div class="falling-petals" aria-hidden="true">
-  <svg width="0" height="0" class="absolute">
-    {SHAPE_NAMES.map((shapeName: string) => (
-      <symbol id={`petal-${shapeName}`} viewBox="0 0 24 24">
-        <path d={PETAL_SHAPES[shapeName].path} />
-      </symbol>
-    ))}
-  </svg>
-  {petals.map((petal: Petal) => (
-    <svg
-      class="petal"
-      style={`--left:${petal.left}%;--size:${petal.size}px;--duration:${petal.duration}s;--delay:${petal.delay}s;--drift:${petal.drift}px;--color:${petal.color}`}
-    >
-      <use href={`#petal-${petal.shape}`} />
-    </svg>
-  ))}
-</div>
-
-<style>
-  .falling-petals {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .petal {
-    position: absolute;
-    top: 0;
-    left: var(--left);
-    width: var(--size);
-    height: var(--size);
-    fill: var(--color);
-    opacity: 0;
-    animation: petalfall var(--duration) ease-in-out var(--delay) infinite;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    :global([data-palette^='spring']) .falling-petals {
-      display: block;
-    }
-  }
-
-  @keyframes petalfall {
-    0% {
-      opacity: 0;
-      transform: translate3d(0, -8vh, 0) rotate(0deg);
-    }
-    10% {
-      opacity: 0.8;
-    }
-    33% {
-      transform: translate3d(var(--drift), 32vh, 0) rotate(110deg);
-    }
-    66% {
-      transform: translate3d(calc(var(--drift) * -0.6), 66vh, 0) rotate(250deg);
-    }
-    90% {
-      opacity: 0.8;
-    }
-    100% {
-      opacity: 0;
-      transform: translate3d(calc(var(--drift) * 0.5), 108vh, 0) rotate(360deg);
-    }
-  }
-</style>
+<FallingParticles
+  family="spring"
+  shapes={PETAL_SHAPES}
+  shapeColors={PETAL_COLORS}
+  count={26}
+  size={{ min: 14, spread: 12 }}
+  duration={{ min: 13, spread: 10 }}
+  drift={{ min: 25, spread: 45 }}
+  delaySpread={22}
+  peakOpacity={0.8}
+/>
