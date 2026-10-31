@@ -90,6 +90,7 @@ bunx playwright show-report                              # open the last HTML re
 
 - Every page is captured at 1920x1200 in light and dark. The home page is also captured in autumn and winter.
 - The clock is pinned (June 15 for the default palette, Oct 15 for autumn, Jan 15 for winter), so results don't depend on today's date.
+- `falling-particles` captures the home page with the falling effects frozen mid-fall (all seasons), since the other screenshots disable animations and so hide the particles.
 - The color scheme is emulated with `prefers-color-scheme`.
 - Screenshots are written to `screenshots/` (overwriting the previous ones) and are not part of the deployed site. Names look like `home-autumn-dark.png`.
 - They are captured, not compared, so the tests don't fail on visual changes. Review the images in `git diff` before committing.
