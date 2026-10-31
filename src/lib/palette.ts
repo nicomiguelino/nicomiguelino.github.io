@@ -1,6 +1,7 @@
 export const PALETTE_CONFIG = {
   modeStorageKey: 'site-mode',
   legacyPaletteStorageKey: 'site-palette',
+  themeStorageKey: 'site-theme',
   seasons: {
     autumn: { start: 922, end: 1221 },
     winter: { start: 1222, end: 319 },
@@ -9,7 +10,10 @@ export const PALETTE_CONFIG = {
 } as const;
 
 type PaletteMode = 'light' | 'dark';
-type PaletteFamily = 'neon' | 'autumn' | 'winter' | 'spring';
+export type PaletteFamily = 'neon' | 'autumn' | 'winter' | 'spring';
+export type ThemeChoice = 'auto' | PaletteFamily;
+export const THEME_CHOICES: ThemeChoice[] = ['auto', 'neon', 'autumn', 'winter', 'spring'];
+
 type SeasonRange = { start: number; end: number };
 
 function migrateLegacyPalette(): void {
@@ -37,7 +41,23 @@ function isInSeason(monthDay: number, season: SeasonRange): boolean {
     : monthDay >= season.start && monthDay <= season.end;
 }
 
-function getPaletteFamily(): PaletteFamily {
+export function getStoredTheme(): ThemeChoice {
+  const storedTheme: string | null = localStorage.getItem(PALETTE_CONFIG.themeStorageKey);
+  const matchingChoice: ThemeChoice | undefined = THEME_CHOICES.find((choice: ThemeChoice) => choice === storedTheme);
+  if (matchingChoice) return matchingChoice;
+  if (storedTheme !== null) localStorage.removeItem(PALETTE_CONFIG.themeStorageKey);
+  return 'auto';
+}
+
+export function setStoredTheme(theme: ThemeChoice): void {
+  if (theme === 'auto') {
+    localStorage.removeItem(PALETTE_CONFIG.themeStorageKey);
+    return;
+  }
+  localStorage.setItem(PALETTE_CONFIG.themeStorageKey, theme);
+}
+
+function getDatePaletteFamily(): PaletteFamily {
   const today: Date = new Date();
   const monthDay: number = (today.getMonth() + 1) * 100 + today.getDate();
   const seasonNames = Object.keys(PALETTE_CONFIG.seasons) as (keyof typeof PALETTE_CONFIG.seasons)[];
@@ -45,7 +65,12 @@ function getPaletteFamily(): PaletteFamily {
   return activeSeason ?? 'neon';
 }
 
-function applyPalette(): void {
+function getPaletteFamily(): PaletteFamily {
+  const storedTheme: ThemeChoice = getStoredTheme();
+  return storedTheme === 'auto' ? getDatePaletteFamily() : storedTheme;
+}
+
+export function applyPalette(): void {
   migrateLegacyPalette();
   document.documentElement.setAttribute('data-palette', `${getPaletteFamily()}-${getMode()}`);
 }
