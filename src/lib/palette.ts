@@ -4,11 +4,12 @@ export const PALETTE_CONFIG = {
   seasons: {
     autumn: { start: 922, end: 1221 },
     winter: { start: 1222, end: 319 },
+    spring: { start: 320, end: 620 },
   },
 } as const;
 
 type PaletteMode = 'light' | 'dark';
-type PaletteFamily = 'neon' | 'autumn' | 'winter';
+type PaletteFamily = 'neon' | 'autumn' | 'winter' | 'spring';
 type SeasonRange = { start: number; end: number };
 
 function migrateLegacyPalette(): void {
