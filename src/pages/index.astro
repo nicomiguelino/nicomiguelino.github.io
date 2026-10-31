@@ -1,4 +1,5 @@
 ---
+import FallingLeaves from '@/components/FallingLeaves.astro';
 import Layout from '@/components/Layout.astro';
 import Highlight from '@/components/Highlight.astro';
 import PageHero from '@/components/PageHero.astro';
@@ -16,6 +17,7 @@ const personSchema = JSON.stringify({
 
 <Layout title={SITE_NAME} description={SITE_DESCRIPTION} canonicalPath="/">
   <script type="application/ld+json" is:inline set:html={personSchema}></script>
+  <FallingLeaves />
   <main class="content-shell">
     <PageHero title="Home" hideTitle>
       <h2 class:list={['text-[clamp(3rem,4.5vw,4.25rem)]', 'leading-[1.1]', 'tracking-[-0.03em]']}>
