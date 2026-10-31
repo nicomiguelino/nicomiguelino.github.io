@@ -38,6 +38,7 @@ The site switches palettes by date. Both families have a light and a dark varian
 
 - `neon-*`: the default, used all year
 - `autumn-*`: used from Sept 22 to Dec 21
+- `winter-*`: used from Dec 22 to Mar 19
 
 How it works:
 
@@ -47,7 +48,9 @@ How it works:
 - `initializePalette()` in `src/lib/palette.ts` sets `data-palette` on `<html>`. `Layout.astro` calls it from `<head>`, and `body` stays hidden until the attribute is set (visible when scripting is off) to avoid a flash of the wrong colors.
 - The theme toggle switches between light and dark within the active family.
 
-To change the dates, edit `autumnSeason` in `PALETTE_CONFIG` (`MMDD` numbers, inclusive). To add a season, add a `[data-palette='<name>-light']` and `<name>-dark` block to `palettes.css` and extend `getPaletteFamily()`.
+Each season also has a falling effect on the home page (`FallingLeaves`, `FallingSnow`), shown only under its palettes and when `prefers-reduced-motion` allows it.
+
+To change the dates, edit `seasons` in `PALETTE_CONFIG` (`MMDD` numbers, inclusive; a range with `start` after `end` wraps the new year). To add a season, add `[data-palette='<name>-light']` and `<name>-dark` blocks to `palettes.css`, add its name to `PaletteFamily`, and add its range to `seasons`.
 
 To preview a season, set it in the browser console, e.g. `document.documentElement.dataset.palette = 'autumn-dark'`.
 

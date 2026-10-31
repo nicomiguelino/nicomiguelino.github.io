@@ -1,11 +1,15 @@
 export const PALETTE_CONFIG = {
   modeStorageKey: 'site-mode',
   legacyPaletteStorageKey: 'site-palette',
-  autumnSeason: { start: 922, end: 1221 },
+  seasons: {
+    autumn: { start: 922, end: 1221 },
+    winter: { start: 1222, end: 319 },
+  },
 } as const;
 
 type PaletteMode = 'light' | 'dark';
-type PaletteFamily = 'neon' | 'autumn';
+type PaletteFamily = 'neon' | 'autumn' | 'winter';
+type SeasonRange = { start: number; end: number };
 
 function migrateLegacyPalette(): void {
   const legacyPalette: string | null = localStorage.getItem(PALETTE_CONFIG.legacyPaletteStorageKey);
@@ -25,11 +29,19 @@ function getMode(): PaletteMode {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
+function isInSeason(monthDay: number, season: SeasonRange): boolean {
+  const wrapsYear: boolean = season.start > season.end;
+  return wrapsYear
+    ? monthDay >= season.start || monthDay <= season.end
+    : monthDay >= season.start && monthDay <= season.end;
+}
+
 function getPaletteFamily(): PaletteFamily {
   const today: Date = new Date();
   const monthDay: number = (today.getMonth() + 1) * 100 + today.getDate();
-  const { start, end } = PALETTE_CONFIG.autumnSeason;
-  return monthDay >= start && monthDay <= end ? 'autumn' : 'neon';
+  const seasonNames = Object.keys(PALETTE_CONFIG.seasons) as (keyof typeof PALETTE_CONFIG.seasons)[];
+  const activeSeason = seasonNames.find((seasonName) => isInSeason(monthDay, PALETTE_CONFIG.seasons[seasonName]));
+  return activeSeason ?? 'neon';
 }
 
 function applyPalette(): void {
