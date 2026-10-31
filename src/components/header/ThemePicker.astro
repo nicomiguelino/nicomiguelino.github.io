@@ -1,0 +1,162 @@
+---
+import type { ThemeChoice } from '@/lib/palette';
+import { FLAKE_SHAPES, LEAF_SHAPES } from '@/lib/particleShapes';
+
+interface ThemeOption {
+  choice: ThemeChoice;
+  label: string;
+  paths: string[];
+}
+
+const DEFAULT_CHOICE: ThemeChoice = 'auto';
+
+const themeOptions: ThemeOption[] = [
+  {
+    choice: 'auto',
+    label: 'Automatic',
+    paths: ['M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z', 'M3 10h18', 'M8 3v4', 'M16 3v4'],
+  },
+  { choice: 'neon', label: 'Neon', paths: ['M13 2 4 14h7l-1 8 9-12h-7z'] },
+  { choice: 'autumn', label: 'Autumn', paths: [LEAF_SHAPES.maple] },
+  { choice: 'winter', label: 'Winter', paths: [FLAKE_SHAPES.star] },
+  {
+    choice: 'spring',
+    label: 'Spring',
+    paths: ['M12 21v-9', 'M12 14C12 10 9 8 5 8c0 4 3 6 7 6z', 'M12 11c0-3.5 2.5-6 7-6 0 3.5-2.5 6-7 6z'],
+  },
+];
+---
+
+<details class="theme-picker" id="theme-picker">
+  <summary class="theme-picker-button" aria-label="Choose theme">
+    {themeOptions.map((option: ThemeOption) => (
+      <svg
+        class:list={['picker-icon', 'size-4', { hidden: option.choice !== DEFAULT_CHOICE }]}
+        data-icon={option.choice}
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        {option.paths.map((path: string) => (
+          <path d={path} />
+        ))}
+      </svg>
+    ))}
+  </summary>
+  <div class="theme-picker-panel" role="group" aria-label="Theme">
+    {themeOptions.map((option: ThemeOption) => (
+      <button class="theme-picker-option" type="button" data-theme-option={option.choice} aria-pressed="false">
+        <svg
+          class="size-4"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          {option.paths.map((path: string) => (
+            <path d={path} />
+          ))}
+        </svg>
+        <span>{option.label}</span>
+      </button>
+    ))}
+  </div>
+</details>
+
+<script>
+  import { applyPalette, getStoredTheme, setStoredTheme, type ThemeChoice } from '@/lib/palette';
+
+  function getPicker(): HTMLDetailsElement | null {
+    return document.querySelector<HTMLDetailsElement>('#theme-picker');
+  }
+
+  function syncPicker(): void {
+    const currentTheme: ThemeChoice = getStoredTheme();
+    const icons: NodeListOf<SVGElement> = document.querySelectorAll<SVGElement>('.picker-icon');
+    const options: NodeListOf<HTMLButtonElement> = document.querySelectorAll<HTMLButtonElement>('[data-theme-option]');
+
+    icons.forEach((icon: SVGElement): void => {
+      icon.classList.toggle('hidden', icon.dataset.icon !== currentTheme);
+    });
+    options.forEach((option: HTMLButtonElement): void => {
+      option.setAttribute('aria-pressed', String(option.dataset.themeOption === currentTheme));
+    });
+  }
+
+  function selectTheme(theme: ThemeChoice): void {
+    setStoredTheme(theme);
+    applyPalette();
+    syncPicker();
+    const picker: HTMLDetailsElement | null = getPicker();
+    if (picker) picker.open = false;
+  }
+
+  function initThemePicker(): void {
+    const options: NodeListOf<HTMLButtonElement> = document.querySelectorAll<HTMLButtonElement>('[data-theme-option]');
+    options.forEach((option: HTMLButtonElement): void => {
+      option.addEventListener('click', (): void => selectTheme(option.dataset.themeOption as ThemeChoice));
+    });
+    syncPicker();
+  }
+
+  document.addEventListener('click', (event: MouseEvent): void => {
+    const picker: HTMLDetailsElement | null = getPicker();
+    if (picker?.open && !picker.contains(event.target as Node)) picker.open = false;
+  });
+
+  document.addEventListener('keydown', (event: KeyboardEvent): void => {
+    const picker: HTMLDetailsElement | null = getPicker();
+    if (event.key === 'Escape' && picker?.open) picker.open = false;
+  });
+
+  syncPicker();
+  document.addEventListener('astro:page-load', initThemePicker);
+</script>
+
+<style>
+  @reference "@/styles/global.css";
+
+  .theme-picker {
+    @apply relative;
+  }
+
+  .theme-picker-button {
+    @apply inline-flex size-[2.1rem] cursor-pointer list-none items-center justify-center rounded-none border-2 border-ink bg-bg-elevated text-ink;
+    @apply shadow-[3px_3px_0_0_var(--ink)] transition-[translate,box-shadow,background-color,color] duration-120 ease-[ease];
+  }
+
+  .theme-picker-button::-webkit-details-marker {
+    display: none;
+  }
+
+  .theme-picker-button::marker {
+    content: '';
+  }
+
+  .theme-picker-button:hover,
+  [open] > .theme-picker-button {
+    @apply translate-x-[1px] translate-y-[1px] shadow-[2px_2px_0_0_var(--ink)];
+  }
+
+  .theme-picker-panel {
+    @apply absolute top-[calc(100%_+_0.5rem)] right-0 z-30 grid min-w-44 p-[0.35rem];
+    @apply rounded-none border-2 border-ink bg-bg-elevated shadow-[4px_4px_0_0_var(--ink)];
+  }
+
+  .theme-picker-option {
+    @apply flex w-full cursor-pointer items-center gap-2 rounded-none px-[0.7rem] py-[0.62rem] text-left;
+    @apply font-heading text-[0.9rem] font-semibold text-ink;
+  }
+
+  .theme-picker-option:hover,
+  .theme-picker-option[aria-pressed='true'] {
+    @apply bg-accent text-bg;
+  }
+</style>
