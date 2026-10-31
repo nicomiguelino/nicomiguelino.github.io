@@ -40,10 +40,10 @@ The site switches palettes by date. Both families have a light and a dark varian
 - `neon-*`: the default, used all year
 - `autumn-*`: used from Sept 22 to Dec 21
 
-|        | Light                                                     | Dark                                                    |
-| ------ | --------------------------------------------------------- | ------------------------------------------------------- |
-| Neon   | ![Neon light](screenshots/home-default-light-darwin.png)  | ![Neon dark](screenshots/home-default-dark-darwin.png)  |
-| Autumn | ![Autumn light](screenshots/home-autumn-light-darwin.png) | ![Autumn dark](screenshots/home-autumn-dark-darwin.png) |
+|        | Light                                              | Dark                                             |
+| ------ | -------------------------------------------------- | ------------------------------------------------ |
+| Neon   | ![Neon light](screenshots/home-default-light.png)  | ![Neon dark](screenshots/home-default-dark.png)  |
+| Autumn | ![Autumn light](screenshots/home-autumn-light.png) | ![Autumn dark](screenshots/home-autumn-dark.png) |
 
 How it works:
 
@@ -87,7 +87,7 @@ bunx playwright show-report                           # open the last HTML repor
 - Every page is captured at 1920x1200 in light and dark. The home page is also captured in autumn.
 - The clock is pinned (June 15 for the default palette, Oct 15 for autumn), so results don't depend on today's date.
 - The color scheme is emulated with `prefers-color-scheme`.
-- Baselines are committed to `screenshots/` and are not part of the deployed site. Names look like `home-autumn-dark-darwin.png`; the suffix is the OS, because rendering differs between platforms.
+- Baselines are committed to `screenshots/` and are not part of the deployed site. Names look like `home-autumn-dark.png`.
 - After an intentional visual change, rebuild and refresh them, then review the images before committing:
 
 ```sh
