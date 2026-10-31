@@ -74,12 +74,12 @@ Then build and run. Playwright serves the production build with `astro preview` 
 
 ```sh
 bun run build
-bun run test:e2e                                      # everything
-bunx playwright test src/tests/e2e                    # E2E only
-bunx playwright test src/tests/screenshots            # screenshots only
+bun run test:e2e                                         # everything
+bunx playwright test src/tests/e2e                       # E2E only
+bunx playwright test src/tests/screenshots               # screenshots only
 bunx playwright test src/tests/screenshots/blog.spec.ts  # one page
-bunx playwright test --ui                             # interactive runner
-bunx playwright show-report                           # open the last HTML report
+bunx playwright test --ui                                # interactive runner
+bunx playwright show-report                              # open the last HTML report
 ```
 
 ### Screenshots
