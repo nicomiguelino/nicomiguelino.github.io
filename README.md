@@ -135,6 +135,10 @@ public/
 
 [AGPL-3.0-or-later](LICENSE).
 
+This project is a modified version of [astro-palette](https://github.com/joshruggles/astro-palette) by Josh Ruggles, which is also licensed under AGPL-3.0-or-later. It was modified by Nico Miguelino in 2026. The changes include the season-aware themes and seasonal effects, the neobrutalist design, Tailwind CSS, Fuse.js search, the added pages and components, and the linting, formatting, and testing setup. The full change history is in this repository's git log.
+
+As required by [AGPL-3.0 section 13](https://www.gnu.org/licenses/agpl-3.0.html#section13), the site name in the footer links to the source code of this deployed site. If you deploy a modified version, set `SOURCE_URL` in `src/lib/site.ts` to the repository that builds your site.
+
 With thanks to:
 
 - [astro-palette](https://github.com/joshruggles/astro-palette) by Josh Ruggles, the template this site was generated from (AGPL-3.0-or-later)
