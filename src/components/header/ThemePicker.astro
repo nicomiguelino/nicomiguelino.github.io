@@ -6,6 +6,7 @@ interface ThemeOption {
   choice: ThemeChoice;
   label: string;
   paths: string[];
+  dividerLabel?: string;
 }
 
 const DEFAULT_CHOICE: ThemeChoice = 'auto';
@@ -16,13 +17,23 @@ const themeOptions: ThemeOption[] = [
     label: 'Automatic',
     paths: ['M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z', 'M3 10h18', 'M8 3v4', 'M16 3v4'],
   },
-  { choice: 'neon', label: 'Neon', paths: ['M13 2 4 14h7l-1 8 9-12h-7z'] },
-  { choice: 'autumn', label: 'Autumn', paths: [LEAF_SHAPES.maple] },
+  { choice: 'autumn', label: 'Autumn', paths: [LEAF_SHAPES.maple], dividerLabel: 'Seasons' },
   { choice: 'winter', label: 'Winter', paths: [FLAKE_SHAPES.star] },
   {
     choice: 'spring',
     label: 'Spring',
     paths: ['M12 21v-9', 'M12 14C12 10 9 8 5 8c0 4 3 6 7 6z', 'M12 11c0-3.5 2.5-6 7-6 0 3.5-2.5 6-7 6z'],
+  },
+  {
+    choice: 'summer',
+    label: 'Summer',
+    paths: ['M3 13a9 9 0 0 1 18 0z', 'M12 4c-1 3-3 6-3 9', 'M12 4c1 3 3 6 3 9', 'M12 13v8', 'M9 21h6'],
+  },
+  {
+    choice: 'neon',
+    label: 'Neon',
+    paths: ['M13 2 4 14h7l-1 8 9-12h-7z'],
+    dividerLabel: 'Other',
   },
 ];
 ---
@@ -49,23 +60,30 @@ const themeOptions: ThemeOption[] = [
   </summary>
   <div class="theme-picker-panel" role="group" aria-label="Theme">
     {themeOptions.map((option: ThemeOption) => (
-      <button class="theme-picker-option" type="button" data-theme-option={option.choice} aria-pressed="false">
-        <svg
-          class="size-4"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          {option.paths.map((path: string) => (
-            <path d={path} />
-          ))}
-        </svg>
-        <span>{option.label}</span>
-      </button>
+      <>
+        {option.dividerLabel && (
+          <div class="theme-picker-divider" role="separator">
+            {option.dividerLabel}
+          </div>
+        )}
+        <button class="theme-picker-option" type="button" data-theme-option={option.choice} aria-pressed="false">
+          <svg
+            class="size-4"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            {option.paths.map((path: string) => (
+              <path d={path} />
+            ))}
+          </svg>
+          <span>{option.label}</span>
+        </button>
+      </>
     ))}
   </div>
 </details>
@@ -148,6 +166,11 @@ const themeOptions: ThemeOption[] = [
   .theme-picker-panel {
     @apply absolute top-[calc(100%_+_0.5rem)] right-0 z-30 grid min-w-44 p-[0.35rem];
     @apply rounded-none border-2 border-ink bg-bg-elevated shadow-[4px_4px_0_0_var(--ink)];
+  }
+
+  .theme-picker-divider {
+    @apply mt-[0.35rem] border-t-2 border-ink px-[0.7rem] pt-[0.45rem] pb-[0.25rem];
+    @apply font-heading text-[0.7rem] font-bold tracking-[0.08em] text-muted uppercase;
   }
 
   .theme-picker-option {
