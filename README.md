@@ -57,7 +57,7 @@ How it works:
 - The legacy `site-palette` value is migrated to `site-mode` and removed.
 - `initializePalette()` in `src/lib/palette.ts` sets `data-palette` on `<html>`. `Layout.astro` calls it from `<head>`, and `body` stays hidden until the attribute is set (visible when scripting is off) to avoid a flash of the wrong colors.
 - The theme toggle switches between light and dark within the active family.
-- The theme picker in the navbar (before the light/dark toggle) overrides the date: Automatic (follow the date, the default), Neon, Autumn, Winter, Spring, or Summer. The choice is stored in `localStorage` as `site-theme` (removed for Automatic), and the matching falling effect follows it.
+- The theme picker in the navbar (before the light/dark toggle) overrides the date: Automatic (follow the date, the default), Autumn, Winter, Spring, Summer (under a "Seasons" divider), or Neon (under an "Other" divider). The choice is stored in `localStorage` as `site-theme` (removed for Automatic), and the matching falling effect follows it.
 
 Autumn, winter and spring each have a falling effect on the home page (`FallingLeaves`, `FallingSnow`, `FallingPetals`). Summer has two ambient effects instead: `HeatShimmer` (an SVG displacement filter that makes the page content shimmer) and `Sunlight` (a pulsing warm glow in the top-right corner). Every effect is shown only under its palettes and when `prefers-reduced-motion` allows it.
 
