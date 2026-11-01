@@ -27,6 +27,12 @@ const FILTER_ID: string = 'heat-shimmer';
 </div>
 
 <style>
+  .heat-shimmer {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     :global([data-palette^='summer']) .heat-shimmer {
       filter: url(#heat-shimmer);
