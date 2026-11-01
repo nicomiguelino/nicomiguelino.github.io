@@ -66,3 +66,11 @@ test('theme picker closes on escape and on an outside click', async ({ page }) =
   await page.locator('h2').first().click();
   await expect(picker).not.toHaveAttribute('open', '');
 });
+
+test('theme picker and mode toggle stay visible on a phone-sized screen', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 700 });
+  await page.goto('/');
+
+  await expect(page.locator('#theme-picker summary')).toBeVisible();
+  await expect(page.locator('#theme-toggle')).toBeVisible();
+});
