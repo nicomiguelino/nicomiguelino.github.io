@@ -112,8 +112,6 @@ Site-wide values (name, URL, description, job title, and LinkedIn profile) live 
 - `public/robots.txt` and `public/.well-known/security.txt`: domain and contact (static files, so they can't import from `site.ts`)
 - `public/assets/og-v2.png`: social preview image, 1200x630 (a plain placeholder is included)
 
-Comments stay disabled unless you run a Remark42 instance. The configuration is at the bottom of `src/pages/blog/[slug].astro`; remove the comments section there if you don't want it.
-
 ## Writing posts
 
 Posts are markdown files in `src/content/blog/` with `title`, `description`, `date`, optional `tags`, and optional `draft` frontmatter. Each tag links to its archive page under `/tags/`. `initial-post.md` shows the frontmatter and the supported markdown.
