@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { AUTUMN_SEASON, DEFAULT_SEASON, SPRING_SEASON, WINTER_SEASON } from '../seasons';
+import { AUTUMN_SEASON, SUMMER_SEASON, SPRING_SEASON, WINTER_SEASON } from '../seasons';
 
 interface SeasonCase {
   description: string;
@@ -10,7 +10,7 @@ interface SeasonCase {
 const PARTICLE_FAMILIES: string[] = ['autumn', 'winter', 'spring'];
 
 const SEASON_CASES: SeasonCase[] = [
-  { description: 'default season', date: DEFAULT_SEASON.date, visibleFamily: null },
+  { description: 'mid summer', date: SUMMER_SEASON.date, visibleFamily: null },
   { description: 'mid autumn', date: AUTUMN_SEASON.date, visibleFamily: 'autumn' },
   { description: 'first day of autumn', date: '2026-09-22T12:00:00', visibleFamily: 'autumn' },
   { description: 'last day of autumn', date: '2026-12-21T12:00:00', visibleFamily: 'autumn' },

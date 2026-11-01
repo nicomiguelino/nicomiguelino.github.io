@@ -1,6 +1,6 @@
 import { join } from 'path';
 import { test, type Page } from '@playwright/test';
-import { DEFAULT_SEASON, type Season } from '../seasons';
+import { SUMMER_SEASON, type Season } from '../seasons';
 
 type ColorScheme = 'light' | 'dark';
 
@@ -40,7 +40,7 @@ async function freezeParticleAnimations(page: Page): Promise<void> {
 export function defineScreenshotTests(
   pageName: string,
   path: string,
-  seasons: Season[] = [DEFAULT_SEASON],
+  seasons: Season[] = [SUMMER_SEASON],
   options: ScreenshotOptions = {},
 ): void {
   for (const season of seasons) {

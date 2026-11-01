@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
-import { AUTUMN_SEASON, DEFAULT_SEASON } from '../seasons';
+import { AUTUMN_SEASON, SUMMER_SEASON } from '../seasons';
 
-const FIXED_THEMES: string[] = ['neon', 'autumn', 'winter', 'spring'];
+const FIXED_THEMES: string[] = ['neon', 'autumn', 'winter', 'spring', 'summer'];
 
 async function chooseTheme(page: Page, theme: string): Promise<void> {
   await page.locator('#theme-picker summary').click();
@@ -10,7 +10,7 @@ async function chooseTheme(page: Page, theme: string): Promise<void> {
 
 for (const theme of FIXED_THEMES) {
   test(`theme picker applies the ${theme} theme and keeps it after a reload`, async ({ page }) => {
-    await page.clock.setFixedTime(new Date(DEFAULT_SEASON.date));
+    await page.clock.setFixedTime(new Date(SUMMER_SEASON.date));
     await page.goto('/');
 
     await chooseTheme(page, theme);
@@ -36,7 +36,7 @@ test('theme picker returns to the date based theme when automatic is chosen', as
 });
 
 test('theme picker shows the falling particles of the chosen theme', async ({ page }) => {
-  await page.clock.setFixedTime(new Date(DEFAULT_SEASON.date));
+  await page.clock.setFixedTime(new Date(SUMMER_SEASON.date));
   await page.goto('/');
   await expect(page.locator('.falling-particles:visible')).toHaveCount(0);
 
@@ -45,7 +45,7 @@ test('theme picker shows the falling particles of the chosen theme', async ({ pa
 });
 
 test('theme picker keeps the light or dark mode when the theme changes', async ({ page }) => {
-  await page.clock.setFixedTime(new Date(DEFAULT_SEASON.date));
+  await page.clock.setFixedTime(new Date(SUMMER_SEASON.date));
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto('/');
 

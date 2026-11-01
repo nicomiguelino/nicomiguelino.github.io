@@ -6,13 +6,14 @@ export const PALETTE_CONFIG = {
     autumn: { start: 922, end: 1221 },
     winter: { start: 1222, end: 319 },
     spring: { start: 320, end: 620 },
+    summer: { start: 621, end: 921 },
   },
 } as const;
 
 type PaletteMode = 'light' | 'dark';
-export type PaletteFamily = 'neon' | 'autumn' | 'winter' | 'spring';
+export type PaletteFamily = 'neon' | 'autumn' | 'winter' | 'spring' | 'summer';
 export type ThemeChoice = 'auto' | PaletteFamily;
-export const THEME_CHOICES: ThemeChoice[] = ['auto', 'neon', 'autumn', 'winter', 'spring'];
+export const THEME_CHOICES: ThemeChoice[] = ['auto', 'neon', 'autumn', 'winter', 'spring', 'summer'];
 
 type SeasonRange = { start: number; end: number };
 
