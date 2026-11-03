@@ -2,33 +2,6 @@
 
 Newest entries go at the top. Number entries sequentially and never rewrite an accepted entry; supersede it with a new one instead.
 
-## 002. Add linting and formatting
-
-- **Date:** 2026-09-22
-- **Status:** Accepted
-
-### Context
-
-- I'm picky about things like indentation and unused identifiers.
-- I'd rather spend my time on design and functionality than on nitpicking style by hand.
-- Linting and formatting is also standard practice in established open-source repos.
-
-### Decision
-
-- I added ESLint (with `typescript-eslint` and `eslint-plugin-astro`) for linting and Prettier (with `prettier-plugin-astro`) for formatting.
-- I added `lint` and `format` scripts, each with a check and a fix variant.
-- I added a GitHub Actions workflow so the checks run in the pipeline.
-
-### Alternatives considered
-
-- **Biome:** a single tool for linting and formatting. I could've used it, or other alternatives.
-- **ESLint and Prettier:** I picked these because I'm already familiar with them and they're mature.
-
-### Consequences
-
-- Style issues are caught automatically, so reviews can focus on design and functionality.
-- The existing files were reformatted once to match the new rules.
-
 ## 001. Title of the decision
 
 - **Date:** 2026-09-17
