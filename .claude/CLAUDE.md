@@ -20,3 +20,9 @@
 ## Checks
 
 - Run `bunx astro check` and `bunx prettier --check` on changed files.
+
+# Decision log
+
+Past project decisions live in the file below. Consult it before changing anything it covers, and add a new entry when a significant decision is made.
+
+@../DECISIONS.md
