@@ -19,17 +19,12 @@ const navMenuItems = [
   {
     href: '/blog/',
     title: 'Blog',
-    current: currentPath.startsWith('/blog'),
+    current: currentPath.startsWith('/blog') || currentPath.startsWith('/tags'),
   },
   {
     href: '/experience/',
     title: 'Experience',
     current: currentPath === '/experience/',
-  },
-  {
-    href: '/tags/',
-    title: 'Tags',
-    current: currentPath.startsWith('/tags'),
   },
 ];
 ---

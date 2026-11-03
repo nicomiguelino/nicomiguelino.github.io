@@ -4,6 +4,7 @@ import Layout from '@/components/Layout.astro';
 import Lede from '@/components/Lede.astro';
 import PageHero from '@/components/PageHero.astro';
 import PostCard from '@/components/PostCard.astro';
+import Tag from '@/components/Tag.astro';
 import { SITE_DESCRIPTION, SITE_NAME } from '@/lib/site';
 
 const posts = (await getCollection('blog'))
@@ -17,6 +18,11 @@ const lede = "Notes on what I'm building, learning, and figuring out along the w
   <main class="content-shell">
     <PageHero title="Blog" hideTitle>
       <Lede>{lede}</Lede>
+      <div class="mt-5">
+        <Tag href="/tags/" size="lg">
+          Browse by tag
+        </Tag>
+      </div>
     </PageHero>
 
     <section class="section" aria-label="Blog posts">
