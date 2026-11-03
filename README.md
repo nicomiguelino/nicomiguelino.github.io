@@ -108,7 +108,6 @@ Site-wide values (name, URL, description, job title, and LinkedIn profile) live 
 
 - `src/components/header/index.astro` and `src/components/Footer.astro`: social links, footer
 - `src/lib/palette.ts`: the seasonal palette logic and its config (storage keys, season dates); see [Seasonal theme](#seasonal-theme)
-- `src/lib/colors.ts`: the color tokens listed on the `/colors/` page; add a token here when you add one to `src/styles/palettes.css`
 - `public/robots.txt` and `public/.well-known/security.txt`: domain and contact (static files, so they can't import from `site.ts`)
 - `public/assets/og-v2.png`: social preview image, 1200x630 (a plain placeholder is included)
 
@@ -123,7 +122,7 @@ src/
   components/     # reusable UI: layout, header, page hero, post card, search, theme toggle
   content/blog/   # posts as markdown
   lib/            # post and tag helpers, palette config, particle shapes, color token list, site constants
-  pages/          # index (home), blog/, experience/, colors/, tags/, 404, rss
+  pages/          # index (home), blog/, experience/, tags/, 404, rss
   styles/         # global styles, design tokens, palette definitions (Tailwind CSS)
   tests/          # Playwright specs: e2e/ and screenshots/
 screenshots/      # committed screenshot baselines (not deployed)
