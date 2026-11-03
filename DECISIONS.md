@@ -2,6 +2,32 @@
 
 Newest entries go at the top. Number entries sequentially and never rewrite an accepted entry; supersede it with a new one instead.
 
+## 003. Adopt Neobrutalism
+
+- **Date:** 2026-10-28
+- **Status:** Accepted
+
+### Context
+
+- The site uses a muted Gruvbox theme with serif headings.
+- I want a bolder look with more personality.
+
+### Decision
+
+- Adopt Neobrutalism: hard borders, offset shadows, and card layouts.
+- Use Space Grotesk for headings, nav, and brand, and Inter for body text.
+- Switch to a pastel neon palette.
+- Drop styles that don't fit, like glassmorphism.
+
+### Alternatives considered
+
+- **Keep Gruvbox:** the status quo. It works, but it's plain.
+
+### Consequences
+
+- Components get restyled to match.
+- The look is less subtle, so it may feel loud on a content-heavy site.
+
 ## 002. Migrate styling to Tailwind CSS
 
 - **Date:** 2026-09-27
