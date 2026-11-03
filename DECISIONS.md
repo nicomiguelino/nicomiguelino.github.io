@@ -2,6 +2,34 @@
 
 Newest entries go at the top. Number entries sequentially and never rewrite an accepted entry; supersede it with a new one instead.
 
+## 002. Migrate styling to Tailwind CSS
+
+- **Date:** 2026-09-27
+- **Status:** Accepted
+
+### Context
+
+- All styles live in one hand-written stylesheet, `public/css/style.css`.
+- Writing plain CSS for every component feels verbose.
+
+### Decision
+
+- Adopt Tailwind CSS v4 through `@tailwindcss/vite`.
+- Style components inline with Tailwind's utilities and shorthands instead of writing separate CSS rules.
+- Expose the palette variables to Tailwind through `@theme inline`.
+- Shared concerns that don't fit utilities, like palettes and design tokens, stay in CSS files under `src/styles`.
+
+### Alternatives considered
+
+- **Plain CSS:** the status quo. It works, but I want less boilerplate per component.
+
+### Consequences
+
+- Most component styling moves into markup, so the global stylesheet shrinks.
+- Class lists in templates will get long. Use `@apply` where utilities get awkward, like pseudo-elements and descendant rules.
+- Tailwind's preflight reset changes browser defaults. Restore some of them, like list markers and heading sizes.
+- Some CSS stays, so this won't remove hand-written styles entirely.
+
 ## 001. Title of the decision
 
 - **Date:** 2026-09-17
