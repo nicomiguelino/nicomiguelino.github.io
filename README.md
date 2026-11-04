@@ -122,7 +122,7 @@ src/
   components/     # reusable UI: layout, header, page hero, post card, search, theme toggle
   content/blog/   # posts as markdown
   lib/            # post and tag helpers, palette config, particle shapes, color token list, site constants
-  pages/          # index (home), blog/, experience/, tags/, 404, rss
+  pages/          # index (home), blog/, experience/, projects/, tags/, 404, rss
   styles/         # global styles, design tokens, palette definitions (Tailwind CSS)
   tests/          # Playwright specs: e2e/ and screenshots/
 screenshots/      # committed screenshot baselines (not deployed)
