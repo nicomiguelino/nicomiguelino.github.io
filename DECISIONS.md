@@ -2,6 +2,37 @@
 
 Newest entries go at the top. Number entries sequentially and never rewrite an accepted entry; supersede it with a new one instead.
 
+## 005. Organize components into subdirectories by feature
+
+- **Date:** 2026-11-04
+- **Status:** Accepted
+
+### Context
+
+- Component files used by the Experience and Projects pages and the navigation header are organized into subdirectories.
+- The rest of the files sit directly in the `src/components/` directory.
+
+### Decision
+
+- Group components into subdirectories by the page or feature they belong to.
+- Where components don't nest under one parent, group them by similarity instead, such as the seasonal effects.
+- Components shared across many pages can stay at the root.
+
+### Alternatives considered
+
+- Flat directory structure
+  - It's easy to add new files because I don't have to decide where to put them.
+  - It works for a small number of files, but it doesn't scale.
+- A folder for every page
+  - It's tidy, but it forces unrelated components together.
+
+### Consequences
+
+- Browsing `src/components/` will be easier because related files sit together.
+- Moving a component means updating the import paths in the files that use it. Most imports use the `@/components/...` alias, so each move touches only a few files.
+- Each new component requires a decision about where it belongs.
+- A component used by one page today may be shared later, which means moving it back to the root.
+
 ## 004. Add seasonal themes
 
 - **Date:** 2026-10-31
