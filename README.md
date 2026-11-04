@@ -144,4 +144,5 @@ With thanks to:
 - [herdr](https://github.com/ogulcancelik/herdr) by Oğulcan Çelik, the website theme this one grew out of, and the reason it is AGPL-3.0-or-later
 - Style: [Neubrutalism](https://neubrutalism.com/), the design style behind the hard borders, offset shadows, and bold colors
 - Font: [JetBrains Mono](https://www.jetbrains.com/lp/mono/), under the [SIL Open Font License 1.1](https://github.com/JetBrains/JetBrainsMono/blob/master/OFL.txt)
+- Icons: [Font Awesome Free](https://fontawesome.com/) icons, under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - Search: [Fuse.js](https://www.fusejs.io) (Apache-2.0)

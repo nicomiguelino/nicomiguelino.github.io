@@ -1,36 +1,12 @@
+---
+import { faSun } from '@fortawesome/free-regular-svg-icons';
+import { faMoon } from '@fortawesome/free-solid-svg-icons';
+import Icon from '@/components/Icon.astro';
+---
+
 <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Toggle color theme">
-  <svg
-    class="theme-toggle-sun size-4"
-    viewBox="0 0 24 24"
-    aria-hidden="true"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <circle cx="12" cy="12" r="4" />
-    <path d="M12 2v2" />
-    <path d="M12 20v2" />
-    <path d="m4.93 4.93 1.41 1.41" />
-    <path d="m17.66 17.66 1.41 1.41" />
-    <path d="M2 12h2" />
-    <path d="M20 12h2" />
-    <path d="m6.34 17.66-1.41 1.41" />
-    <path d="m19.07 4.93-1.41 1.41" />
-  </svg>
-  <svg
-    class="theme-toggle-moon size-4"
-    viewBox="0 0 24 24"
-    aria-hidden="true"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-  </svg>
+  <Icon icon={faSun} class="theme-toggle-sun" />
+  <Icon icon={faMoon} class="theme-toggle-moon" />
 </button>
 
 <script>
