@@ -1,0 +1,23 @@
+---
+import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
+
+interface Props {
+  icon: IconDefinition;
+  class?: string;
+  [attribute: string]: unknown;
+}
+
+const { icon, class: className, ...attributes } = Astro.props;
+const [width, height, , , path] = icon.icon;
+const viewBox: string = `0 0 ${width} ${height}`;
+---
+
+<svg
+  class:list={['size-4 fill-current', className]}
+  viewBox={viewBox}
+  aria-hidden="true"
+  focusable="false"
+  {...attributes}
+>
+  <path d={path as string}></path>
+</svg>
