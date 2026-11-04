@@ -3,10 +3,7 @@ import { SITE_NAME } from '@/lib/site';
 import Layout from '@/components/Layout.astro';
 import Lede from '@/components/Lede.astro';
 import PageHero from '@/components/PageHero.astro';
-import Screenly from '@/components/experience/Screenly.astro';
-import DostAstiBackend from '@/components/experience/DostAstiBackend.astro';
-import Nokia from '@/components/experience/Nokia.astro';
-import DostAstiTestAutomation from '@/components/experience/DostAstiTestAutomation.astro';
+import Experience from '@/components/experience/index.astro';
 
 const description = 'My tech journey so far...';
 ---
@@ -17,11 +14,6 @@ const description = 'My tech journey so far...';
       <Lede>{description}</Lede>
     </PageHero>
 
-    <section class="section grid gap-8" aria-label="Work experience">
-      <Screenly />
-      <DostAstiBackend />
-      <Nokia />
-      <DostAstiTestAutomation />
-    </section>
+    <Experience />
   </main>
 </Layout>
