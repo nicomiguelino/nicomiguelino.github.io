@@ -1,0 +1,36 @@
+---
+import { SOURCE_URL } from '@/lib/site';
+import ProjectCard from './ProjectCard.astro';
+
+const projects = [
+  {
+    name: 'nicomiguelino.github.io',
+    description:
+      'My personal portfolio and blog, and the site you are on right now. It has a Neobrutalist look and a palette that follows the seasons.',
+    technologies: ['TypeScript', 'Astro', 'Tailwind CSS'],
+    url: SOURCE_URL,
+  },
+  {
+    name: 'astro-seasons',
+    description:
+      'A season-aware Neobrutalist theme for Astro blogs. The idea came to me during a makeover of this site, and I thought: why not make it into a theme? The palette follows the calendar, with light and dark modes for every season.',
+    technologies: ['TypeScript', 'Astro', 'Tailwind CSS'],
+    url: 'https://github.com/nicomiguelino/astro-seasons',
+    demoUrl: 'https://nicomiguelino.github.io/astro-seasons/',
+  },
+  {
+    name: 'Neobrutalist Web Components',
+    description:
+      'A library of Neobrutalist-inspired Web Components that work right out of the box. Because they are standard Web Components, they run in plain HTML, CSS, and JavaScript with no build step, and they fit into other frontend frameworks as well.',
+    technologies: ['Web Components', 'HTML', 'CSS', 'JavaScript'],
+    url: 'https://github.com/nicomiguelino',
+    isCooking: true,
+  },
+];
+---
+
+<section class="section grid gap-8 md:grid-cols-2" aria-label="Projects">
+  {projects.map((project) => (
+    <ProjectCard {...project} />
+  ))}
+</section>
