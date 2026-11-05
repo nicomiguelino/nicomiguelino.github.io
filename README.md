@@ -78,10 +78,9 @@ Set up once per machine:
 bunx playwright install chromium
 ```
 
-Then build and run. Playwright serves the production build with `astro preview` on port 4322, so it never collides with the dev server on :4321:
+Then run the tests. Playwright builds the site and serves it with `astro preview` on port 4322, so it never collides with the dev server on :4321:
 
 ```sh
-bun run build
 bun run test:e2e                                         # everything
 bunx playwright test src/tests/e2e                       # E2E only
 bunx playwright test src/tests/screenshots               # screenshots only
