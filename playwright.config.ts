@@ -1,7 +1,7 @@
 import { defineConfig } from '@playwright/test';
 
 const SERVER_PORT: number = 4322;
-const SERVER_COMMAND: string = `bun run preview --port ${SERVER_PORT}`;
+const SERVER_COMMAND: string = `bun run build && bun run preview --port ${SERVER_PORT}`;
 const BASE_URL: string = `http://localhost:${SERVER_PORT}`;
 const SERVER_TIMEOUT_MS: number = 120 * 1000;
 const VIEWPORT_WIDTH: number = 1920;

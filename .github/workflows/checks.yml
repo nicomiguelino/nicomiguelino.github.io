@@ -86,8 +86,6 @@ jobs:
           fail-on-cache-miss: true
       - name: Install Playwright browsers
         run: bunx playwright install --with-deps chromium
-      - name: Build site
-        run: bun run build
       - name: Run test:e2e
         run: bun run test:e2e
       - name: Upload Playwright report
