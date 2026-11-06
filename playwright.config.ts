@@ -12,6 +12,7 @@ export default defineConfig({
     command: SERVER_COMMAND,
     url: BASE_URL,
     timeout: SERVER_TIMEOUT_MS,
+    env: { USE_FIXTURE_POSTS: 'true' },
     reuseExistingServer: !process.env.CI,
   },
   use: {

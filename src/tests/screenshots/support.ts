@@ -37,6 +37,16 @@ async function freezeParticleAnimations(page: Page): Promise<void> {
   });
 }
 
+async function freezeSvgAnimations(page: Page): Promise<void> {
+  await page.evaluate((): void => {
+    const svgElements: SVGSVGElement[] = Array.from(document.querySelectorAll('svg'));
+    svgElements.forEach((svgElement: SVGSVGElement): void => {
+      svgElement.pauseAnimations();
+      svgElement.setCurrentTime(0);
+    });
+  });
+}
+
 export function defineScreenshotTests(
   pageName: string,
   path: string,
@@ -50,6 +60,7 @@ export function defineScreenshotTests(
         await page.clock.setFixedTime(new Date(season.date));
         await page.emulateMedia({ colorScheme });
         await page.goto(path);
+        await freezeSvgAnimations(page);
         if (options.keepAnimations) {
           await freezeParticleAnimations(page);
           await page.screenshot({ path: outputPath, animations: 'allow' });
