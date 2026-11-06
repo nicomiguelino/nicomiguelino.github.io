@@ -9,6 +9,11 @@ tags:
 import Highlight from '@/components/Highlight.astro';
 import ColorSwatch from '@/components/posts/ColorSwatch.astro';
 import DemoCard from '@/components/posts/DemoCard.astro';
+import { Image } from 'astro:assets';
+import gruvboxLight from '@/assets/blog/i-didnt-plan-to-make-an-astro-theme/gruvbox-light.png';
+import gruvboxDark from '@/assets/blog/i-didnt-plan-to-make-an-astro-theme/gruvbox-dark.png';
+import neonLight from '@/assets/blog/i-didnt-plan-to-make-an-astro-theme/neon-light.png';
+import neonDark from '@/assets/blog/i-didnt-plan-to-make-an-astro-theme/neon-dark.png';
 
 ## How it started
 
@@ -22,9 +27,12 @@ I wanted to give the site a major makeover, but I had some prep work to do first
 
 Astro Palette originally came with 32 themes, all available through a theme switcher. To simplify things before the makeover, I opened a PR that cut the options down to two Gruvbox themes, light and dark, with a simple toggle. That left the site with warm and muted colors, serif headings, and monospace body text. Here's how it looked right before the makeover:
 
-![The home page header, heading, and intro card in the Gruvbox light theme, with serif headings and monospace body text](/assets/blog/i-didnt-plan-to-make-an-astro-theme/gruvbox-light.png)
+<Image
+  src={gruvboxLight}
+  alt="The home page header, heading, and intro card in the Gruvbox light theme, with serif headings and monospace body text"
+/>
 
-![The same section in the Gruvbox dark theme](/assets/blog/i-didnt-plan-to-make-an-astro-theme/gruvbox-dark.png)
+<Image src={gruvboxDark} alt="The same section in the Gruvbox dark theme" />
 
 ## Giving the site more identity
 
@@ -62,9 +70,12 @@ I also wanted to add my own twist, a highlighter-style touch, so I built a small
 
 For a while, that was all there was to it: a purely neon-inspired look. Here's how the site looked at that point:
 
-![The home page header, heading, and intro card in the neon light theme, with thick borders, offset shadows, and pink highlights](/assets/blog/i-didnt-plan-to-make-an-astro-theme/neon-light.png)
+<Image
+  src={neonLight}
+  alt="The home page header, heading, and intro card in the neon light theme, with thick borders, offset shadows, and pink highlights"
+/>
 
-![The same section in the neon dark theme](/assets/blog/i-didnt-plan-to-make-an-astro-theme/neon-dark.png)
+<Image src={neonDark} alt="The same section in the neon dark theme" />
 
 ## Halloween epiphany
 
