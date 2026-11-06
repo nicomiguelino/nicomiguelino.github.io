@@ -8,7 +8,7 @@ tags:
 
 ## How it started
 
-As mentioned in [this post](/blog/initial-post#the-story-so-far), I bootstrapped this personal site off of [Josh Ruggles](https://github.com/joshruggles/)'s [Astro Palette](https://astro.build/themes/details/astro-palette/) theme. I did put some time into deciding which theme to choose and picked this one because of my fascination with various code editor color schemes.
+As mentioned in [this post](/blog/initial-post#the-story-so-far), I bootstrapped this personal site off of [Josh Ruggles](https://github.com/joshruggles/)'s [Astro Palette](https://astro.build/themes/details/astro-palette/) theme. I did put some time into deciding which theme to use and picked this one because of my fascination with various code editor color schemes.
 
 A few weeks later, I started making small to moderate tweaks to the site's layout and behavior. Every time I spotted an issue, I patched it right away. I even made [a few contributions](https://github.com/joshruggles/astro-palette/pulls?q=is%3Apr+state%3Aclosed+author%3Anicomiguelino) back to the template itself. I felt like I owed that theme a lot, so I wanted to do my part. It's like leaving a campsite better than you found it.
 
@@ -26,7 +26,7 @@ Astro Palette originally came with 32 themes, all available through a theme swit
 
 With the groundwork done, the site was great and all, but I wanted it to have more identity. I wanted a minimalist look, but not too stripped-down. I kept picturing those sites where everything's flat and the rectangles have this solid, single-color shadow, as if they were sitting just above the page. I didn't know the name for that kind of aesthetic, so I looked it up. A couple of searches later, I got an answer&mdash;[_Neobrutalism (or Neubrutalism)_](https://neubrutalism.com/).
 
-Here's what that difference looks like, with a flat card next to a neobrutalist one:
+Here's what that difference looks like, with a flat card next to a Neobrutalist one:
 
 <div class="my-8 grid gap-8 sm:grid-cols-2">
   <div class="border border-line bg-bg-elevated p-5">
@@ -81,3 +81,21 @@ For a while, that was all there was to it: a purely neon-inspired look. Here's h
 ![The home page header, heading, and intro card in the neon light theme, with thick borders, offset shadows, and pink highlights](/assets/blog/i-didnt-plan-to-make-an-astro-theme/neon-light.png)
 
 ![The same section in the neon dark theme](/assets/blog/i-didnt-plan-to-make-an-astro-theme/neon-dark.png)
+
+## Halloween epiphany
+
+It was October 31st, and I was making some touch-ups to my personal site, bouncing between my terminal and my browser. I opened my GitHub profile and noticed that my contribution graph had gotten a Halloween look for the day. Why not give my site the same treatment and have it look season-appropriate on certain dates? So I started adding support for occasional theme changes.
+
+However, I wanted that seasonal look to last longer than a day. Then I asked myself, "What about winter?" A few patches later, I was asking, "How about the rest of the seasons?"
+
+I went all in on all four seasons. I also wanted the option to pick a theme myself whenever I felt like it. (It felt like I'd almost come full circle.)
+
+I wish I'd known about Neobrutalism sooner, back when I was choosing a template for my site. There are already a few Neobrutalist Astro themes out there, but some of the ones I liked are paid. The free ones are hit or miss, and some of them don't look polished. That frustration is what motivated me to create a new theme.
+
+## Creating a new theme
+
+I started by creating a new local repository that mirrors this one and named it Seasons. Then I went through it to make it template-ready. I swapped my name, links, and job title for placeholders, replaced my posts with a couple of examples, and added a README that explains how to create a new project from the theme with the Astro CLI. Once it was all set, I made the repository public and deployed a live demo to GitHub Pages. You can check out the [source code](https://github.com/nicomiguelino/astro-seasons) and the [live demo](https://nicomiguelino.github.io/astro-seasons/).
+
+## What's next?
+
+I'll stick with this theme for now. I might outgrow it eventually, just like the ones before it, but not anytime soon. Who knows, maybe someday I'll try a theme inspired by another aesthetic, like [Global Village Coffeehouse](https://cari.institute/aesthetics/global-village-coffeehouse), which screams the &rsquo;90s. No promises, though.
