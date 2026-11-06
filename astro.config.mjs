@@ -4,6 +4,8 @@ import { SITE_URL } from './src/lib/site.ts';
 
 import tailwindcss from '@tailwindcss/vite';
 
+import mdx from '@astrojs/mdx';
+
 export default defineConfig({
   site: SITE_URL,
 
@@ -13,7 +15,7 @@ export default defineConfig({
     shikiConfig: { theme: 'css-variables' },
   },
 
-  integrations: [sitemap()],
+  integrations: [sitemap(), mdx()],
 
   vite: {
     plugins: [tailwindcss()],

@@ -6,6 +6,8 @@ tags:
   - Astro
 ---
 
+import Highlight from '@/components/Highlight.astro';
+
 ## How it started
 
 As mentioned in [this post](/blog/initial-post#the-story-so-far), I bootstrapped this personal site off of [Josh Ruggles](https://github.com/joshruggles/)'s [Astro Palette](https://astro.build/themes/details/astro-palette/) theme. I did put some time into deciding which theme to use and picked this one because of my fascination with various code editor color schemes.
@@ -72,7 +74,15 @@ I also wanted to add my own twist, a highlighter-style touch, so I built a small
 
 <div class="my-8 border-2 border-ink bg-bg-elevated p-5 shadow-[6px_6px_0_0_var(--ink)]">
   <div class="font-heading text-xl font-bold">
-    A <span class="-mx-[0.2em] bg-[linear-gradient(76deg,transparent_0.2em,color-mix(in_srgb,var(--pink)_55%,transparent)_0.2em,color-mix(in_srgb,var(--pink)_55%,transparent)_calc(100%-0.2em),transparent_calc(100%-0.2em))] bg-size-[100%_0.75em] bg-bottom bg-no-repeat px-[0.2em] box-decoration-clone">highlighter</span> makes the <span class="-mx-[0.2em] bg-[linear-gradient(76deg,transparent_0.2em,color-mix(in_srgb,var(--pink)_55%,transparent)_0.2em,color-mix(in_srgb,var(--pink)_55%,transparent)_calc(100%-0.2em),transparent_calc(100%-0.2em))] bg-size-[100%_0.75em] bg-bottom bg-no-repeat px-[0.2em] box-decoration-clone">words that matter</span> stand out.
+    A{' '}
+    <span class="-mx-[0.2em] bg-[linear-gradient(76deg,transparent_0.2em,color-mix(in_srgb,var(--pink)_55%,transparent)_0.2em,color-mix(in_srgb,var(--pink)_55%,transparent)_calc(100%-0.2em),transparent_calc(100%-0.2em))] bg-size-[100%_0.75em] bg-bottom bg-no-repeat px-[0.2em] box-decoration-clone">
+      highlighter
+    </span>{' '}
+    makes the{' '}
+    <span class="-mx-[0.2em] bg-[linear-gradient(76deg,transparent_0.2em,color-mix(in_srgb,var(--pink)_55%,transparent)_0.2em,color-mix(in_srgb,var(--pink)_55%,transparent)_calc(100%-0.2em),transparent_calc(100%-0.2em))] bg-size-[100%_0.75em] bg-bottom bg-no-repeat px-[0.2em] box-decoration-clone">
+      words that matter
+    </span>{' '}
+    stand out.
   </div>
 </div>
 
