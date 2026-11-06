@@ -1,0 +1,83 @@
+---
+title: "I Didn't Plan to Make an Astro Theme"
+description: 'I wanted to give a major makeover to this site, but I ended up creating a new theme as well.'
+date: 2026-11-05
+tags:
+  - Astro
+---
+
+## How it started
+
+As mentioned in [this post](/blog/initial-post#the-story-so-far), I bootstrapped this personal site off of [Josh Ruggles](https://github.com/joshruggles/)'s [Astro Palette](https://astro.build/themes/details/astro-palette/) theme. I did put some time into deciding which theme to choose and picked this one because of my fascination with various code editor color schemes.
+
+A few weeks later, I started making small to moderate tweaks to the site's layout and behavior. Every time I spotted an issue, I patched it right away. I even made [a few contributions](https://github.com/joshruggles/astro-palette/pulls?q=is%3Apr+state%3Aclosed+author%3Anicomiguelino) back to the template itself. I felt like I owed that theme a lot, so I wanted to do my part. It's like leaving a campsite better than you found it.
+
+## Laying the groundwork
+
+I wanted to give the site a major makeover, but I had some prep work to do first. For starters, everything lived in one hand-written stylesheet, and writing plain CSS for every component felt verbose. I migrated to Tailwind CSS in [one big PR](https://github.com/nicomiguelino/nicomiguelino.github.io/pull/25), styling components inline with utilities where it made sense and keeping the palettes and design tokens in their own CSS files. With that in place, I refactored the markup into more refined components, giving the header, the search overlay, and the theme switcher their own.
+
+Astro Palette originally came with 32 themes, all available through a theme switcher. To simplify things before the makeover, I opened a PR that cut the options down to two Gruvbox themes, light and dark, with a simple toggle. That left the site with warm and muted colors, serif headings, and monospace body text. Here's how it looked right before the makeover:
+
+![The home page header, heading, and intro card in the Gruvbox light theme, with serif headings and monospace body text](/assets/blog/i-didnt-plan-to-make-an-astro-theme/gruvbox-light.png)
+
+![The same section in the Gruvbox dark theme](/assets/blog/i-didnt-plan-to-make-an-astro-theme/gruvbox-dark.png)
+
+## Giving the site more identity
+
+With the groundwork done, the site was great and all, but I wanted it to have more identity. I wanted a minimalist look, but not too stripped-down. I kept picturing those sites where everything's flat and the rectangles have this solid, single-color shadow, as if they were sitting just above the page. I didn't know the name for that kind of aesthetic, so I looked it up. A couple of searches later, I got an answer&mdash;[_Neobrutalism (or Neubrutalism)_](https://neubrutalism.com/).
+
+Here's what that difference looks like, with a flat card next to a neobrutalist one:
+
+<div class="my-8 grid gap-8 sm:grid-cols-2">
+  <div class="border border-line bg-bg-elevated p-5">
+    <div class="font-heading font-bold">Flat</div>
+    <div class="text-muted">Soft edges, no shadow, easy to overlook.</div>
+  </div>
+  <div class="border-2 border-ink bg-bg-elevated p-5 shadow-[6px_6px_0_0_var(--ink)] transition-[translate,box-shadow] duration-120 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[3px_3px_0_0_var(--ink)]">
+    <div class="font-heading font-bold">Neobrutalist</div>
+    <div class="text-muted">Hard border, solid offset shadow. Hover over me.</div>
+  </div>
+</div>
+
+Color came next. I swapped Gruvbox out for a vibrant palette, and these swatches follow the light or dark mode:
+
+<div class="my-8 grid grid-cols-2 gap-8 sm:grid-cols-3">
+  <div class="border-2 border-ink bg-bg-elevated p-3 pb-5 shadow-[6px_6px_0_0_var(--ink)] transition-[translate,box-shadow] duration-120 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[3px_3px_0_0_var(--ink)]">
+    <div class="aspect-[5/4] border-2 border-ink bg-accent"></div>
+    <div class="mt-3 text-center font-heading font-bold">Accent</div>
+  </div>
+  <div class="border-2 border-ink bg-bg-elevated p-3 pb-5 shadow-[6px_6px_0_0_var(--ink)] transition-[translate,box-shadow] duration-120 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[3px_3px_0_0_var(--ink)]">
+    <div class="aspect-[5/4] border-2 border-ink bg-(--pink)"></div>
+    <div class="mt-3 text-center font-heading font-bold">Pink</div>
+  </div>
+  <div class="border-2 border-ink bg-bg-elevated p-3 pb-5 shadow-[6px_6px_0_0_var(--ink)] transition-[translate,box-shadow] duration-120 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[3px_3px_0_0_var(--ink)]">
+    <div class="aspect-[5/4] border-2 border-ink bg-(--blue)"></div>
+    <div class="mt-3 text-center font-heading font-bold">Blue</div>
+  </div>
+  <div class="border-2 border-ink bg-bg-elevated p-3 pb-5 shadow-[6px_6px_0_0_var(--ink)] transition-[translate,box-shadow] duration-120 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[3px_3px_0_0_var(--ink)]">
+    <div class="aspect-[5/4] border-2 border-ink bg-(--green)"></div>
+    <div class="mt-3 text-center font-heading font-bold">Green</div>
+  </div>
+  <div class="border-2 border-ink bg-bg-elevated p-3 pb-5 shadow-[6px_6px_0_0_var(--ink)] transition-[translate,box-shadow] duration-120 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[3px_3px_0_0_var(--ink)]">
+    <div class="aspect-[5/4] border-2 border-ink bg-(--yellow)"></div>
+    <div class="mt-3 text-center font-heading font-bold">Yellow</div>
+  </div>
+  <div class="border-2 border-ink bg-bg-elevated p-3 pb-5 shadow-[6px_6px_0_0_var(--ink)] transition-[translate,box-shadow] duration-120 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[3px_3px_0_0_var(--ink)]">
+    <div class="aspect-[5/4] border-2 border-ink bg-(--red)"></div>
+    <div class="mt-3 text-center font-heading font-bold">Red</div>
+  </div>
+</div>
+
+I also wanted to add my own twist, a highlighter-style touch, so I built a small Astro component for it:
+
+<div class="my-8 border-2 border-ink bg-bg-elevated p-5 shadow-[6px_6px_0_0_var(--ink)]">
+  <div class="font-heading text-xl font-bold">
+    A <span class="-mx-[0.2em] bg-[linear-gradient(76deg,transparent_0.2em,color-mix(in_srgb,var(--pink)_55%,transparent)_0.2em,color-mix(in_srgb,var(--pink)_55%,transparent)_calc(100%-0.2em),transparent_calc(100%-0.2em))] bg-size-[100%_0.75em] bg-bottom bg-no-repeat px-[0.2em] box-decoration-clone">highlighter</span> makes the <span class="-mx-[0.2em] bg-[linear-gradient(76deg,transparent_0.2em,color-mix(in_srgb,var(--pink)_55%,transparent)_0.2em,color-mix(in_srgb,var(--pink)_55%,transparent)_calc(100%-0.2em),transparent_calc(100%-0.2em))] bg-size-[100%_0.75em] bg-bottom bg-no-repeat px-[0.2em] box-decoration-clone">words that matter</span> stand out.
+  </div>
+</div>
+
+For a while, that was all there was to it: a purely neon-inspired look. Here's how the site looked at that point:
+
+![The home page header, heading, and intro card in the neon light theme, with thick borders, offset shadows, and pink highlights](/assets/blog/i-didnt-plan-to-make-an-astro-theme/neon-light.png)
+
+![The same section in the neon dark theme](/assets/blog/i-didnt-plan-to-make-an-astro-theme/neon-dark.png)
