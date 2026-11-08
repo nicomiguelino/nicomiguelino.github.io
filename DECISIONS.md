@@ -2,6 +2,37 @@
 
 Newest entries go at the top. Number entries sequentially and never rewrite an accepted entry; supersede it with a new one instead.
 
+## 007. Migrate icons from Font Awesome to Lucide
+
+- **Date:** 2026-11-08
+- **Status:** Proposed
+
+### Context
+
+- The site draws its icons from Font Awesome's free solid, regular, and brand packs through `src/components/Icon.astro`.
+- The sun icon in the theme toggle at the top-right corner looks like a gear at a glance.
+- Next to the other header buttons, it's hard to tell the theme toggle from a settings button.
+
+### Decision
+
+- Replace Font Awesome with [Lucide](https://lucide.dev), which has a sun icon that reads as a sun, with rays around a circle.
+- Keep brand icons, like GitHub and LinkedIn, on Font Awesome's brand pack. Lucide has dropped its brand icons.
+- Keep the `Icon` component as the single place that renders icons, so call sites barely change.
+
+### Alternatives considered
+
+- **Keep Font Awesome and swap only the sun:** the smallest change. It fixes the gripe but leaves the icon set inconsistent with itself.
+- **Swap the sun for another Font Awesome icon:** the free packs have few sun variants, and none of them are clearly different from a gear at 16px.
+- **Font Awesome's alternative sun icon:** it reads as a sun, but it isn't in the free packs. It needs a paid license.
+- **[Simple Icons](https://simpleicons.org) for brands:** a full replacement for the brand pack, but it's one more dependency for two icons.
+
+### Consequences
+
+- The header icons share one stroke style and look more consistent.
+- Lucide icons are stroked, while Font Awesome icons are filled, so `Icon.astro` has to support both, and `fill-current` styling doesn't carry over.
+- Two icon packages stay installed, at least until brand icons have a replacement.
+- Every `Icon` call site needs a visual check after the move.
+
 ## 006. Describe project links with a typed `links` array
 
 - **Date:** 2026-11-08
