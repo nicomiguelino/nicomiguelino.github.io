@@ -1,6 +1,6 @@
 ---
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUpRightFromSquare, faPalette } from '@fortawesome/free-solid-svg-icons';
 import Icon from '@/components/Icon.astro';
 import { ANIMATED_UNDERLINE_CLASSES } from '@/lib/animatedUnderline';
 
@@ -10,11 +10,12 @@ interface Props {
   technologies: string[];
   url: string;
   demoUrl?: string;
+  themeUrl?: string;
   isCooking?: boolean;
 }
 
-const { name, description, technologies, url, demoUrl, isCooking = false } = Astro.props;
-const linkLabel: string = isCooking ? 'Follow for updates' : 'View on GitHub';
+const { name, description, technologies, url, demoUrl, themeUrl, isCooking = false } = Astro.props;
+const linkLabel: string = isCooking ? 'Follow' : 'GitHub';
 const linkAriaLabel: string = isCooking ? `Follow for updates on ${name}` : `View ${name} on GitHub`;
 ---
 
@@ -56,7 +57,19 @@ const linkAriaLabel: string = isCooking ? `Follow for updates on ${name}` : `Vie
         aria-label={`View ${name} demo`}
       >
         <Icon icon={faArrowUpRightFromSquare} />
-        View demo
+        Demo
+      </a>
+    )}
+    {themeUrl && (
+      <a
+        class="inline-flex items-center gap-2"
+        href={themeUrl}
+        target="_blank"
+        rel="noopener"
+        aria-label={`View ${name} in the Astro themes library`}
+      >
+        <Icon icon={faPalette} />
+        Theme
       </a>
     )}
   </div>
