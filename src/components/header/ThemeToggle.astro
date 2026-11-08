@@ -1,12 +1,11 @@
 ---
-import { faSun } from '@fortawesome/free-regular-svg-icons';
-import { faMoon } from '@fortawesome/free-solid-svg-icons';
 import Icon from '@/components/Icon.astro';
+import { getIcon } from '@/lib/icons';
 ---
 
 <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Toggle color theme">
-  <Icon icon={faSun} class="theme-toggle-sun" />
-  <Icon icon={faMoon} class="theme-toggle-moon" />
+  <Icon icon={getIcon('sun')} class="theme-toggle-sun" />
+  <Icon icon={getIcon('moon')} class="theme-toggle-moon" />
 </button>
 
 <script>

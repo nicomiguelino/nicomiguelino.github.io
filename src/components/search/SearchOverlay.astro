@@ -1,13 +1,13 @@
 ---
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import Icon from '@/components/Icon.astro';
+import { getIcon } from '@/lib/icons';
 ---
 
 <div class="theme-overlay" id="search-overlay" hidden>
   <div class="theme-overlay-panel" role="dialog" aria-label="Search" aria-modal="true">
     <div class="search-input-row">
       <span class="search-icon" aria-hidden="true">
-        <Icon icon={faMagnifyingGlass} />
+        <Icon icon={getIcon('search')} />
       </span>
       <input
         id="search-input"
