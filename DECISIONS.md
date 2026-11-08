@@ -2,6 +2,37 @@
 
 Newest entries go at the top. Number entries sequentially and never rewrite an accepted entry; supersede it with a new one instead.
 
+## 006. Describe project links with a typed `links` array
+
+- **Date:** 2026-11-08
+- **Status:** Accepted
+
+### Context
+
+- Project cards took a `url` (secretly the GitHub link) plus one-off props like `demoUrl` and `themeUrl`.
+- Each new link type meant a new prop and a new branch in the card.
+- `isCooking` also changed the first link's label.
+
+### Decision
+
+- Give each project a `links` array of `{ kind, url }`.
+- Resolve each `kind` to its label, icon, and aria label in one map, `PROJECT_LINK_DEFINITIONS` in `src/lib/projects.ts`.
+- Render links in array order.
+- Keep `isCooking` for the badge only.
+
+### Alternatives considered
+
+- **Bare `url[]`:** can't tell a link's label or icon, and keeps the "first URL is GitHub" assumption.
+- **`{ label, url, icon }[]`:** flexible, but project data carries presentation and labels can drift.
+- **Keyed object (`{ github?, demo? }`):** typed, but link order comes from the card and each new key needs a card change.
+- **[Content collection](https://docs.astro.build/en/guides/content-collections/):** worth it once projects need long content or screenshots. Too big for this problem.
+
+### Consequences
+
+- A new link type is one map entry and one union member.
+- Project data stays plain.
+- Link order is controlled per project.
+
 ## 005. Organize components into subdirectories by feature
 
 - **Date:** 2026-11-04

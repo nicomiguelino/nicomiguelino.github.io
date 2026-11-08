@@ -41,7 +41,7 @@ export const PAGE_SEARCH_ENTRIES: SearchEntry[] = [
     title: 'Projects',
     description: PROJECTS_DESCRIPTION,
     tags: ['open source', 'github'],
-    body: 'nicomiguelino.github.io: my personal portfolio and blog, and the site you are on right now. It has a Neobrutalist look and a palette that follows the seasons. astro-seasons: a season-aware Neobrutalist theme for Astro blogs. The idea came to me during a makeover of this site, and I thought: why not make it into a theme? The palette follows the calendar, with light and dark modes for every season. Neobrutalist Web Components (cooking): a library of Neobrutalist-inspired Web Components that work right out of the box. Because they are standard Web Components, they run in plain HTML, CSS, and JavaScript with no build step, and they fit into other frontend frameworks as well.',
+    body: 'nicomiguelino.github.io: my personal portfolio and blog, and the site you are on right now. It has a Neobrutalist look and a palette that follows the seasons. Seasons: a season-aware Neobrutalist theme for Astro blogs. The idea came to me during a makeover of this site, and I thought: why not make it into a theme? The palette follows the calendar, with light and dark modes for every season. Neobrutalist Web Components (cooking): a library of Neobrutalist-inspired Web Components that work right out of the box. Because they are standard Web Components, they run in plain HTML, CSS, and JavaScript with no build step, and they fit into other frontend frameworks as well.',
     url: '/projects/',
   },
 ];

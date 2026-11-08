@@ -1,21 +1,17 @@
 ---
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import Icon from '@/components/Icon.astro';
 import { ANIMATED_UNDERLINE_CLASSES } from '@/lib/animatedUnderline';
+import { PROJECT_LINK_DEFINITIONS, type ProjectLink } from '@/lib/projects';
 
 interface Props {
   name: string;
   description: string;
   technologies: string[];
-  url: string;
-  demoUrl?: string;
+  links: ProjectLink[];
   isCooking?: boolean;
 }
 
-const { name, description, technologies, url, demoUrl, isCooking = false } = Astro.props;
-const linkLabel: string = isCooking ? 'Follow for updates' : 'View on GitHub';
-const linkAriaLabel: string = isCooking ? `Follow for updates on ${name}` : `View ${name} on GitHub`;
+const { name, description, technologies, links, isCooking = false } = Astro.props;
 ---
 
 <article class="flex flex-col border-2 border-ink bg-bg-elevated p-6 shadow-[6px_6px_0_0_var(--ink)]">
@@ -43,21 +39,20 @@ const linkAriaLabel: string = isCooking ? `Follow for updates on ${name}` : `Vie
       ...ANIMATED_UNDERLINE_CLASSES,
     ]}
   >
-    <a class="inline-flex items-center gap-2" href={url} target="_blank" rel="noopener" aria-label={linkAriaLabel}>
-      <Icon icon={faGithub} />
-      {linkLabel}
-    </a>
-    {demoUrl && (
-      <a
-        class="inline-flex items-center gap-2"
-        href={demoUrl}
-        target="_blank"
-        rel="noopener"
-        aria-label={`View ${name} demo`}
-      >
-        <Icon icon={faArrowUpRightFromSquare} />
-        View demo
-      </a>
-    )}
+    {links.map((link) => {
+      const definition = PROJECT_LINK_DEFINITIONS[link.kind];
+      return (
+        <a
+          class="inline-flex items-center gap-2"
+          href={link.url}
+          target="_blank"
+          rel="noopener"
+          aria-label={definition.getAriaLabel(name)}
+        >
+          <Icon icon={definition.icon} />
+          {definition.label}
+        </a>
+      );
+    })}
   </div>
 </article>
