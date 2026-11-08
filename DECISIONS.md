@@ -5,7 +5,7 @@ Newest entries go at the top. Number entries sequentially and never rewrite an a
 ## 008. Migrate icons from Font Awesome to Tabler
 
 - **Date:** 2026-11-08
-- **Status:** Proposed
+- **Status:** Accepted
 
 ### Context
 
