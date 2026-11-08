@@ -2,10 +2,51 @@
 
 Newest entries go at the top. Number entries sequentially and never rewrite an accepted entry; supersede it with a new one instead.
 
-## 007. Migrate icons from Font Awesome to Lucide
+## 008. Migrate icons from Font Awesome to Tabler
 
 - **Date:** 2026-11-08
 - **Status:** Proposed
+
+### Context
+
+- Decision 007 proposed Lucide, but Lucide has no brand icons, so GitHub and LinkedIn would stay on Font Awesome.
+- That leaves two icon sets in the header, one stroked and one filled.
+- I want to drop Font Awesome fully.
+- The sun icon in the theme toggle still looks like a gear, which started all this.
+
+### Decision
+
+- Replace Font Awesome with [Tabler Icons](https://tabler.io/icons), using the `@iconify-json/tabler` package.
+- Tabler has the brand icons I need (`brand-github`, `brand-linkedin`) in the same outlined style as the rest.
+- Read icon data at build time in `src/lib/icons.ts` through `getIcon(name)`. Nothing ships to the browser.
+- Keep `Icon.astro` as the single place that renders icons.
+- Credit Tabler Icons (MIT) somewhere visible, such as the README.
+- Autumn uses a plain leaf. No set has a maple leaf.
+
+### Alternatives considered
+
+- **Lucide (decision 007):** a nice sun icon, but no brand icons. It needs Font Awesome's brand pack too, so two sets stay installed.
+- **Keep Font Awesome's brand pack:** the smallest change, but it keeps a second set and a mix of filled and stroked icons.
+- **[Simple Icons](https://simpleicons.org) for brands:** has GitHub but no LinkedIn, so it can't be the only source.
+- **Bootstrap Icons:** has both brands, but it's filled, so the header would mix styles again.
+- **Phosphor:** has both brands in an outlined style, and would also work. Tabler is the one I tried first.
+- **Inline SVGs:** no dependency, but I'd have to source and credit each one by hand.
+
+### Consequences
+
+- Every icon shares one stroke style, brands included. The sun reads as a sun.
+- `Icon.astro` only draws stroked icons, so the `fill-current` path goes away.
+- Font Awesome and Lucide are both gone, with one icon dependency left.
+- Tabler's license is MIT. It needs a credit, and the brand marks are trademarks of their owners. Using them as links to my own profiles is fine.
+- GitHub and LinkedIn are outlined redraws, not the official logos.
+- Tabler glyphs have padding inside their square, so they look small at the old 1rem size. Icons are 1.25rem now.
+- Stroked icons look light next to bold text, so the project link labels drop from bold to medium.
+- Every `Icon` call site needs a visual check after the move.
+
+## 007. Migrate icons from Font Awesome to Lucide
+
+- **Date:** 2026-11-08
+- **Status:** Rejected, superseded by 008
 
 ### Context
 
