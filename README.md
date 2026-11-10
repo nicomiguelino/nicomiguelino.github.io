@@ -149,6 +149,7 @@ With thanks to:
 - [astro-palette](https://github.com/joshruggles/astro-palette) by Josh Ruggles, the template this site was generated from (AGPL-3.0-or-later)
 - [herdr](https://github.com/ogulcancelik/herdr) by Oğulcan Çelik, the website theme this one grew out of, and the reason it is AGPL-3.0-or-later
 - Style: [Neubrutalism](https://neubrutalism.com/), the design style behind the hard borders, offset shadows, and bold colors
+- Font: [Just Another Hand](https://fonts.google.com/specimen/Just+Another+Hand) by Font Diner, under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 - Font: [JetBrains Mono](https://www.jetbrains.com/lp/mono/), under the [SIL Open Font License 1.1](https://github.com/JetBrains/JetBrainsMono/blob/master/OFL.txt)
 - Icons: [Tabler Icons](https://tabler.io/icons) by Paweł Kuna, under the [MIT License](https://github.com/tabler/tabler-icons/blob/master/LICENSE)
 - Search: [Fuse.js](https://www.fusejs.io) (Apache-2.0)
