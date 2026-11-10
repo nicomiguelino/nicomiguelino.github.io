@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
-import Layout from '@/components/Layout.astro';
-import Tag from '@/components/Tag.astro';
+import Layout from '@/components/layout/Layout.astro';
+import Tag from '@/components/common/Tag.astro';
 import { formatPostDate, postSlug } from '@/lib/posts';
 import { slugifyTag } from '@/lib/tags';
 import { SITE_NAME, SITE_URL } from '@/lib/site';
@@ -67,10 +67,28 @@ const postSchema = JSON.stringify({
           <p class="post-meta">
             <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date)}</time>
           </p>
-          <h1 class="m-0 max-w-[22ch] text-[clamp(2rem,4vw,3.4rem)] leading-none font-semibold tracking-[0.005em] text-ink">
+          <h1
+            class:list={[
+              'm-0',
+              'max-w-[22ch]',
+              'text-[clamp(2rem,4vw,3.4rem)]',
+              'leading-none',
+              'font-semibold',
+              'tracking-[0.005em]',
+              'text-ink',
+            ]}
+          >
             {post.data.title}
           </h1>
-          <p class="mt-[1.2rem] max-w-[680px] text-[1.18rem] leading-[1.7] text-[color-mix(in_srgb,var(--ink)_68%,var(--muted))]">
+          <p
+            class:list={[
+              'mt-[1.2rem]',
+              'max-w-[680px]',
+              'text-[1.18rem]',
+              'leading-[1.7]',
+              'text-[color-mix(in_srgb,var(--ink)_68%,var(--muted))]',
+            ]}
+          >
             {post.data.description}
           </p>
           {tags.length > 0 && (

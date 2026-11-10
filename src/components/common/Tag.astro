@@ -1,0 +1,36 @@
+---
+interface Props {
+  href: string;
+  size?: 'sm' | 'lg';
+}
+
+const { href, size = 'sm' } = Astro.props;
+
+const baseClasses = [
+  'inline-flex',
+  'items-center',
+  'gap-[0.35rem]',
+  'rounded-none',
+  'border-2',
+  'border-ink',
+  'bg-bg',
+  'font-mono',
+  'leading-[1.4]',
+  'font-bold',
+  'text-ink',
+  'transition-[background-color,color]',
+  'duration-120',
+  'ease-[ease]',
+  'hover:bg-accent',
+  'hover:text-bg',
+];
+
+const sizeClasses = {
+  sm: ['px-[0.6rem]', 'py-[0.14rem]', 'text-[0.7rem]'],
+  lg: ['px-3', 'py-[0.22rem]', 'text-[0.78rem]'],
+};
+---
+
+<a class:list={[baseClasses, sizeClasses[size]]} href={href}>
+  <slot />
+</a>
