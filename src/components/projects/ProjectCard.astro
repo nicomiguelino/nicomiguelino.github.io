@@ -17,7 +17,9 @@ const { name, description, technologies, links, isCooking = false } = Astro.prop
 
 <Card as="article" class="flex flex-col">
   <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
-    <h2 class="m-0 text-[1.5em] leading-[1.2] font-bold tracking-[0.005em] text-ink">{name}</h2>
+    <h2 class="m-0 text-[1.5em] leading-[1.2] font-bold tracking-[0.005em] max-w-full truncate text-ink" title={name}>
+      {name}
+    </h2>
     {isCooking && (
       <span
         class:list={[
