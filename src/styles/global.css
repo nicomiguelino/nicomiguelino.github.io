@@ -35,6 +35,14 @@
 }
 
 @font-face {
+  font-family: 'Just Another Hand';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('/assets/just-another-hand.woff2') format('woff2');
+}
+
+@font-face {
   font-family: 'JetBrains Mono';
   font-style: normal;
   font-weight: 400 700;
