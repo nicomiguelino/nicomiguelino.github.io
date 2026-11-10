@@ -30,6 +30,22 @@
   --term-str: #e6c060;
 }
 
+@theme {
+  --animate-develop: develop 4s ease-out both;
+
+  @keyframes develop {
+    0% {
+      filter: brightness(1.5) contrast(0.55) saturate(0.2) blur(3px);
+    }
+    55% {
+      filter: brightness(1.2) contrast(0.8) saturate(0.6) blur(1px);
+    }
+    100% {
+      filter: none;
+    }
+  }
+}
+
 @theme inline {
   --color-bg: var(--bg);
   --color-bg-elevated: var(--bg-elevated);
