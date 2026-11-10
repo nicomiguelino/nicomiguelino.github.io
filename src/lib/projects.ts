@@ -31,7 +31,7 @@ export const PROJECT_LINK_DEFINITIONS: Record<ProjectLinkKind, ProjectLinkDefini
   },
   theme: {
     label: 'Theme',
-    icon: getIcon('palette'),
+    icon: getIcon('color-swatch'),
     getAriaLabel: (projectName: string): string => `View ${projectName} in the Astro themes library`,
   },
 };

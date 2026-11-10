@@ -79,7 +79,7 @@ Set up once per machine:
 bunx playwright install chromium
 ```
 
-Then run the tests. Playwright builds the site and serves it with `astro preview` on port 4322, so it never collides with the dev server on :4321:
+Then run the tests. Playwright builds the site and serves it with `astro preview` on port 4322, so it never collides with the dev server on :4321. If something is already listening on port 4322, Playwright reuses it and captures that site instead, so stop it first:
 
 ```sh
 bun run test:e2e                                         # everything
@@ -96,6 +96,7 @@ bunx playwright show-report                              # open the last HTML re
 - The clock is pinned (July 15 for summer, Oct 15 for autumn, Jan 15 for winter, Apr 15 for spring), so results don't depend on today's date.
 - `falling-particles` captures the home page with the falling effects frozen mid-fall (autumn, winter and spring; summer has no particles), since the other screenshots disable animations and so hide the particles.
 - The color scheme is emulated with `prefers-color-scheme`.
+- Each capture waits for eager images to decode and lets the summer heat shimmer settle, so photos don't show up as empty frames.
 - Content is pinned too. The Playwright build sets `USE_FIXTURE_POSTS`, which makes the content collection in `src/content.config.ts` load the posts in `src/tests/fixtures/blog/` instead of `src/content/blog/`. Adding or editing a real post leaves `screenshots/` unchanged, and `blog-post` points at `/blog/fixture-post-one/`.
 - Fixture posts have fixed titles, tags, and dates. Edit them only when a screenshot should change, and keep a word like "tool" in one of them, since the search E2E spec queries it.
 - Screenshots are written to `screenshots/` (overwriting the previous ones) and are not part of the deployed site. Names look like `home-autumn-dark.png`.
@@ -108,9 +109,11 @@ The `Checks` workflow runs lint, format, and E2E as parallel jobs after a shared
 
 Site-wide values (name, URL, description, job title, and LinkedIn profile) live in `src/lib/site.ts`. Everything else to customize:
 
-- `src/components/header/index.astro` and `src/components/Footer.astro`: social links, footer
+- `src/components/header/index.astro` and `src/components/layout/Footer.astro`: social links, footer
 - `src/lib/palette.ts`: the seasonal palette logic and its config (storage keys, season dates); see [Seasonal theme](#seasonal-theme)
 - `public/robots.txt` and `public/.well-known/security.txt`: domain and contact (static files, so they can't import from `site.ts`)
+- `src/assets/home/portrait.png` and the `InstantPhoto` caption in `src/pages/index.astro`: the home page photo
+- `src/pages/index.astro`: hero text, about card, and the focus-area cards
 - `public/assets/og-v2.png`: social preview image, 1200x630 (a plain placeholder is included)
 
 ## Writing posts
@@ -121,7 +124,8 @@ Posts are markdown files in `src/content/blog/` with `title`, `description`, `da
 
 ```
 src/
-  components/     # reusable UI: layout, header, page hero, post card, search, theme toggle
+  assets/         # images used by pages, e.g. the home page portrait
+  components/     # reusable UI, grouped by feature: common/, layout/, header/, posts/, search/, ...
   content/blog/   # posts as markdown
   lib/            # post and tag helpers, palette config, particle shapes, color token list, site constants
   pages/          # index (home), blog/, experience/, projects/, tags/, 404, rss

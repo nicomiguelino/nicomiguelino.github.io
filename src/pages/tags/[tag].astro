@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
-import Layout from '@/components/Layout.astro';
-import Lede from '@/components/Lede.astro';
-import PageHero from '@/components/PageHero.astro';
+import Layout from '@/components/layout/Layout.astro';
+import Lede from '@/components/common/Lede.astro';
+import PageHero from '@/components/common/PageHero.astro';
 import PostCard from '@/components/posts/PostCard.astro';
 import { getAllTags, slugifyTag } from '@/lib/tags';
 import { SITE_NAME } from '@/lib/site';

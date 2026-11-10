@@ -13,7 +13,7 @@ export const PAGE_SEARCH_ENTRIES: SearchEntry[] = [
     title: 'Home',
     description: SITE_DESCRIPTION,
     tags: [],
-    body: "Hi, I'm Nico, a full-stack engineer who likes building things for the web, frontend or backend. I turn annoying problems into convenient tools, using engineering and creativity. When I'm not coding, I'm usually listening to or playing music in my room.",
+    body: "Hi, I'm Nico, a full-stack engineer who likes building things for the web, frontend or backend. I turn annoying problems into convenient tools, using engineering and creativity.",
     url: '/',
   },
   {
