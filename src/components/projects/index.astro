@@ -8,7 +8,7 @@ interface Project {
   description: string;
   technologies: string[];
   links: ProjectLink[];
-  isCooking?: boolean;
+  releaseRepository?: string;
 }
 
 const projects: Project[] = [
@@ -29,14 +29,18 @@ const projects: Project[] = [
       { kind: 'demo', url: 'https://nicomiguelino.github.io/astro-seasons/' },
       { kind: 'theme', url: 'https://astro.build/themes/details/seasons/' },
     ],
+    releaseRepository: 'nicomiguelino/astro-seasons',
   },
   {
     name: 'Neobrutalist Web Components',
     description:
       'A library of Neobrutalist custom elements built with Lit and Vite. You can use them from TypeScript or from vanilla HTML, CSS, and JavaScript.',
     technologies: ['TypeScript', 'Lit', 'Vite', 'Web Components'],
-    links: [{ kind: 'github', url: 'https://github.com/nicomiguelino/neobrutalist-web-components' }],
-    isCooking: true,
+    links: [
+      { kind: 'github', url: 'https://github.com/nicomiguelino/neobrutalist-web-components' },
+      { kind: 'npm', url: 'https://www.npmjs.com/package/@nicomiguelino/neobrutalist-web-components' },
+    ],
+    releaseRepository: 'nicomiguelino/neobrutalist-web-components',
   },
 ];
 ---

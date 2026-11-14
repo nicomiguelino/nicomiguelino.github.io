@@ -9,10 +9,10 @@ interface Props {
   description: string;
   technologies: string[];
   links: ProjectLink[];
-  isCooking?: boolean;
+  releaseRepository?: string;
 }
 
-const { name, description, technologies, links, isCooking = false } = Astro.props;
+const { name, description, technologies, links, releaseRepository } = Astro.props;
 ---
 
 <Card as="article" class="flex flex-col">
@@ -20,8 +20,10 @@ const { name, description, technologies, links, isCooking = false } = Astro.prop
     <h2 class="m-0 text-[1.5em] leading-[1.2] font-bold tracking-[0.005em] max-w-full truncate text-ink" title={name}>
       {name}
     </h2>
-    {isCooking && (
+    {releaseRepository && (
       <span
+        hidden
+        data-release-repository={releaseRepository}
         class:list={[
           'border-2',
           'border-ink',
@@ -35,7 +37,7 @@ const { name, description, technologies, links, isCooking = false } = Astro.prop
           'text-bg',
         ]}
       >
-        Cooking
+        Latest
       </span>
     )}
   </div>
@@ -85,3 +87,33 @@ const { name, description, technologies, links, isCooking = false } = Astro.prop
     })}
   </div>
 </Card>
+
+<script>
+  interface LatestRelease {
+    tag_name: string;
+  }
+
+  async function getLatestVersion(repository: string): Promise<string> {
+    const response = await fetch(`https://api.github.com/repos/${repository}/releases/latest`);
+    if (!response.ok) {
+      throw new Error(`Failed to load the latest release of ${repository}`);
+    }
+    const release: LatestRelease = await response.json();
+    return release.tag_name;
+  }
+
+  async function showLatestVersion(badge: HTMLElement): Promise<void> {
+    const repository = badge.dataset.releaseRepository ?? '';
+    try {
+      badge.textContent = await getLatestVersion(repository);
+      badge.hidden = false;
+    } catch {
+      badge.hidden = true;
+    }
+  }
+
+  const badges: HTMLElement[] = Array.from(document.querySelectorAll<HTMLElement>('[data-release-repository]'));
+  badges.forEach((badge) => {
+    void showLatestVersion(badge);
+  });
+</script>
