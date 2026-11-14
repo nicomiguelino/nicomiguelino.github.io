@@ -9,6 +9,8 @@ const SCREENSHOTS_DIRECTORY: string = 'screenshots';
 
 interface ScreenshotOptions {
   keepAnimations?: boolean;
+  beforeNavigation?: (page: Page) => Promise<void>;
+  afterNavigation?: (page: Page) => Promise<void>;
 }
 
 async function freezeParticleAnimations(page: Page): Promise<void> {
@@ -70,7 +72,9 @@ export function defineScreenshotTests(
         const outputPath: string = join(SCREENSHOTS_DIRECTORY, `${pageName}-${season.name}-${colorScheme}.png`);
         await page.clock.setFixedTime(new Date(season.date));
         await page.emulateMedia({ colorScheme });
+        await options.beforeNavigation?.(page);
         await page.goto(path);
+        await options.afterNavigation?.(page);
         await waitForImages(page);
         await freezeSvgAnimations(page);
         await page.waitForTimeout(FILTER_SETTLE_MS);
