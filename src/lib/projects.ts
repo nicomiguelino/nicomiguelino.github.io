@@ -1,6 +1,6 @@
 import { getIcon, type IconSource } from '@/lib/icons';
 
-export type ProjectLinkKind = 'github' | 'follow' | 'demo' | 'theme' | 'npm';
+export type ProjectLinkKind = 'github' | 'follow' | 'demo' | 'docs' | 'theme' | 'npm';
 
 export interface ProjectLink {
   kind: ProjectLinkKind;
@@ -28,6 +28,11 @@ export const PROJECT_LINK_DEFINITIONS: Record<ProjectLinkKind, ProjectLinkDefini
     label: 'Demo',
     icon: getIcon('external-link'),
     getAriaLabel: (projectName: string): string => `View ${projectName} demo`,
+  },
+  docs: {
+    label: 'Docs',
+    icon: getIcon('book'),
+    getAriaLabel: (projectName: string): string => `Read the ${projectName} docs`,
   },
   theme: {
     label: 'Theme',
